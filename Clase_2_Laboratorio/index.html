@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clase 2</title>
+    
+    
+</head>
+<body>
+    <form action = "./pagina2.html" method="GET">
+    <fieldset>
+        <legend>Datos Personales</legend>            
+        <div>
+                <label for="txtNombre">Nombre</label>
+                <input type="text" id="txtNombre" name="nombre" required>
+        </div>
+        <div>
+                <label for="txtClave">Contraseña</label>
+                <input type="password" id="txtClave" name="clave" required>
+        </div>
+        <div>
+                <label for="txtMail">Mail</label>
+                <input type="email" id="txtMail" name="email" required>
+        </div>                    
+        <div>
+                <label for="txtEdad">Edad</label>
+                <input type="number" id="txtEdad" name="edad" min="18" max="65"> 
+        </div>
+        <div>
+            <label for="cmbPais">Pais</label>
+            <select name="pais" id="cmbPais"> 
+                <optgroup label="America">
+                    <option value="Argentina">Argentina</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="Chile">Chile</option>
+                </optgroup>
+                <optgroup label="Europa">
+                        <option value="España" selected>España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Alemania">Alemania</option>
+                    </optgroup>
+            </select>
+        </div>
+    <fieldset>
+        <legend>Genero</legend>
+        <input type="radio" name="sexo" id="rdoMasculino">
+        <label for="rdoMasculino">Masculino</label>
+        <input type="radio" name="sexo" id="rdoFemenino" checked>
+        <label for="rdoFemenino">Femenino</label>
+    </fieldset>      
+    <fieldset>
+            <legend>Hobbies</legend>
+            <input type="checkbox"  id="chkEsqui">
+            <label for="chkEsqui">Esqui</label>
+            <input type="checkbox"  id="chkFutbol" checked>
+            <label for="chkFutbol">Futbol</label>
+            <input type="checkbox"  id="chkPorro" checked>
+            <label for="chkPorro">Porro</label>
+            <input type="checkbox"  id="chkCine" checked>
+            <label for="chkCine">Cine</label>
+    </fieldset>
+        <label for="txtComentarios">Comentarios</label>
+        <div>
+            <textarea name="comentarios" id="txtComentarios" cols="30" rows="10">
+            </textarea>
+        </div>  
+        <input type="submit" value="Login">
+        <input type="reset">
+    </fieldset>
+    </form>
+</body>
+</html>
