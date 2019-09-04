@@ -4,10 +4,22 @@ p{
 }
 
 .destacado {
-    color: red;
+    color: white;
 }
 
 #lujo{
     background-color: green;
 
+}
+
+.site-header{
+    background: url(../img/header.jpg);
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.contenido-header{
+
+    height: 100pc;
 }
