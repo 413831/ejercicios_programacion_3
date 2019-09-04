@@ -45,8 +45,13 @@ p{
 }
 
 .navegacion a{
-    font-size: 50px;
+    text-decoration: none;
     color: white;
+    margin-right: 10px;  
+}
+
+.navegacion a::last-of-type{
+    margin: 0px;
 }
 
 .contenedor{
