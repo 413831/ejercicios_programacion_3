@@ -53,6 +53,10 @@ p{
 .navegacion a::last-of-type{
     margin: 0px;
 }
+.navegacion a::hover{
+    color: grey;
+}
+
 
 .contenedor{
     max-height: 1200px;
