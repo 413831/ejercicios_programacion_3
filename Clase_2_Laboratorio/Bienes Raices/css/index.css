@@ -9,7 +9,6 @@ p{
 
 #lujo{
     background-color: green;
-
 }
 
 .site-header{
@@ -20,6 +19,24 @@ p{
 }
 
 .contenido-header{
+    height: 100pc;    
+    display: flex;
+    flex-direction: column;
+}
 
-    height: 100pc;
+.barra{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+
+.navegacion a{
+    font-size: 50px;
+    color: white;
+}
+
+.contenedor{
+    max-height: 1200px;
+    margin: 0 auto;
 }
