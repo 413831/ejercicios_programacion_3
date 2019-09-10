@@ -131,10 +131,14 @@ body {
 .comodidades{
     display: flex;
     list-style: none;     
+    justify-content: space-around;
+    flex: 1;
 }
 
 .comodidades li{
     display: flex;
-    justify-content: space-around;
-    flex-basis: 33.3%; 
+}
+
+.comodidades li img{
+    margin-right: 20px; 
 }
