@@ -11,11 +11,9 @@ switch($request){
     case "POST" : 
        if(isset($_POST["Nombre"]) && isset($_POST["Apellido"]) && isset($_POST["Legajo"]))
         {
-            echo "ENTRO";
             $persona = new Persona($_POST["Nombre"], $_POST["Apellido"], $_POST["Legajo"]);
             $dao->guardar($persona);
         }
-        echo "SALIO";
         break;
     case "GET" :
         break;

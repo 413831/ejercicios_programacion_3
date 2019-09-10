@@ -3,23 +3,30 @@
     {
         public function __construct()
         {
+            $datos = array();
             session_start();
-            if(!isset($_SESSION["Personas"])){
-                $_SESSION["Personas"] = array();
+            if(!isset($_SESSION["objetos"])){
+                $_SESSION["objetos"] = array();
             }
         }
         
-        function guardar($persona){
-            $archivo = fopen("./archivo.txt", "a");
-            $rta=fwrite($archivo, PHP_EOL.$persona->Nombre. ' - '.$persona->Apellido. ' - '.$persona->Legajo);
+        function guardar($persona)
+        {
+            $datos = $this->listar();
+            $personas = json_decode($datos); 
+            array_push($personas,$persona); // NUEVA PERSONA
+            
+            $archivo = fopen("./archivo.txt", "w");
+            $rta=fwrite($archivo, json_encode($personas));
             $rta2=fclose($archivo);
             //array_push($_SESSION["Personas"], $alumno);
         }
 
+
         function borrar($personaLegajo){
-            foreach($_SESSION["Personas"] as $key => $persona){
+            foreach($_SESSION["objetos"] as $key => $persona){
                 if($persona->legajo == $personaLegajo){
-                    unset($_SESSION["Personas"][$key]);
+                    unset($_SESSION["objetos"][$key]);
                 }
             }
         }
@@ -40,10 +47,13 @@
                 }
             }
             //$arrayAux = json_encode($_SESSION["Personas"]);
-            return json_encode($arrayPersona);
+            $datos = json_encode($arrayPersona); 
+            fclose($archivo);
+            echo $datos;
+            return $datos;
         }
         function modificar($personaLegajo, $personaNombre){
-            foreach($_SESSION["Personas"] as $key => $persona){
+            foreach($_SESSION["objetos"] as $key => $persona){
                 if($persona->legajo == $personaLegajo){
                     $persona->nombre = $personaNombre;
                 }
