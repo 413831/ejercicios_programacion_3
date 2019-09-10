@@ -1,30 +1,25 @@
+    
 <?php
     INCLUDE './Clases/Persona.php';
+    INCLUDE './Clases/IO.php';
    // $archivo = fopen("./prueba.txt", "a");
    // $rta=fwrite($archivo,"hol1a");
    // fclose($archivo);
     $request = ($_SERVER['REQUEST_METHOD']);
-    
+    $dao = new IO();
 switch($request){
     case "POST" : 
-        if(isset($_POST["Nombre"]) && isset($_POST["Apellido"]))
+       if(isset($_POST["Nombre"]) && isset($_POST["Apellido"]) && isset($_POST["Legajo"]))
         {
-            $archivo = fopen("./archivo.txt", "a"); // Se abre archivo para agregar a = append
-            $rta=fwrite($archivo, PHP_EOL.$_POST["Nombre"]. ' - '. $_POST["Apellido"]); 
-            $rta2=fclose($archivo);
+            echo "ENTRO";
+            $persona = new Persona($_POST["Nombre"], $_POST["Apellido"], $_POST["Legajo"]);
+            $dao->guardar($persona);
         }
+        echo "SALIO";
         break;
     case "GET" :
-        $archivo = fopen("./archivo.txt", "r"); // Se abre un archivo para leer
-        while(!feof($archivo))
-        {
-            //echo fgets($archivo);
-            $personaAux = explode(' - ', fgets($archivo));
-            $persona = new Persona($personaAux[0], $personaAux[1]);
-            $persona->saludar();
-            echo "Array size: ".count($personaAux);
-        }
-        $rta2=fclose($archivo);
-        break;      
+        break;
+       
+        
 }
 ?>
