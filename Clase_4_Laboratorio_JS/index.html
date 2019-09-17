@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/mascota.js"></script>
+    <script src="./js/script.js"></script>
+    <title>Alta mascota</title>
+</head>
+
+<body>
+    <form action="#" style="width: 300px">
+
+        <fieldset>
+            <legend>Datos de la Mascota</legend>
+            <table>
+                <tr>
+                    <td><label for="txtNombre">Nombre:</label> </td>
+                    <td><input type="text" id="txtNombre" name="nombre"> </td>
+                </tr>
+                <tr>
+                    <td><label for="txtEdad">Edad:</label> </td>
+                    <td><input type="text" id="txtEdad" name="edad"> </td>
+                </tr>
+            </table>
+
+            <fieldset>
+                <legend>Tipo</legend>
+                <table>
+                    <tr>
+                        <td><label for="rdoPerro">Perro</label> </td>
+                        <td><input type="radio" id="rdoPerro" name="tipo" value="perro" checked></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rdoGato">Gato</label> </td>
+                        <td><input type="radio" id="rdoGato" name="tipo" value="gato"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rdoRoedor">Roedor</label> </td>
+                        <td><input type="radio" id="rdoRoedor" name="tipo" value="roedor"></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Estado</legend>
+                <table>
+                    <tr>
+                        <td><label for="chkCastrado">Castrado</label> </td>
+                        <td><input type="checkbox" id="chkCastrado" name="castrado"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rdoGato">Vacunado</label> </td>
+                        <td><input type="checkbox" id="chkVacunas" name="vacunado"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="chkDesparasitado">Desparasitado</label> </td>
+                        <td><input type="checkbox" id="chkDesparasitado" name="desparasitado"></td>
+
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Alimento</legend>
+                <table>
+                    <tr>
+                        <td><label for="selAlimento">Alimento Preferido</label> </td>
+                        <td><select name="alimento" id="selAlimento">
+                                <option value="carne">Carne</option>
+                                <option value="pescado">Pescado</option>
+                                <option value="semillas">Semillas</option>
+
+                            </select> </td>
+                    </tr>
+                </table>
+            </fieldset>
+            </table>
+        </fieldset>
+        </table>
+        </fieldset>
+
+        <input type="submit" value="Alta Mascota">
+
+    </form>
+</body>
+
+</html>
