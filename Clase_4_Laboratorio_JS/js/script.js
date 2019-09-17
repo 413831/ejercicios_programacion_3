@@ -12,41 +12,52 @@ function inicializarManejadores(){
     // Se puede utilizar la propiedad OnSubmit
     // frm.onsubmit = function(){}
     frm.addEventListener('submit', manejadorSubmit);
-
 }
 
 function manejadorSubmit(e){
     e.preventDefault();
+    console.log(e.target);
+    let nuevaMascota = obtenerMascota(e.target);
+    console.log(nuevaMascota.toString());
 }
 
-//Ejemplos de callbacks
-
-function operar(a,b,callback)
-{
-    return callback(a,b);
-}
-
-function sumar(a,b)
-{
-    return a + b;
-}
-
-function restar(a,b)
-{
-    return a - b;
-}
-
-function multiplicar(a,b)
-{
-    return a * b;
-}
-
-function dividir(a,b)
-{
-    let z;
-    if(b != 0)
+function obtenerMascota(frm){
+    console.log(frm.elements);
+    let nombre;
+    let edad;
+    let tipo;
+    let vacunado;
+    let desparasitado;
+    let castrado;
+    let alimento;
+    
+    for(elemento of frm.elements)
     {
-        z = a / b;
+        switch(elemento.name){
+            case "nombre" :
+                nombre = elemento.value;
+                break;
+            case "edad" :
+                edad = parseInt(elemento.value);
+                break;
+            case "tipo" :
+                if(elemento.checked){
+                    tipo = elemento.value;
+                }
+                break;
+            case "vacunado" :
+                vacunado = elemento.checked; // value devuelve ON o sino nada
+                break;
+            case "desparasitado" :
+                desparasitado = elemento.checked;
+                break;
+            case "castrado" :
+                castrado = elemento.checked;
+                break;
+            case "alimento" :
+                alimento = elemento.value;
+                break;
+        }
     }
-    return z;
+    return new Mascota(nombre,edad,tipo,castrado,vacunado,desparasitado,alimento);
 }
