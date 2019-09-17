@@ -1,0 +1,1 @@
+[{"nombre":"Nicolino","apellido":"Gonzalez","legajo":"7586876"}][{"nombre":"Manuela","apellido":"Hincada","legajo":"54563546"}][{"nombre":"Manuela","apellido":"Hincada","legajo":"54563546"}][{"nombre":"Manuela","apellido":"Hincada","legajo":"54563546"}][{"nombre":"Josecito","apellido":"Sosa","legajo":"6549063546"}][{"nombre":"Josecito","apellido":"Sosa","legajo":"6549063546"}]
