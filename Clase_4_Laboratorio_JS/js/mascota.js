@@ -1,3 +1,5 @@
+let mascotas = [];
+
 function Mascota(nombre, edad, tipo, castrado, vacunado, desparasitado, alimento){
     this.nombre = nombre;
     this.edad = edad;
