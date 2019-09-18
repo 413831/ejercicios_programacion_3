@@ -15,5 +15,20 @@ function crearTabla(array){
     }
     tabla.appendChild(cabecera);
 
+    for(var i in array){
+        var fila = document.createElement("tr");
+        var unObjeto = array[i];
+
+        for(j in unObjeto)
+        {
+            var celda = document.createElement("td");
+            celda.setAttribute("style","text-align:center");
+            var dato = document.createTextNode(unObjeto[j]);
+            celda.appendChild(dato);            
+            fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+    }
+
     return tabla;
 }

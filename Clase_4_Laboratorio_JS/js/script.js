@@ -15,12 +15,14 @@ function inicializarManejadores(){
 }
 
 function manejadorSubmit(e){
+    document.getElementById("divTabla").innerHTML = "";
     e.preventDefault();
     console.log(e.target);
     let nuevaMascota = obtenerMascota(e.target);
     mascotas.push(nuevaMascota);
 
     document.getElementById("divTabla").appendChild(crearTabla(mascotas));
+    //document.getElementById("divTabla").innerHTML += crearTabla(mascotas); ALTERNATIVA pero debe ser texto
     console.log(nuevaMascota.toString());
     console.log(mascotas);
 }
