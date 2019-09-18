@@ -29,6 +29,7 @@ function crearTabla(array){
         }
         tabla.appendChild(fila);
     }
-
+    
+    //manejadorTR(table.querySelectorAll("tr"));
     return tabla;
 }
