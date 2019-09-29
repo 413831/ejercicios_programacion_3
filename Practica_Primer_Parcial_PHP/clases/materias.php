@@ -4,14 +4,14 @@ class Materia
 {
   public $nombre;
   public $codigo;
-  public $cupoAlumnos;
+  public $cupo;
   public $aula;
 
   public function __construct($nombre,$codigo,$cupoAlumnos,$aula)
   {
     $this->nombre = $nombre;
     $this->codigo = $codigo;
-    $this->cupoAlumnos = $cupoAlumnos;
+    $this->cupo = $cupoAlumnos;
     $this->aula = $aula;
   }
 }

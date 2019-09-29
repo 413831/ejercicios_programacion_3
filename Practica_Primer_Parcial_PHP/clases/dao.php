@@ -10,6 +10,7 @@ class GenericDao
         }
         else {
             $aux = fopen($archivo,"w");
+            fwrite($aux," ");
             $this->archivo = $archivo;
             fclose($aux);
         }
@@ -49,7 +50,7 @@ class GenericDao
         try
         {
             $objects = json_decode($this->listar());
-            if(!empty($objects))
+            if(!is_null($objects))
             {
                 foreach ($objects as $object) {
                     //Comparo todo en minuscula
@@ -70,7 +71,7 @@ class GenericDao
         try {
             $objects = json_decode($this->listar());
             $retorno = array();
-            if(count($objects) > 0){
+            if(!is_null($objects)){
                 foreach ($objects as $object) {
                     //Comparo todo en minuscula
                     if (strtolower($object->$attrKey) == strtolower($attrValue)) {
@@ -92,11 +93,11 @@ class GenericDao
         try {
             $objects = json_decode($this->listar());
             $retorno = array();
-            if(count($objects) > 0){
+            if(!is_null($objects)){
                 foreach ($objects as $object) {
                     //Comparo todo en minuscula
                     if (strtolower($object->$attrKey) == strtolower($attrValue)) {
-                        return object;
+                        return $object;
                     }
                 }
                 return null;
@@ -113,8 +114,7 @@ class GenericDao
         {
             $objects = [];
             $jsonDecoded = json_decode($this->listar());
-            echo "JSON ".$jsonDecoded;
-            var_dump($jsonDecoded);
+
             //Valido si el array de json esta vacio
             if (!is_null($jsonDecoded)) {
                 //Si está vacio, lo formateo para que sea un array de objetos json.
@@ -143,7 +143,7 @@ class GenericDao
         try {
             $retorno = false;
             $objects = json_decode($this->listar());
-            if(count($objects) > 0)
+            if(!is_null($objects))
             {
                 $archivo = fopen($this->archivo, "w");
                 foreach ($objects as $key => $object) {
@@ -166,7 +166,7 @@ class GenericDao
          try {
              $objects = json_decode($this->listar());
 
-             if(count($objects) > 0)
+             if(!is_null($objects))
              {
                  $archivo = fopen($this->archivo, "w");
 

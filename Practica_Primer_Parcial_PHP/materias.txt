@@ -1,0 +1,1 @@
+[{"nombre":"Matematicas","codigo":"0001","cupo":"30","aula":"14"},{"nombre":"Geografia","codigo":"0002","cupo":"30","aula":"13"},{"nombre":"Contabilidad","codigo":"0003","cupo":"30","aula":"4"},{"nombre":"Fisica","codigo":"0004","cupo":"30","aula":"23"}]

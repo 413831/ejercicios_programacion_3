@@ -30,17 +30,19 @@ try {
               }
               break;
           case 'cargarMateria':
-                // code...
+              if(isset($_POST["nombre"]) && isset($_POST["codigo"]) && isset($_POST["cupo"]) && isset($_POST["aula"]))
+              {
+               Controller::cargarMateria($_POST["nombre"],$_POST["codigo"],$_POST["cupo"],$_POST["aula"],'./materias.txt');
+              }
+              else {
+                echo "Datos incompletos.";
+              }
                 break;
           default:
-            // code...
+            echo "Case incorrecto";
             break;
         }
-
       }
-
-
-      // code...
       break;
     case 'GET':
         if(isset($_GET["case"]))
@@ -48,22 +50,30 @@ try {
           switch ($_GET["case"])
           {
             case 'inscribirAlumno':
-              // code...
+              if(isset($_GET["nombreAlumno"]) && isset($_GET["apellidoAlumno"]) && isset($_GET["emailAlumno"]) &&
+                  isset($_GET["nombreMateria"]) && isset($_GET["codigoMateria"]))
+              {
+                Controller::inscribirAlumno($_GET["nombreAlumno"],$_GET["apellidoAlumno"],$_GET["emailAlumno"],
+                                            $_GET["nombreMateria"],$_GET["codigoMateria"],
+                                            './materias.txt','./alumnos.txt','./inscripciones.txt');
+              }
               break;
             case 'consultarAlumno':
-              // code...
+              if(isset($_GET["apellido"]))
+              {
+                echo Controller::consultarAlumno($_GET["apellido"],'./alumnos.txt');
+              }
               break;
             case 'alumnos':
-                // code...
+                echo Controller::mostrarAlumnos('./alumnos.txt');
                 break;
             case 'inscripciones':
-                  // code...
+                  echo Controller::mostrarInscripciones($_GET,'./inscripciones.txt');
                   break;
             default:
               // code...
               break;
           }
-
         }
         break;
     default:
@@ -72,10 +82,7 @@ try {
   }
 
 } catch (Exception $e) {
-
   echo $e->getMessage();
-
-
 }
 
 

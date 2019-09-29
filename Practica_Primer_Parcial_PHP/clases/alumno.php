@@ -10,9 +10,9 @@
     public function __construct($nombre,$apellido,$email,$foto)
     {
       $this->nombre = $nombre;
-      $this->$apellido = $apellido;
-      $this->$email = $email;
-      $this->$foto = $foto;
+      $this->apellido = $apellido;
+      $this->email = $email;
+      $this->foto = $foto;
     }
   }
 
