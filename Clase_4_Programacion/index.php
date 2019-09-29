@@ -1,23 +1,56 @@
 <?php
+    //TODO validar que sea una imagen(image/) que no supere los 2 mb
+    //TODO pasar todas las $_post a minuscula ("imagen")
+    /*$tmpName = $_FILES["imagen"]["tmp_name"];
+    $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+    $rta = move_uploaded_file($tmpName, "./".$_FILES["imagen"]["name"]);*/
     INCLUDE './Clases/Persona.php';
+    INCLUDE './Clases/Alumno.php';
     INCLUDE './Clases/IO.php';
     $request = ($_SERVER['REQUEST_METHOD']);
     $dao = new IO('./texto.txt');
-
     switch($request){
-        case "POST" : 
-        var_dump($_POST);
-        var_dump($_FILES);
-            if(isset($_POST["Nombre"]) && isset($_POST["Apellido"]) && isset($_POST["Legajo"])) {
-                $persona = new Persona($_POST["Nombre"], $_POST["Apellido"], $_POST["Legajo"]);
-                $dao->guardar($persona);
-                $dao->guardarImagen("Imagen","./",$persona->legajo);
+        case "POST" :
+            if(isset($_POST["case"]) && $_POST["case"] == "alta" && isset($_POST["nombre"])
+                && isset($_POST["apellido"]) && isset($_POST["legajo"]) && isset($_FILES["imagen"])) {
+                $tmpName = $_FILES["imagen"]["tmp_name"];
+                $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+                $filename = "./imagenes/".$_POST["legajo"].".".$extension;
+                $rta = move_uploaded_file($tmpName, $filename);
+                if($rta == true) {
+                    $alumno = new Alumno($_POST["nombre"], $_POST["apellido"], $_POST["legajo"], $filename);
+                    $dao->guardar($alumno);
+                    echo 'Saved';
+                }
+                else {
+                    echo 'Something went wrong';
+                }
+            }
+            //TODO modificacion para nombre y apellido
+            else if (isset($_POST["case"]) && $_POST["case"] == "modificacion" && isset($_POST["legajo"])
+                && isset($_FILES["imagen"])) {
+                //TODO backupear
+                $tmpName = $_FILES["imagen"]["tmp_name"];
+                $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+                $filename = "./imagenes/".$_POST["legajo"].".".$extension;
+                $rta = move_uploaded_file($tmpName, $filename);
+                if($rta == true) {
+                    $dao->modificar("legajo", $_POST["legajo"],"imagen", $filename);
+                    echo 'Modified';
+                }
+                else {
+                    echo 'Something went wrong';
+                }
             }
             break;
-        case "GET" : 
+        case "GET" :
             echo $dao->listar();
             break;
-        
+        case "DELETE" :
+            //TODO borrar imagen
+            if(isset($_GET["legajo"])){
+                $dao->borrar("legajo", $_GET["legajo"]);
+            }
+            break;
     }
-
 ?>

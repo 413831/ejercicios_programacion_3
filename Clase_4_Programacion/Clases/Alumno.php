@@ -2,22 +2,31 @@
 require_once 'Persona.php';
 
 class Alumno extends Persona
-{    
+{
     // Atributos
     public $legajo;
     public $cuatrimestre;
-    
+
     // Constructor
-    public function __construct($nombre, $dni, $edad, $localidad,$legajo,$cuatrimestre)  
+    public function __construct($nombre, $apellido,$legajo,$imagen)
     {
-       // parent:: __construct($nombre, $dni, $edad, $localidad);
-       $this->nombre = $nombre;
-        $this->dni = $dni;
-        $this->edad = $edad;
-        $this->localidad = $localidad; 
-       $this->legajo = $legajo;
-        $this->cuatrimestre = $cuatrimestre;
+        // parent:: __construct($nombre, $dni, $edad, $localidad);
+        $this->nombre = $nombre;
+        $this->apellido = $apellido;
+        $this->legajo = $legajo;
+        $this->imagen = $imagen;
     }
+
+    //public function __construct($nombre, $dni, $edad, $localidad,$legajo,$cuatrimestre)
+    //{
+       // parent:: __construct($nombre, $dni, $edad, $localidad);
+      // $this->nombre = $nombre;
+        //$this->dni = $dni;
+        //$this->edad = $edad;
+        //$this->localidad = $localidad;
+       //$this->legajo = $legajo;
+        //$this->cuatrimestre = $cuatrimestre;
+    //}
 
     public function saludar()
     {
@@ -28,7 +37,7 @@ class Alumno extends Persona
     {
 //$datos = "Legajo: ".$this->legajo;
      //   $datos.= "Cuatrimestre".$this->cuatrimestre;
-       // return parent::mostrarInfo()." ".$datos; 
+       // return parent::mostrarInfo()." ".$datos;
     }
 }
 
