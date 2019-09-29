@@ -132,9 +132,17 @@ class Controller
        echo "<td>".$object->nombre."</td>";
        echo "<td>".$object->apellido."</td>";
        echo "<td>".$object->email."</td>";
-       echo "<td><img src=\".$object->foto.\" alt=\"Foto de alumno\"></td>\"";
-       echo "</tr>";
 
+      $image = $object->foto;
+      // Read image path, convert to base64 encoding
+      $imageData = base64_encode(file_get_contents($image));
+
+      // Format the image SRC:  data:{mime};base64,{data};
+      $src = 'data: '.mime_content_type($image).';base64,'.$imageData;
+
+      // Echo out a sample image
+      echo '<td><img src="' . $src . '" width="150" height="200"></td>';
+      echo "</tr>";
      }
      echo "</table>";
      //var_dump($jsonObject);
@@ -192,20 +200,20 @@ class Controller
 
         if(array_key_exists("codigoMateria", $GET)) //poner primero el campo que esta en null para que no salte error por Undefined index
         {
-            $rta = "Alumnos filtrados por materia\n" . self::$archivo->getObjects("codigoMateria", $GET["codigoMateria"]);
+            $rta = self::$archivo->getObjects("codigoMateria", $GET["codigoMateria"]);
         }
         else if(array_key_exists("apellidoAlumno", $GET))
         {
-            $rta = "Alumnos filtrados por apellido\n" . self::$archivo->getObjects("apellidoAlumno", $GET["apellidoAlumno"]);
+            $rta = self::$archivo->getObjects("apellidoAlumno", $GET["apellidoAlumno"]);
         }
         else if(array_key_exists("apellidoAlumno", $GET) && array_key_exists("codigoMateria", $GET))
         {
-            $rta = "no se pueden filtrar los campos apellido y materia juntos";
+            echo "no se pueden filtrar los campos apellido y materia juntos";
         }
         else if(!array_key_exists("apellidoAlumno", $GET) && !array_key_exists("codigoMateria", $GET)){
             $rta = self::$archivo->listar();
         }
-        return $rta;
+        self::createTable($rta);
     }
 
    // Verifica si es una imagen valida
@@ -219,6 +227,24 @@ class Controller
        }
    }
 
+   static function createTable($objetos){
+     $jsonObject = json_decode($objetos);
+     echo "<table border=1px>";
+     echo "<tr><th>Nombre Alumno</th><th>Apellido Alumno</th><th>Email</th><th>Materia</th><th>Codigo</th></tr>";
+     foreach ($jsonObject as $object) {
+       echo "<tr>";
+       echo "<td>".$object->nombreAlumno."</td>";
+       echo "<td>".$object->apellidoAlumno."</td>";
+       echo "<td>".$object->emailAlumno."</td>";
+       echo "<td>".$object->nombreMateria."</td>";
+       echo "<td>".$object->codigoMateria."</td>";
+       echo "</tr>";
+
+     }
+     echo "</table>";
+
+
+   }
 }
 
 

@@ -68,7 +68,7 @@ try {
                 echo Controller::mostrarAlumnos('./alumnos.txt');
                 break;
             case 'inscripciones':
-                  echo Controller::mostrarInscripciones($_GET,'./inscripciones.txt');
+                  Controller::mostrarInscripciones($_GET,'./inscripciones.txt');
                   break;
             default:
               // code...
