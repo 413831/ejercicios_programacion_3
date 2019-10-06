@@ -11,10 +11,27 @@ body {
     line-height: 2;
 }
 
-.tabla{
-    display: flex;
-    margin: auto;
+.tabla tr{
+margin: auto;
+    width: 1000px;
 }
+
+.tablaDatos {
+    margin: auto;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+.tablaDatos,
+.tablaDatos th,
+.tablaDatos td {
+    border: 1px solid black;
+}
+
+.tablaDatos td {
+    text-align: center;
+}
+
 
 fieldset{
     background-color: rgb(174, 210, 247);
@@ -225,7 +242,7 @@ h4 {
 .contenido-anuncio {
     padding: 2rem;
 }
-.contenido-anuncio h3, 
+.contenido-anuncio h3,
 .contenido-anuncio p  {
     margin: 0;
 }

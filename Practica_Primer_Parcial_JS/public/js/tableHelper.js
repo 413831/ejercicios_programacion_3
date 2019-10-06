@@ -5,7 +5,7 @@ function crearTabla(array) {
     // tabla.setAttribute('width', '700px');
     tabla.className = 'tabla';
 
-    let cabecera = document.createElement("th");
+    let cabecera = document.createElement("tr");
 
     for (atributo in array[0]) {
         if (atributo != "toString") {

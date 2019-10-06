@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,49 +15,40 @@
     <form action="#" style="width: 300px" id="frmAlta" class="frm">
         <fieldset>
             <legend>Formulario</legend>
-            <table id="table" class="tabla">
-                <tr>
-                    <td><label for="txtTitulo">Titulo:</label> </td>
-                    <td><input type="text" id="txtTitulo" name="titulo"> </td>
-                </tr>
-                <tr>
-                    <td><label for="txtDescripcion">Descripcion:</label> </td>
-                    <td><input type="text" id="txtDescripcion" name="descripcion"> </td>
-                </tr>
-                <tr>
-                    <td><label for="txtPrecio">Precio:</label> </td>
-                    <td><input type="text" id="txtPrecio" name="precio"> </td>
-                </tr>
-                <tr>                   
-                    <td>
-                        <label for="txtAlquiler">Alquiler</label>
-                        <input type="radio" id="rdoAlquiler" name="transaccion" value="alquiler" >
-                    </td>
-                    <td><label for="txtVenta">Venta</label>
-                        <input type="radio" id="rdoVenta" name="transaccion" value="venta" >
-                    </td>
-                </tr>
-                <tr>
-                        <td><label for="txtDormitorios">Dormitorios:</label> </td>
-                        <td><input type="text" id="txtDormitorios" name="dormitorios"> </td>
-                    </tr>
-                <tr>
-                    <td><label for="txtWc">Baños:</label> </td>
-                    <td><input type="text" id="txtWc" name="wc"> </td>
-                </tr>
-                <tr>
-                    <td><label for="txtEstacionamiento">Estacionamientos:</label> </td>
-                    <td><input type="text" id="txtEstacionamiento" name="estacionamiento"> </td>
-                </tr>
-            </table>
-            <div>                
+                <label id="lblId" for="idAnuncio" hidden >ID:</label>
+                <input type="text" id="idAnuncio" name="idAnuncio" hidden disabled>
+
+                <label for="titulo">Titulo:</label>
+                <input type="text" id="titulo" name="titulo">
+
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion">
+
+                <label for="precio">Precio:</label>
+                <input type="text" id="precio" name="precio">
+
+                <label for="rdoAlquiler">Alquiler</label>
+                <input type="radio" id="rdoAlquiler" name="transaccion" value="Alquiler" >
+
+                <label for="rdoVenta">Venta</label>
+                <input type="radio" id="rdoVenta" name="transaccion" value="Venta" >
+
+                <label for="num_dormitorio">Dormitorios:</label>
+                <input type="text" id="num_dormitorio" name="num_dormitorio">
+
+                <label for="num_wc">Baños:</label>
+                <input type="text" id="num_wc" name="num_wc">
+
+                <label for="num_estacionamiento">Estacionamientos:</label>
+                <input type="text" id="num_estacionamiento" name="num_estacionamiento">
+            <div>
                 <button type="submit" id="btnCrearModificar">Crear</button>
                 <button type="button" id="btnBorrar" hidden>Borrar</button>
-            </div>        
+            </div>
         </fieldset>
-    </form>
-    <div class="tablaDatos" id="tablaDatos">
+        <div class="tablaDatos" id="tablaDatos">
 
-    </div>
+        </div>
+    </form>
 </body>
 </html>

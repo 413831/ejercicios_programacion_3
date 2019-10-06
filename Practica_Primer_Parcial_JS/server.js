@@ -1,4 +1,4 @@
-   
+
 
 const express = require('express');
 
@@ -58,7 +58,7 @@ app.get("/traerAnuncios", function (request, response) {
 
     if (err) {
 
-        throw err; 
+        throw err;
 
     }
 
@@ -78,9 +78,9 @@ app.get("/traerAnuncios", function (request, response) {
 
        });
 
-       
 
-       setTimeout(function(){response.send({"message": "Carga exitosa","data":array});},5000);
+
+       setTimeout(function(){response.send({"message": "Carga exitosa","data":array});},30);
 
 });
 
@@ -102,7 +102,7 @@ app.post('/altaAnuncio', (request, response) => {
 
   var Anuncio = {};
 
- 
+
 
   if (validarAnuncio(nuevoAnuncio)) {
 
@@ -114,9 +114,9 @@ app.post('/altaAnuncio', (request, response) => {
 
       }else{
 
-          
 
-          
+
+
 
           //guardo el objeto
 
@@ -140,9 +140,9 @@ app.post('/altaAnuncio', (request, response) => {
 
             Anuncio.titulo = nuevoAnuncio.titulo;
 
-            Anuncio.transaccion = nuevoAnuncio.transaccion;
-
             Anuncio.descripcion = nuevoAnuncio.descripcion;
+
+            Anuncio.transaccion = nuevoAnuncio.transaccion;
 
             Anuncio.precio = nuevoAnuncio.precio;
 
@@ -170,13 +170,13 @@ app.post('/altaAnuncio', (request, response) => {
 
           }*/
 
-          setTimeout(function(){response.send("Alta Exitosa");    },5000);
+          setTimeout(function(){response.send("Alta Exitosa");    },50);
 
       }
 
-     
 
-      });  
+
+      });
 
     }
 
@@ -214,9 +214,9 @@ app.post('/bajaAnuncio', (request, response) => {
 
         require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
 
-        //res.send({"message":"Baja exitosa"}); 
+        //res.send({"message":"Baja exitosa"});
 
-  });  
+  });
 
 
 
@@ -244,7 +244,7 @@ app.post('/modificarAnuncio', (request, response) => {
 
   var Anuncio = request.body;
 
-  var AnuncioModificada = request.body; 
+  var AnuncioModificada = request.body;
 
 
 
@@ -272,7 +272,7 @@ app.post('/modificarAnuncio', (request, response) => {
 
                 require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
 
-                //response.send('Modificacion exitosa'); 
+                //response.send('Modificacion exitosa');
 
             });
 
@@ -290,7 +290,7 @@ app.post('/modificarAnuncio', (request, response) => {
 
     response.send(respuesta);
 
-  }, 1000);
+  }, 60);
 
 });
 
