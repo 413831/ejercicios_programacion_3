@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/estilos.css">
     <script src="./js/anuncio.js"></script>
     <script src="./js/tableHelper.js"></script>
     <script src="./js/index.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <form action="#" style="width: 300px" id="frmAlta" class="frm">
+    <h1>Bienes Raices la Poronga</h1>
+    <form action="#" id="frmAlta" class="frm">
         <fieldset>
             <legend>Formulario</legend>
+            <div class="formulario">
                 <label id="lblId" for="idAnuncio" hidden >ID:</label>
                 <input type="text" id="idAnuncio" name="idAnuncio" hidden disabled>
 
@@ -26,12 +28,14 @@
 
                 <label for="precio">Precio:</label>
                 <input type="text" id="precio" name="precio">
-
-                <label for="rdoAlquiler">Alquiler</label>
-                <input type="radio" id="rdoAlquiler" name="transaccion" value="Alquiler" >
-
-                <label for="rdoVenta">Venta</label>
-                <input type="radio" id="rdoVenta" name="transaccion" value="Venta" >
+                <div class="radios">
+                    <div class="">
+                        <input type="radio" id="rdoAlquiler" name="transaccion" value="Alquiler" >Alquiler
+                    </div>
+                    <div class="">
+                        <input type="radio" id="rdoVenta" name="transaccion" value="Venta" >Venta
+                    </div>
+                </div>
 
                 <label for="num_dormitorio">Dormitorios:</label>
                 <input type="text" id="num_dormitorio" name="num_dormitorio">
@@ -41,14 +45,15 @@
 
                 <label for="num_estacionamiento">Estacionamientos:</label>
                 <input type="text" id="num_estacionamiento" name="num_estacionamiento">
-            <div>
-                <button type="submit" id="btnCrearModificar">Crear</button>
-                <button type="button" id="btnBorrar" hidden>Borrar</button>
+                <div>
+                    <button type="submit" id="btnCrearModificar">Crear</button>
+                    <button type="button" id="btnBorrar" hidden>Borrar</button>
+                </div>
             </div>
         </fieldset>
-        <div class="tablaDatos" id="tablaDatos">
-
-        </div>
     </form>
+    <div class="tablaDatos" id="tablaDatos">
+
+    </div>
 </body>
 </html>

@@ -1,8 +1,5 @@
 function crearTabla(array) {
     var tabla = document.createElement("table");
-    // tabla.setAttribute('border', '1px solid black');
-    // tabla.setAttribute('style', 'border-collapse:collapse');
-    // tabla.setAttribute('width', '700px');
     tabla.className = 'tabla';
 
     let cabecera = document.createElement("tr");

@@ -80,7 +80,7 @@ app.get("/traerAnuncios", function (request, response) {
 
 
 
-       setTimeout(function(){response.send({"message": "Carga exitosa","data":array});},30);
+       setTimeout(function(){response.send({"message": "Carga exitosa","data":array});},2000);
 
 });
 
@@ -170,7 +170,7 @@ app.post('/altaAnuncio', (request, response) => {
 
           }*/
 
-          setTimeout(function(){response.send("Alta Exitosa");    },50);
+          setTimeout(function(){response.send("Alta Exitosa");    },2000);
 
       }
 
@@ -224,7 +224,7 @@ app.post('/bajaAnuncio', (request, response) => {
 
     response.send({"message":"Baja exitosa"});
 
-  }, 1000);
+  }, 2000);
 
 
 
