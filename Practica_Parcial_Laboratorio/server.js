@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 
 const app = express();
@@ -38,9 +36,14 @@ app.use(express.static(__dirname + '/public'));
 
 // Express 4.0
 
-app.use(parser.json({ limit: '20mb' }));
+app.use(parser.json({
+  limit: '20mb'
+}));
 
-app.use(parser.urlencoded({ extended: true, limit: '20mb' }));
+app.use(parser.urlencoded({
+  extended: true,
+  limit: '20mb'
+}));
 
 
 
@@ -48,41 +51,44 @@ app.use(parser.urlencoded({ extended: true, limit: '20mb' }));
 
 
 
-app.get("/traerAnuncios", function (request, response) {
+app.get("/traerAnuncios", function(request, response) {
 
   console.log("Enviando Anuncios");
 
   //console.log(Anuncios);
 
-  require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function (err, data) {
+  require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function(err, data) {
 
     if (err) {
 
-        throw err;
+      throw err;
+
+    } else if (data === undefined) {
+
+      throw ("No se encontro la data solicitada");
 
     }
 
-    else if(data === undefined){
-
-        throw("No se encontro la data solicitada");
-
-    }
 
 
+    var array = JSON.parse(data);
 
-       var array = JSON.parse(data);
+    array = array.filter(function(a) {
 
-       array = array.filter(function(a){
+      return a.active == true || a.active == "true";
 
-         return a.active == true || a.active == "true";
-
-       });
+    });
 
 
 
-       setTimeout(function(){response.send({"message": "Carga exitosa","data":array});},2000);
+    setTimeout(function() {
+      response.send({
+        "message": "Carga exitosa",
+        "data": array
+      });
+    }, 2000);
 
-});
+  });
 
 
 
@@ -106,79 +112,81 @@ app.post('/altaAnuncio', (request, response) => {
 
   if (validarAnuncio(nuevoAnuncio)) {
 
-    require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function (err, data) {
+    require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function(err, data) {
 
       if (err) {
 
-           throw err; // error handling
+        throw err; // error handling
 
-      }else{
-
-
+      } else {
 
 
 
-          //guardo el objeto
-
-          var array = [];
-
-          array = JSON.parse(data);
-
-          Anuncio.id = getID(array);
-
-          /*Anuncio.foto = "public/img/"+Anuncio.id+".jpg";
-
-          //guardo la imagen
-
-          nuevoAnuncio.foto = nuevoAnuncio.foto.split(';base64,').pop();
-
-          require("fs").writeFile(Anuncio.foto, nuevoAnuncio.foto, 'base64', function(err) {
-
-              console.log(err);
-
-            });*/
-
-            Anuncio.titulo = nuevoAnuncio.titulo;
-
-            Anuncio.descripcion = nuevoAnuncio.descripcion;
-
-            Anuncio.transaccion = nuevoAnuncio.transaccion;
-
-            Anuncio.precio = nuevoAnuncio.precio;
-
-          Anuncio.num_wc = nuevoAnuncio.num_wc;
-
-          Anuncio.num_estacionamiento = nuevoAnuncio.num_estacionamiento;
-
-          Anuncio.num_dormitorio = nuevoAnuncio.num_dormitorio;
-
-          Anuncio.active = "true";
 
 
+        //guardo el objeto
 
-          array.push(Anuncio);
+        var array = [];
 
-          require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
+        array = JSON.parse(data);
 
-          //build response
+        Anuncio.id = getID(array);
 
-          /*var respuesta = {
+        /*Anuncio.foto = "public/img/"+Anuncio.id+".jpg";
 
-              message: "Alta exitosa",
+        //guardo la imagen
 
-              data: array
+        nuevoAnuncio.foto = nuevoAnuncio.foto.split(';base64,').pop();
 
-          }*/
+        require("fs").writeFile(Anuncio.foto, nuevoAnuncio.foto, 'base64', function(err) {
 
-          setTimeout(function(){response.send("Alta Exitosa");    },2000);
+            console.log(err);
+
+          });*/
+
+        Anuncio.titulo = nuevoAnuncio.titulo;
+
+        Anuncio.descripcion = nuevoAnuncio.descripcion;
+
+        Anuncio.transaccion = nuevoAnuncio.transaccion;
+
+        Anuncio.precio = nuevoAnuncio.precio;
+
+        Anuncio.num_wc = nuevoAnuncio.num_wc;
+
+        Anuncio.num_estacionamiento = nuevoAnuncio.num_estacionamiento;
+
+        Anuncio.num_dormitorio = nuevoAnuncio.num_dormitorio;
+
+        Anuncio.active = "true";
+
+
+
+        array.push(Anuncio);
+
+        require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
+
+        //build response
+
+        /*var respuesta = {
+
+            message: "Alta exitosa",
+
+            data: array
+
+        }*/
+
+        setTimeout(function() {
+          response.send("Alta Exitosa");
+        }, 2000);
 
       }
 
 
 
-      });
+    });
 
-    }
+  }
 
 });
 
@@ -194,27 +202,27 @@ app.post('/bajaAnuncio', (request, response) => {
 
   var array;
 
-  require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function (err, data) {
+  require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function(err, data) {
 
-      if (err) {
+    if (err) {
 
-          // error handling
+      // error handling
 
-      }
+    }
 
-         array = JSON.parse(data);
+    array = JSON.parse(data);
 
-         var objectToDelete = array.filter(function(a){
+    var objectToDelete = array.filter(function(a) {
 
-           return a.id == indice;
+      return a.id == indice;
 
-         });
+    });
 
-        remove(objectToDelete[0]);
+    remove(objectToDelete[0]);
 
-        require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
+    require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
 
-        //res.send({"message":"Baja exitosa"});
+    //res.send({"message":"Baja exitosa"});
 
   });
 
@@ -222,7 +230,9 @@ app.post('/bajaAnuncio', (request, response) => {
 
   setTimeout(() => {
 
-    response.send({"message":"Baja exitosa"});
+    response.send({
+      "message": "Baja exitosa"
+    });
 
   }, 2000);
 
@@ -240,7 +250,9 @@ app.post('/modificarAnuncio', (request, response) => {
 
 
 
-  var respuesta = {"todoOk": 0};
+  var respuesta = {
+    "todoOk": 0
+  };
 
   var Anuncio = request.body;
 
@@ -252,33 +264,33 @@ app.post('/modificarAnuncio', (request, response) => {
 
     var array = new Array();
 
-            require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function (err, data) {
+    require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function(err, data) {
 
-                if (err) {
+      if (err) {
 
-                    // error handling
+        // error handling
 
-                }
+      }
 
-                array = JSON.parse(data);
+      array = JSON.parse(data);
 
-                //obtengo index del id que necesito
+      //obtengo index del id que necesito
 
-                var index = array.findIndex(function(obj){return obj.id === Anuncio.id || obj.id.toString() === Anuncio.id;})
+      var index = array.findIndex(function(obj) {
+        return obj.id === Anuncio.id || obj.id.toString() === Anuncio.id;
+      })
 
-                array[index] = Anuncio;
+      array[index] = Anuncio;
 
 
 
-                require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
+      require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));
 
-                //response.send('Modificacion exitosa');
+      //response.send('Modificacion exitosa');
 
-            });
+    });
 
-  }
-
-  else{
+  } else {
 
     console.log("Anuncio invalida");
 
@@ -286,7 +298,7 @@ app.post('/modificarAnuncio', (request, response) => {
 
 
 
-  setTimeout(function () {
+  setTimeout(function() {
 
     response.send(respuesta);
 
@@ -330,9 +342,7 @@ function validarAnuncio(Anuncio, full) {
 
     }
 
-  }
-
-  else {
+  } else {
 
     if (Anuncio.hasOwnProperty('descripcion') && Anuncio.hasOwnProperty('num_dormitorio') && Anuncio.hasOwnProperty('num_estacionamiento') && Anuncio.hasOwnProperty('num_wc') && Anuncio.hasOwnProperty('precio') && Anuncio.hasOwnProperty('titulo') && Anuncio.hasOwnProperty('transaccion')) {
 
@@ -356,7 +366,7 @@ function validarAnuncio(Anuncio, full) {
 
 
 
-app.get('/',function(req,res){
+app.get('/', function(req, res) {
 
   res.sendFile(__dirname + '/public/index.html');
 
@@ -364,7 +374,7 @@ app.get('/',function(req,res){
 
 
 
-app.get('/admin',function(req,res){
+app.get('/admin', function(req, res) {
 
   res.sendFile(__dirname + '/public/admin.html');
 
@@ -372,7 +382,7 @@ app.get('/admin',function(req,res){
 
 
 
-function remove(a){
+function remove(a) {
 
   a.active = "false";
 
@@ -380,35 +390,31 @@ function remove(a){
 
 
 
-function getID(array){
+function getID(array) {
 
-  if(array.length == 0){
+  if (array.length == 0) {
 
-      return 1;
+    return 1;
 
-  }
+  } else if (array.length == 1) {
 
-  else if(array.length == 1){
+    return 2;
 
-      return 2;
+  } else {
 
-  }
+    var maxIndex = array.reduce(function(prev, curr, index) {
 
-  else{
+      if (parseInt(prev.id) > parseInt(curr.id))
 
-      var maxIndex = array.reduce(function(prev,curr,index){
+        return parseInt(prev.id);
 
-          if(parseInt(prev.id)>parseInt(curr.id))
+      else
 
-          return parseInt(prev.id);
+        return parseInt(curr.id);
 
-          else
+    });
 
-          return parseInt(curr.id);
-
-      });
-
-      return (maxIndex+1).toString();
+    return (maxIndex + 1).toString();
 
   }
 
