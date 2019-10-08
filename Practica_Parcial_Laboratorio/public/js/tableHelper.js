@@ -5,7 +5,7 @@ function crearTabla(array) {
 
   for(atributo in array[0]) // Se crea cabecera de la tabla
   {
-    let th = createElement('th');
+    let th = document.createElement('th');
     th.textContent = atributo;
     cabecera.appendChild(th);
   }

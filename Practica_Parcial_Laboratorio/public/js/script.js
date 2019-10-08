@@ -24,7 +24,7 @@ function manejadorModificar(e) {
 function altaAnuncio(anuncio) {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
-    if (xhr.readystate == 4 && xhr.status == 400) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       traerAnuncios();
     } else {
       // Hacer algo mientras llega la respuesta
@@ -40,7 +40,7 @@ function altaAnuncio(anuncio) {
 function bajaAnuncio(anuncio) {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
-    if (xhr.readystate == 4 && xhr.status == 400) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       traerAnuncios();
     } else {
       // Hacer algo mientras llega la respuesta
@@ -56,7 +56,7 @@ function bajaAnuncio(anuncio) {
 function modificarAnuncio(anuncio) {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
-    if (xhr.readystate == 4 && xhr.status == 400) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       traerAnuncios();
     } else {
       // Hacer algo mientras llega la respuesta
@@ -65,7 +65,10 @@ function modificarAnuncio(anuncio) {
   }
   xhr.open('POST', 'http://localhost:3000/modificarAnuncio', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  anuncio.active = true;
+  if(anuncio != undefined)
+  {
+    anuncio.active = true;
+  }
   console.log(anuncio);
   xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
 }
@@ -75,11 +78,11 @@ function traerAnuncios() {
   let anuncios;
   let celdas;
   xhr.onreadystatechange = () => {
-    if (xhr.readystate == 4 && xhr.status == 400) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       anuncios = JSON.parse(xhr.responseText);
       document.getElementById('tablaDatos').innerHTML = ""; // Traigo el div para la tabla
       document.getElementById('tablaDatos').appendChild(crearTabla(anuncios.data));
-      celdas = document.getElementByTagName('td');
+      celdas = document.getElementsByTagName('td');
       for (var i = 0; i < celdas.length; i++) {
         let celda = celdas[i];
         celda.addEventListener('click', mostrarAnuncio);
