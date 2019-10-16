@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let personas = [
+            {nombre: "josecito", edad: 22},
+            {nombre: "manolito", edad: 30},
+            {nombre: "jesucito", edad: 45},
+            {nombre:"nachito",edad: 18},
+            {nombre:"anita",edad:25},
+            {nombre:"pepito",edad:32}
+            ];
+        let array = ["juan","ana",15,2,3,4,[1,2,3]];
+        let cuadrados;
+        let numeros = [5,9,8,10,6,3,1];
+        let numeros2 = [100,2,...numeros]; // Operador de propagacion COPIA todos los valores
+        
+        cuadrados = numeros.map( elemento => elemento * elemento);
+        console.log(numeros);        
+        console.log(cuadrados);        
+        
+
+
+
+    </script>
+    <div>
+        <h1>Callbacks</h1>
+        <h2>Función Map</h2>
+        <h3>Mirá la consola zapallo</h3>
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Callbacks</h1>
+        <h2>Función Filter</h2>
+        <h3>Mirá la consola papa frita</h3>
+        <ul id="listaNombres"></ul>                
+    </div>
+
+    <script>
+        let personas = [
+            {nombre: "josecito", edad: 22},
+            {nombre: "manolito", edad: 30},
+            {nombre: "jesucito", edad: 45},
+            {nombre:"nachito",edad: 18},
+            {nombre:"anita",edad:25},
+            {nombre:"pepito",edad:32}
+            ];
+        let array = ["juan","ana",15,2,3,4,[1,2,3]];
+        let nombres = personas.map( p=> p.nombre);
+
+        console.log(nombres);        
+        nombres.forEach( nombre => {
+            let item = document.createElement("li");
+            item.textContent = nombre; 
+            document.getElementById("listaNombres").appendChild(item);
+        })
+
+        nombres = nombres.filter( elemento => elemento.includes('a'));
+        console.log(nombres);        
+
+    </script>
+    
+
+</body>
+</html>

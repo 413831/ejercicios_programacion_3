@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array = ["juan","ana",15,2,3,4,[1,2,3]];
+        let cuadrados = [];
+        // forma º1
+        console.log("forma º1");
+        array.forEach(mostrar)
+    
+        function mostrar(algo){
+            console.log(mostrar);
+        }
+
+        // forma 2 
+        console.log("forma º2");
+        array.forEach(function(algo){
+            console.log(algo);
+        });
+
+        // forma 3
+        console.log("forma º3");
+        array.forEach( elemento=> console.log(elemento));
+        let retorno = array.forEach( elemento=> cuadrados.push(elemento * elemento));
+        console.log(retorno);
+        console.log(array);
+        console.log(cuadrados);
+        console.log("////////");
+
+        console.log(array.some( elemento => elemento === "juan"));
+        console.log(array.every( elemento => elemento === "juan"));
+        
+        let numeros = [5,9,8,10,6,3,1];
+        let numeros2 = [100,2,...numeros]; // Operador de propagacion COPIA todos los valores
+        let personas = [
+            {nombre: "josecito", edad: 22},
+            {nombre: "manolito", edad: 30},
+            {nombre: "jesucito", edad: 45},
+            {nombre:"nachito",edad: 18},
+            {nombre:"anita",edad:25},
+            {nombre:"pepito",edad:32}
+            ];
+        
+        console.log(numeros.sort( (a,b) => a-b));
+        console.log(numeros2.sort( (a,b) => a-b));
+        personas.sort( (p1,p2)=>p1.edad - p2.edad);
+        console.log(personas);
+        console.log(numeros);
+        console.log(numeros2);
+
+
+
+    </script>
+    <div>
+        <h1>Callbacks</h1>
+
+
+    </div>
+
+</body>
+</html>
