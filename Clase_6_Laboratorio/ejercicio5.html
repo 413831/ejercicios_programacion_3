@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Callbacks</h1>
+        <h2>Chaining</h2>
+        <h3>Mirá la consola salchicha</h3>
+        <ul id="listaNombres"></ul>                
+    </div>
+
+    <script>
+        Array.prototype.unique = function() {return [...new Set(this)]};  // Se puede crear metodo de casteo de Set a array
+       
+        let numeros = [4,6,12,3,1,2];
+        // el 0 es como inicializarlo;
+        let suma = numeros.reduce( (acumulador, elemento) => acumulador + elemento, 0);        
+        console.log(suma);
+        let personas = [
+            {nombre: "josecito", edad: 22, sexo: "m"},
+            {nombre: "manolito", edad: 30, sexo: "m"},
+            {nombre: "jesucito", edad: 45, sexo: "m"},
+            {nombre:"laurita",edad: 18, sexo: "f"},
+            {nombre:"anita",edad:25, sexo: "f"},
+            {nombre:"pepito",edad:32, sexo: "m"}
+        ];
+        let x = new Set(numeros);
+        let numerosSInRepertir = [...x];
+        console.log(x);
+        console.log(numerosSInRepertir);
+        console.log(numeros.unique())
+    </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Callbacks</h1>
+        <h2>Función Reduce</h2>
+        <h3>Mirá la consola cebollin</h3>
+        <ul id="listaNombres"></ul>                
+    </div>
+
+    <script>
+        let numeros = [4,6,12,3,1,2];
+        // el 0 es como inicializarlo;
+        let suma = numeros.reduce( (acumulador, elemento) => acumulador + elemento, 0);        
+        console.log(suma);
+        let personas = [
+            {nombre: "josecito", edad: 22, sexo: "m"},
+            {nombre: "manolito", edad: 30, sexo: "m"},
+            {nombre: "jesucito", edad: 45, sexo: "m"},
+            {nombre:"laurita",edad: 18, sexo: "f"},
+            {nombre:"anita",edad:25, sexo: "f"},
+            {nombre:"pepito",edad:32, sexo: "m"}
+        ];
+        suma = personas.reduce( (acumulador,persona) => acumulador + persona.edad,0);
+        console.log(suma);
+        let hombres = personas.filter( persona => persona.sexo === "m");
+        let edades = hombres.map( hombre => hombre.edad);        
+        suma = edades.reduce( (suma,edad) => suma + edad,0);
+        console.log(hombres);
+        console.log(edades);
+        console.log(suma);
+
+        let choclazo = personas.filter( persona => persona.sexo === "m").
+                                map( hombre => hombre.edad).
+                                reduce( (suma,edad,indice,array) => suma + edad / array.length,0);
+        console.log(choclazo);
+
+
+    </script>
+    
+
+</body>
+</html>
