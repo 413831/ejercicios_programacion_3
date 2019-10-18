@@ -1,21 +1,24 @@
 <?php
 class cdApi
 {
-    public $alumnoController;
+    public $alumnos;
+
     public function __construct()
     {
-        $this->alumnoController = new AlumnoController();
+        $this->alumnos = "./alumnos.txt";
     }
+
     public function traerTodos($request, $response, $args){
-        $alumnos = $this->alumnoController->mostrarAlumnos();
+        $alumnos = Controller::mostrarAlumnos($this->alumnos);
         return $response->getbody()->write($alumnos);
     }
 
     public function traerUno($request, $response, $args){
         $apellido = $args['apellido'];
-        $alumno = $this->alumnoController->consultarAlumno($apellido);
-        return $response->getbody()->write(json_encode($alumno));
+        $alumno = Controller::mostrarAlumno($apellido,$this->alumnos);
+        return $response->getbody()->write($alumno);
     }
+
     public function cargarUno($request, $response, $args){
         $archivos = $request->getUploadedFiles();
         $parametros = $request->getParsedBody();
@@ -24,18 +27,23 @@ class cdApi
         $email = $parametros['email'];
         $foto = $archivos["foto"];
 
-        $respuesta = $this->alumnoController->cargarAlumno($nombre, $apellido, $email, $foto);
+        $respuesta = Controller::cargarAlumno($nombre, $apellido, $email, $foto,$this->alumnos);
         return $response->getbody()->write($respuesta);
     }
+
     public function modificarUno($request, $response, $args){
         $archivos = $request->getUploadedFiles();
         $parametros = $request->getParsedBody();
         var_dump($parametros);
 
-        $respuesta = $this->alumnoController->modificarAlumno($archivos,$parametros);
+        $respuesta = Controller::modificarAlumno($archivos,$parametros,$this->alumnos);
         return $response->getbody()->write($respuesta);
     }
+
     public function borrarUno($request, $response, $args){
+        $parametros = $request->getParsedBody();
+
+
         return $response->getbody()->write("Hello world DELETE");
     }
 }
