@@ -97,8 +97,7 @@ class GenericDao
                 foreach ($objects as $object) {
                     //Comparo todo en minuscula
                     if (strtolower($object->$attrKey) == strtolower($attrValue)) {
-                        array_push($retorno, $object);
-                        return json_encode($retorno); // Convierto en JSON
+                        return $object; 
                     }
                 }
                 return null;

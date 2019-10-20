@@ -45,22 +45,28 @@ class Controller
      $jsonObject = json_decode(self::$archivo->listar());
      // Creo tabla con datos del JSON y retorno
      return self::createTable($jsonObject);
-     //var_dump($jsonObject);
-     //return $rta;
+   }
+
+   public static function mostrarMaterias($materias)
+   {
+     // cargo el archivo de materias
+     self::initialize($materias);
+
+     return self::$archivo->listar();
    }
 
    // Busca todos los alumnos con un apellido determinado
    public static function mostrarAlumno($apellido,$archivo)
    {
+      $arrayJson = array();
       self::initialize($archivo);
       $alumno = self::$archivo->getObject("apellido", $apellido);
-      // decodifico el JSON
-      $jsonObject = json_decode($alumno);
-
-      if($jsonObject != null)
+      array_push($arrayJson, $alumno);
+      json_encode($arrayJson);
+      if($arrayJson != null)
       {
         // Creo tabla con datos del JSON y retorno
-        return self::createTable($jsonObject);
+        return self::createTable($arrayJson);
       }
       else {
         return json_encode(array('mensaje' => "No existe alumno con apellido ".$apellido));
@@ -179,8 +185,8 @@ class Controller
 
     public static function mostrarInscripciones($GET,$inscripciones){
         self::initialize($inscripciones);
-
-        if(array_key_exists("codigoMateria", $GET)) //poner primero el campo que esta en null para que no salte error por Undefined index
+        //poner primero el campo que esta en null para que no salte error por Undefined index
+        if(array_key_exists("codigoMateria", $GET))
         {
             $rta = self::$archivo->getObjects("codigoMateria", $GET["codigoMateria"]);
         }
@@ -201,7 +207,7 @@ class Controller
    // Verifica si es una imagen valida
    static function isImage($imagen, $mb): bool
    {
-       if (($imagen->getClientMediaType() == "image/jpeg") && $imagen->getSize() < ($mb * 1024 * 1024)) {
+       if ($imagen != NULL && ($imagen->getClientMediaType() == "image/jpeg") && $imagen->getSize() < ($mb * 1024 * 1024)) {
            return true;
        } else {
            throw new Exception("No es un archivo de imagen valido."); // VERIFICAR CATCH PARA EXCEPCION
