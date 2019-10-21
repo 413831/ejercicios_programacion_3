@@ -41,7 +41,7 @@ class Controller
    {
        self::initialize($archivo);
        $alumnoAModificar = self::$archivo->getObject("email", $parametros["email"]);
-       var_dump($alumnoAModificar);
+  
        if(!is_null($alumnoAModificar))
        {
            if (array_key_exists("apellido", $parametros) && $alumnoAModificar->apellido != $parametros["apellido"]) {
@@ -213,7 +213,7 @@ class Controller
 
    static function moveImage($foto, $entidad)
    {
-     if (!is_null($foto) && !is_null($entidad))) {
+     if (!is_null($foto) && !is_null($entidad)) {
          $rta = true;
          $fechaBkp = date("d-m-Y_H_i");
          $array = explode(".", $entidad->foto);

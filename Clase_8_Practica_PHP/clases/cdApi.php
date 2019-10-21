@@ -34,7 +34,6 @@ class cdApi
     public function modificarAlumno($request, $response, $args){
         $archivos = $request->getUploadedFiles();
         $parametros = $request->getParsedBody();
-        var_dump($parametros);
 
         $respuesta = Controller::modificarAlumno($archivos,$parametros,$this->alumnos);
         return $response->getbody()->write($respuesta);
