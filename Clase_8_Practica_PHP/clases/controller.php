@@ -36,6 +36,53 @@ class Controller
        }
    }
 
+   // Modifica todos los datos de un alumno y crea backup de foto anterior
+   public static function modificarAlumno($archivos,$parametros, $archivo)
+   {
+       self::initialize($archivo);
+       $alumnoAModificar = self::$archivo->getObject("email", $parametros["email"]);
+       var_dump($alumnoAModificar);
+       if(!is_null($alumnoAModificar))
+       {
+           if (array_key_exists("apellido", $parametros) && $alumnoAModificar->apellido != $parametros["apellido"]) {
+               $alumnoAModificar->apellido = $parametros["apellido"];
+           }
+
+           if (array_key_exists("nombre", $parametros) && $alumnoAModificar->nombre != $parametros["nombre"]) {
+               $alumnoAModificar->nombre = $parametros["nombre"];
+           }
+
+           if (array_key_exists("foto", $archivos)) {
+               self::moveImage($archivos["foto"], $alumnoAModificar);
+           }
+
+           $rta = self::$archivo->modificar("email", $parametros["email"], new Alumno($alumnoAModificar->nombre,
+                                                                                $alumnoAModificar->apellido,
+                                                                                $parametros["email"], $alumnoAModificar->foto));
+           if($rta) {
+             echo json_encode(array('mensaje' => "Modificacion realizada"));
+           } else {
+             echo json_encode(array('mensaje' => "No se pudo realizar la modificacion"));
+           }
+
+       } else {
+          echo json_encode(array('mensaje' => "No se encontro el alumno"));
+       }
+   }
+
+   public static function borrarAlumno($parametros,$archivo)
+   {
+      $email = $parametros["email"];
+      self::initialize($archivo);
+      if(self::$archivo->borrar("email",$email))
+      {
+        return json_encode(array('mensaje' => "Alumno dado de baja."));
+      }
+      else {
+        return json_encode(array('mensaje' => "No se pudo dar de baja al alumno."));
+      }
+   }
+
    // VERIFICAR COMO MOSTRAR IMAGEN
    public static function mostrarAlumnos($alumnos)
    {
@@ -85,56 +132,6 @@ class Controller
             echo json_encode(array('mensaje' => "Materia ya cargada."));
         }
     }
-
-   // Modifica todos los datos de un alumno y crea backup de foto anterior
-   public static function modificarAlumno($archivos,$parametros, $archivo)
-   {
-       self::initialize($archivo);
-       $alumnoAModificar = self::$archivo->getObject("email", $parametros["email"]);
-       var_dump($alumnoAModificar);
-       if(!is_null($alumnoAModificar))
-       {
-             /// Me guardo el valor actual de todas la claves del usuario, si el usuario deseará modificarlas, se pisaran.
-             if (array_key_exists("apellido", $parametros) && $alumnoAModificar->apellido != $parametros["apellido"]) {
-                 $alumnoAModificar->apellido = $parametros["apellido"];
-             }
-
-             if (array_key_exists("nombre", $parametros) && $alumnoAModificar->nombre != $parametros["nombre"]) {
-                 $alumnoAModificar->nombre = $parametros["nombre"];
-             }
-
-             if (array_key_exists("foto", $archivos)) {
-                 $rta = true;
-                 $fechaBkp = date("d-m-Y_H_i");
-                 $array = explode(".", $alumnoAModificar->foto);
-                 //Genero la ruta para almacenar la foto de backup
-                 $rutaParaBkp = "./img/backup/" .$alumnoAModificar->apellido . $fechaBkp . "." . end($array);
-                 // Hago backup de la foto
-                 rename($alumnoAModificar->foto, $rutaParaBkp);
-                 //Modificacion
-                 $foto = $archivos["foto"];
-                 $tmpName = $foto->getClientFilename();
-                 $extension = pathinfo($tmpName, PATHINFO_EXTENSION);
-                 // Cambio el nombre de la foto y coloco email.extension
-                 $alumnoAModificar->foto = "./img/" . $parametros["email"] . "." . $extension;
-                 // Muevo la foto recibida a la ruta asociada a la foto del alumno
-                 $foto->moveTo($alumnoAModificar->foto);
-             }
-
-             $rta = self::$archivo->modificar("email", $parametros["email"], new Alumno($alumnoAModificar->nombre,
-                                                                                  $alumnoAModificar->apellido,
-                                                                                  $parametros["email"], $alumnoAModificar->foto));
-             if($rta) {
-               echo json_encode(array('mensaje' => "Modificacion realizada"));
-             } else {
-               echo json_encode(array('mensaje' => "No se pudo realizar la modificacion"));
-             }
-
-         } else {
-            echo json_encode(array('mensaje' => "No se encontro el alumno"));
-         }
-   }
-
 
 
    // PARA QUE CORNO RECIBO NOMBRE Y APELLIDO DE ALUMNO?
@@ -212,6 +209,26 @@ class Controller
        } else {
            throw new Exception("No es un archivo de imagen valido."); // VERIFICAR CATCH PARA EXCEPCION
        }
+   }
+
+   static function moveImage($foto, $entidad)
+   {
+     if (!is_null($foto) && !is_null($entidad))) {
+         $rta = true;
+         $fechaBkp = date("d-m-Y_H_i");
+         $array = explode(".", $entidad->foto);
+         //Genero la ruta para almacenar la foto de backup
+         $rutaParaBkp = "./img/backup/" .$entidad->apellido . $fechaBkp . "." . end($array);
+         // Hago backup de la foto
+         rename($entidad->foto, $rutaParaBkp);
+         //Modificacion
+         $tmpName = $foto->getClientFilename();
+         $extension = pathinfo($tmpName, PATHINFO_EXTENSION);
+         // Cambio el nombre de la foto y coloco email.extension
+         $entidad->foto = "./img/" . $entidad->email . "." . $extension;
+         // Muevo la foto recibida a la ruta asociada a la foto del alumno
+         $foto->moveTo($entidad->foto);
+     }
    }
 
    static function createTable($objetos){

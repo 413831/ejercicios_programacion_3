@@ -97,7 +97,7 @@ class GenericDao
                 foreach ($objects as $object) {
                     //Comparo todo en minuscula
                     if (strtolower($object->$attrKey) == strtolower($attrValue)) {
-                        return $object; 
+                        return $object;
                     }
                 }
                 return null;
@@ -108,7 +108,7 @@ class GenericDao
     }
 
     // Guarda un nuevo objeto en el archivo JSON
-    public function guardar($object): bool
+    public function guardar($object)
     {
         try
         {
@@ -137,8 +137,33 @@ class GenericDao
         }
     }
 
+    public function modificar($idKey, $idValue, $objeto)
+    {
+     try {
+         $objects = json_decode($this->listar());
 
-    public function borrar($idKey, $idValue): bool
+         if(!is_null($objects))
+         {
+             $archivo = fopen($this->archivo, "w");
+
+             for ($i = 0; $i < count($objects); $i++) {
+                 if ($objects[$i]->$idKey == $idValue) {
+                     $objects[$i] = $objeto;
+                     return fwrite($archivo, json_encode($objects));
+                 }
+             }
+         }
+         else {
+             return false;
+         }
+     } catch (Exception $e) {
+         throw new Exception("No se pudo modificar", 0, $e);
+     } finally {
+         fclose($archivo);
+     }
+    }
+
+    public function borrar($idKey, $idValue)
     {
         try {
             $retorno = false;
@@ -148,6 +173,8 @@ class GenericDao
                 $archivo = fopen($this->archivo, "w");
                 foreach ($objects as $key => $object) {
                     if ($object->$idKey == $idValue) {
+                        echo $objects[$key];
+
                         unset($objects[$key]);
                         break;
                     }
@@ -160,33 +187,6 @@ class GenericDao
             fclose($archivo);
         }
     }
-
-    public function modificar($idKey, $idValue, $objeto): bool
-     {
-         try {
-             $objects = json_decode($this->listar());
-
-             if(!is_null($objects))
-             {
-                 $archivo = fopen($this->archivo, "w");
-
-                 for ($i = 0; $i < count($objects); $i++) {
-                     if ($objects[$i]->$idKey == $idValue) {
-                         $objects[$i] = $objeto;
-                         return fwrite($archivo, json_encode($objects));
-                     }
-                 }
-             }
-             else {
-                 return false;
-             }
-         } catch (Exception $e) {
-             throw new Exception("No se pudo modificar", 0, $e);
-         } finally {
-             fclose($archivo);
-         }
-     }
-
 }
 
  ?>
