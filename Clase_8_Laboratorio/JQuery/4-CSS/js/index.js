@@ -7,21 +7,13 @@ $(function() {
     })
 
     $("#btnCambiar").click(function() {
-        $("p.rojo").text("Este es el nuevo texto del nuevo parrafo rojo");
-        $("p:last").html("<strong>Este es el nuevo texto del nuevo parrafo rojo PERO EN NEGRITA</strong>");
-        $("p:last").html(function(i, prevHTML) {
-            return prevHTML + " Agrego mas HTML";
-        })
-        $("#btnCambiar").val("Nuevo cambiar");
-        // $("#btnCambiar").attr("class", "gray"); OPCION A
-        $("#btnCambiar").attr({ // OPCION B
-            "class": "gray"
-        });
-        var boton = $("<input>").val("Nuevo Boton").attr("type", "button");
-        $("#btnCambiar").after(boton);
-        $("body").prepend(btnEnviar); // Mueve el boton Enviar antes del body
+            var boton = $("<input>").val("BOTONCITO").attr("type", "button").addClass("gray").css("border-radius", "15px");
 
-    })
+            $("body").append(boton); // Mueve el boton Enviar antes del body
+
+
+        })
+        //$("input:last").toggleClass("gray");
 
 
 });
