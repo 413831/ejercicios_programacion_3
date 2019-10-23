@@ -11,3 +11,11 @@ function cargarDatos(manejador) {
         }
     });
 };
+
+function guardarDatos(datos, cb) {
+    $.post("http://localhost:3000/altaAnuncio", datos, function(data, status) {
+        if (cb) {
+            cb();
+        }
+    });
+};
