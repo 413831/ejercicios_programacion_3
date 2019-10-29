@@ -12,7 +12,10 @@
         $fecha = "</br>".date('Y-m-d H:i:s',$request->getServerParam('REQUEST_TIME'));        
 
         $mensaje = "</br></br>LOG:".$ruta.$metodo.$fecha.$ip.$server.$software; // Genero el LOG
-        
+        $log = new Log($ruta, $metodo, $fecha,$ip, $server, $software);
+        $dao = new genericDao("./info.log");
+        $dao->guardar($log);
+
         $response = $next($request,$response); // Se va a la funcion NEXT
         $response->getbody()->write("</br>Middleware 1 de Clase");
         $response->getbody()->write($mensaje);
