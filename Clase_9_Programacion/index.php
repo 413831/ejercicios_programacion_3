@@ -22,44 +22,11 @@ $token = array(
 $jwt = JWT::encode($token, $key);
 $decoded = JWT::decode($jwt, $key, array('HS256'));
 
-$app->group('/login', function() use ($app){ 
-    $this->post('/signup/', function($request, $response){
-        $parametros = $request->getParsedBody();
-        $usuario = $parametros["nombre"]; 
-        $clave = $parametros["clave"];
-
-        $payload = array(
-            'nombre' => $usuario,
-            'clave' => $clave,
-            'status' => 'alta'
-        );
-        $token = JWT::encode($payload,$clave);
-
-        var_dump($token);
-    });
-    
-
-
-    $this->post('/', function ($request, $response){
-        try{
-            $datos = $request->getParsedBody();
-    
-            $payload = array ( 'data' => $datos);
-            $jwt = JWT::encode($payload,"miClave");
-            var_dump($jwt);
-    
-            $datos = JWT::decode($jwt,"miClave",array('HS256'));
-            var_dump($datos);
-
-        }
-        catch(Exception $e)
-        {
-            echo "CLAVE INVALIDA";
-        }  
-    });
-
+$app->group('/login', function() use ($app){
+    $this->post('/signup/', cdApi::class . ':altaUsuario')->add(Middleware::class . ':middleware3');
+    $this->post('/', cdApi::class . ':loginUsuario')->add(Middleware::class . ':middleware3');
 });
-    
+
 $app->group('/api', function() use ($app) {
     $this->post('/', cdApi::class . ':funcionPost'); // Se agregan las funciones middleware a todo el grupo
     $this->get('/', cdApi::class . ':funcionGet');
