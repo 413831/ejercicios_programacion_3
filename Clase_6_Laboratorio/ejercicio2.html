@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    <table>
+        <th>CHECKBOX<input type="checkbox" name="checkbox" id="checkbox"></th>
+    </table>
     <script>
         let personas = [
             {nombre: "josecito", edad: 22},
@@ -20,21 +23,15 @@
         let cuadrados;
         let numeros = [5,9,8,10,6,3,1];
         let numeros2 = [100,2,...numeros]; // Operador de propagacion COPIA todos los valores
-        
+
         cuadrados = numeros.map( elemento => elemento * elemento);
-        console.log(numeros);        
-        console.log(cuadrados);        
-        
-
-
-
+        console.log(numeros);
+        console.log(cuadrados);
     </script>
     <div>
         <h1>Callbacks</h1>
         <h2>Función Map</h2>
         <h3>Mirá la consola zapallo</h3>
-
-
     </div>
 
 </body>

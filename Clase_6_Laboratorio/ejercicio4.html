@@ -11,13 +11,13 @@
         <h1>Callbacks</h1>
         <h2>Función Reduce</h2>
         <h3>Mirá la consola cebollin</h3>
-        <ul id="listaNombres"></ul>                
+        <ul id="listaNombres"></ul>
     </div>
 
     <script>
         let numeros = [4,6,12,3,1,2];
         // el 0 es como inicializarlo;
-        let suma = numeros.reduce( (acumulador, elemento) => acumulador + elemento, 0);        
+        let suma = numeros.reduce( (acumulador, elemento) => acumulador + elemento, 0);
         console.log(suma);
         let personas = [
             {nombre: "josecito", edad: 22, sexo: "m"},
@@ -30,12 +30,13 @@
         suma = personas.reduce( (acumulador,persona) => acumulador + persona.edad,0);
         console.log(suma);
         let hombres = personas.filter( persona => persona.sexo === "m");
-        let edades = hombres.map( hombre => hombre.edad);        
+        let edades = hombres.map( hombre => hombre.edad);
         suma = edades.reduce( (suma,edad) => suma + edad,0);
         console.log(hombres);
         console.log(edades);
         console.log(suma);
 
+        campo = "sexo";
         let choclazo = personas.filter( persona => persona.sexo === "m").
                                 map( hombre => hombre.edad).
                                 reduce( (suma,edad,indice,array) => suma + edad / array.length,0);
@@ -43,7 +44,7 @@
 
 
     </script>
-    
+
 
 </body>
 </html>
