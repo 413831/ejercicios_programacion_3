@@ -4,7 +4,8 @@ form{
 }
 
 .filtros{
-  margin: 25px 100px 25px 100px;
+  margin: auto;
+  width: 700px;
 }
 
 .filtros > *{
@@ -49,7 +50,7 @@ body{
 fieldset{
   background-color: whitesmoke;
   border-radius: 20px;
-  margin: 1.5px 1.5px;
+  margin: 1.5px 1.5px 1.5px 1.5px;
 }
 
 .tabla{
