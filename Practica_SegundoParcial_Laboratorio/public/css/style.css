@@ -11,10 +11,11 @@ form{
   display: flex;
   flex-direction: row;
   place-content: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin:  auto;
-  padding: 15px 15px 15px 15px;
+  padding: 10px 10px 10px 10px;
 }
+
 
 .formulario{
   display: flex;

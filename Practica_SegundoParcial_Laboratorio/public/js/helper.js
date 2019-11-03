@@ -1,3 +1,5 @@
+Array.prototype.unique = function() {return [...new Set(this)]};
+
 function crearTabla(array) {
   var tabla = document.createElement('table');
   var cabecera = document.createElement('tr');
@@ -32,13 +34,12 @@ function crearTabla(array) {
 }
 
 function crearBoxes(array, seccion) {
-    var divBox = seccion;
     for (atributo in array[0]) {
         if (atributo != "id") {
             let div = document.createElement("div");
             div.classList.add("box");
             let labelA = document.createElement("label");
-            labelA.htmlFor = "chk_" + atributo;
+            labelA.htmlFor = "chk_" + atributo; // Enlace con entre el label y el checkbox
             if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
             {
               labelA.appendChild(document.createTextNode(atributo.substring(4)));
@@ -52,21 +53,45 @@ function crearBoxes(array, seccion) {
             checkbox.id = "chk_" + atributo;
             checkbox.value = atributo;
             checkbox.checked = true;
-            checkbox.onclick = filtrarCheckbox;
+            checkbox.onclick = traerAnuncios;
             div.appendChild(labelA);
             div.appendChild(checkbox);
-            divBox.append(div);
+            seccion.append(div);
         } else {
             let div = document.createElement("div");
-            divBox.append(div);
+            seccion.append(div);
         }
     }
-    return divBox;
+    return seccion;
 }
 
-function crearSelector(array){
-  let div = document.createElement('div');
+function crearSelectores(array, seccion, atributo)
+{
+  let div = document.createElement("div");
+  let select = document.createElement("select");
+  let option = document.createElement('option');
+  let label = document.createElement('label');
+  select.id = "sel_" + atributo;
+  label.htmlFor = "sel_" + atributo;
+  label.appendChild(document.createTextNode(atributo));
+  option.value = "Todos"; // Por defecto se agrega opcion TODOS
+  option.textContent = "Todos";
+  select.appendChild(option);
 
+  array.forEach(valor => {
+        let option = document.createElement('option');
+        option.value = valor;
+        option.textContent = valor;
+        select.appendChild(option);
+  });
+  seccion.append(label);
+  seccion.append(select);
+  return seccion;
+}
 
-
+function limpiarSelect(select) {
+    //select.options.length = 0;
+    while (select.hasChildNodes()) {
+        select.removeChild(select.firstElementChild);
+    }
 }

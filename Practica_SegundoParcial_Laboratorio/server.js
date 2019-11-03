@@ -86,7 +86,7 @@ app.get("/traerAnuncios", function(request, response) {
         "message": "Carga exitosa",
         "data": array
       });
-    }, 2000);
+    }, 50); // Time original 2000
 
   });
 

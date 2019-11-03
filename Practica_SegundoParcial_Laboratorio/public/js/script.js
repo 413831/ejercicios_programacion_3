@@ -1,4 +1,4 @@
-var frm;
+var datosJSON;
 
 $(function () {
     inicializarManejadores();
@@ -8,7 +8,9 @@ function inicializarManejadores() {
   $("#btnBorrar").click(bajaAnuncio);
   $("#form").submit(manejadorAlta);
   traerAnuncios();
-  crearBoxes(datos, $("#checkBoxes"));
+  crearBoxes(datos, $("#checkBoxes")); // Corregir
+  crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"Transaccion");
+  crearSelectores(["100.000","300.000","500.000"],$("#selectores"),"Precio");
 }
 
 function manejadorAlta(e) {
@@ -83,8 +85,9 @@ function traerAnuncios() {
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4 && xhr.status == 200) {
       anuncios = JSON.parse(xhr.responseText);
+      datosJSON = anuncios.data;
       $("#tablaDatos").html("");
-      $("#tablaDatos").append(crearTabla(filtrarCheckbox(anuncios.data)));
+      $("#tablaDatos").append(crearTabla(filtrarCheckbox(datosJSON)));
       $("td").click(mostrarAnuncio);
     } else {
       $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
