@@ -6,11 +6,13 @@ $(function () {
 
 function inicializarManejadores() {
   $("#btnBorrar").click(bajaAnuncio);
+  $('#btnFiltrar').click(traerAnuncios);
   $("#form").submit(manejadorAlta);
   traerAnuncios();
   crearBoxes(datos, $("#checkBoxes")); // Corregir
   crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"Transaccion");
   crearSelectores(["100.000","300.000","500.000"],$("#selectores"),"Precio");
+  crearSelectores(["1","3","5"],$("#selectores"),"Dormitorios");
 }
 
 function manejadorAlta(e) {
@@ -196,5 +198,35 @@ function filtrarCheckbox(datosJSON) {
       opciones.forEach(atributo => objeto[atributo] = dato[atributo]);
       return objeto;
   });
+  return filtrarPorSelector(datosFiltrados);
+}
+
+function filtrarPorSelector(array)
+{
+  let selectores = $('#selectores select');
+  let datosFiltrados = array;
+  selectores = selectores.filter(indice => selectores[indice].value != "Todos");
+  console.log(selectores)
+  // Ver como hacerlo generico
+  if(selectores.length > 0)
+  {
+    selectores.each( indice => {
+      selector = selectores[indice].id;
+      switch (selector) {
+        case "sel_Transaccion":
+          datosFiltrados = array.filter(elemento => elemento.transaccion.toLowerCase() === selectores[indice].value);
+          break;
+        case "sel_Precio":
+          datosFiltrados = array.filter(elemento => elemento.precio <= selectores[indice].value);
+          break;
+        case "sel_Dormitorios":
+          datosFiltrados = array.filter(elemento => elemento.num_dormitorio >= selectores[indice].value);
+          break;
+        default:
+          break;
+      }
+    });
+  }
+  console.log(datosFiltrados);
   return datosFiltrados;
 }
