@@ -3,6 +3,19 @@ form{
   width: 700px;
 }
 
+.filtros{
+  margin: 25px 80px 25px 80px;
+}
+
+.filtros > *{
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  justify-content: space-between;
+  margin:  auto;
+  padding: 15px 15px 15px 15px;
+}
+
 .formulario{
   display: flex;
   flex-direction: column;
@@ -53,6 +66,8 @@ fieldset{
 .tabla, .tabla th, .tabla td{
   border: 1px solid grey;
   max-width: 700px;
+
+  padding: 5px 5px 5px 5px;
 }
 
 .radiosTransaccion{

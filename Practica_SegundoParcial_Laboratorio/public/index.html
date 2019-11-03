@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script type="text/javascript" src="./js/tableHelper.js"></script>
+  <script type="text/javascript" src="./node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="./js/data.js"></script>
+  <script type="text/javascript" src="./js/helper.js"></script>
   <script type="text/javascript" src="./js/anuncio.js"></script>
   <script type="text/javascript" src="./js/script.js"></script>
   <link rel="stylesheet" href="./css/normalize.css">
@@ -12,7 +14,7 @@
   <title>Menu</title>
 </head>
 <body>
-  <form action="#" class="formulario">
+  <form action="#" class="formulario" id="form">
     <fieldset >
       <legend class="titulo">Bienes Raices La Raiz</legend>
       <div class="formulario">
@@ -49,6 +51,11 @@
       </div>
     </fieldset>
   </form>
+    <fieldset class="filtros">
+      <div id="checkBoxes" class="box">
+
+      </div>
+    </fieldset>
   <div id="tablaDatos" class="tablaDatos">
 
   </div>

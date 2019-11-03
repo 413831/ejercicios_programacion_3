@@ -1,12 +1,14 @@
 var frm;
 
-window.addEventListener('load', inicializarManejadores);
+$(function () {
+    inicializarManejadores();
+})
 
 function inicializarManejadores() {
-  frm = document.forms[0]; // Traigo el primer formulario del HTML
-  frm.addEventListener('submit', manejadorAlta),
-  document.getElementById('btnBorrar').addEventListener('click', bajaAnuncio);
+  $("#btnBorrar").click(bajaAnuncio);
+  $("#form").submit(manejadorAlta);
   traerAnuncios();
+  crearBoxes(datos, $("#checkBoxes"));
 }
 
 function manejadorAlta(e) {
@@ -20,7 +22,6 @@ function manejadorModificar(e) {
   let anuncio = obtenerAnuncio(e.target, true);
   modificarAnuncio(anuncio);
 }
-
 
 function altaAnuncio(anuncio) {
   let xhr = new XMLHttpRequest();
@@ -61,7 +62,8 @@ function modificarAnuncio(anuncio) {
       traerAnuncios();
     } else {
       // Hacer algo mientras llega la respuesta
-      document.getElementById('tablaDatos').innerHTML = '<img src="./Spinner-1s-200px.gif" alt="spinner">';
+      // document.getElementById('tablaDatos').innerHTML = '<img src="./Spinner-1s-200px.gif" alt="spinner">';
+      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
     }
   }
   xhr.open('POST', 'http://localhost:3000/modificarAnuncio', true);
@@ -81,16 +83,11 @@ function traerAnuncios() {
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4 && xhr.status == 200) {
       anuncios = JSON.parse(xhr.responseText);
-      document.getElementById('tablaDatos').innerHTML = ""; // Traigo el div para la tabla
-      document.getElementById('tablaDatos').appendChild(crearTabla(anuncios.data));
-      celdas = document.getElementsByTagName('td');
-      for (var i = 0; i < celdas.length; i++) {
-        let celda = celdas[i];
-        celda.addEventListener('click', mostrarAnuncio);
-      }
+      $("#tablaDatos").html("");
+      $("#tablaDatos").append(crearTabla(filtrarCheckbox(anuncios.data)));
+      $("td").click(mostrarAnuncio);
     } else {
-      // Hacer algo mientras se espera respuesta
-      document.getElementById('tablaDatos').innerHTML = '<img src="./Spinner-1s-200px.gif" alt="spinner">';
+      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
     }
   }
   xhr.open('GET', 'http://localhost:3000/traerAnuncios', true);
@@ -146,22 +143,55 @@ function mostrarAnuncio(e) {
   let fila = e.target.parentElement;
   let nodos = fila.childNodes;
 
-  document.getElementById('id').value = nodos[0].innerText;
-  document.getElementById('id').hidden = false;
-  document.getElementById('lblId').hidden = false;
-  document.getElementById('titulo').value = nodos[1].innerText;
+  //document.getElementById('id').value = nodos[0].innerText;
+  $("#id").val(nodos[0].innerText);
+  $("#id").show();
+  $("#lblId").show();
+  $("#titulo").val( nodos[1].innerText);
+
   if (nodos[2].innerText == "Alquiler") {
-    document.getElementById("rdoAlquiler").checked = true;
+    $("#rdoAlquiler").prop('checked',true);
+    // document.getElementById("rdoAlquiler").checked = true;
   } else if (nodos[0].innerText == "Venta") {
-    document.getElementById("rdoVenta").checked = true;
+    $("#rdoVenta").prop('checked',true);
+    // document.getElementById("rdoVenta").checked = true;
   }
-  document.getElementById('descripcion').value = nodos[3].innerText;
-  document.getElementById('precio').value = nodos[4].innerText;
-  document.getElementById('num_wc').value = nodos[5].innerText;
-  document.getElementById('num_estacionamiento').value = nodos[6].innerText;
-  document.getElementById('num_dormitorio').value = nodos[7].innerText;
-  document.getElementById('btnCrearModificar').innerText = "Modificar";
-  document.getElementById('btnBorrar').hidden = false
-  frm.removeEventListener('submit', manejadorAlta);
-  frm.addEventListener('submit', manejadorModificar);
+
+  $("#descripcion").val(nodos[3].innerText);
+  $("#precio").val(nodos[4].innerText);
+  $("#num_wc").val(nodos[5].innerText);
+  $("#num_estacionamiento").val(nodos[6].innerText);
+  $("#num_dormitorio").val(nodos[7].innerText);
+  $("#btnCrearModificar").text("Modificar");
+
+  $("#btnBorrar").show();
+  $("#form").off("submit",manejadorAlta);
+  $("#form").submit(manejadorModificar);
+
+  // document.getElementById('descripcion').value = nodos[3].innerText;
+  // document.getElementById('precio').value = nodos[4].innerText;
+  // document.getElementById('num_wc').value = nodos[5].innerText;
+  // document.getElementById('num_estacionamiento').value = nodos[6].innerText;
+  // document.getElementById('num_dormitorio').value = nodos[7].innerText;
+  // document.getElementById('btnCrearModificar').innerText = "Modificar";
+  // document.getElementById('btnBorrar').hidden = false
+  // frm.removeEventListener('submit', manejadorAlta);
+  // frm.addEventListener('submit', manejadorModificar);
+}
+
+function filtrarCheckbox(datosJSON) {
+  let opciones = ['id'];
+  let datosFiltrados = [];
+  let objeto;
+  // Levanto todos los checkboxes seleccionados
+  $('.box input:checked').each(function() {
+    opciones.push($(this).val());
+  })
+  // Filtro cada objeto del JSON por los atributos de los checkboxes
+  datosFiltrados = datosJSON.map( dato => {
+      objeto = new Object();
+      opciones.forEach(atributo => objeto[atributo] = dato[atributo]);
+      return objeto;
+  });
+  return datosFiltrados;
 }
