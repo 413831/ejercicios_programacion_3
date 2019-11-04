@@ -218,10 +218,10 @@ function filtrarPorSelector(array)
             if(elemento.transaccion != undefined) elemento.transaccion.toLowerCase() === selectores[indice].value;
           });
           break;
-        case "sel_Precio":
+        case "sel_Precio": // Corregir
           datosFiltrados = datosFiltrados.filter(elemento => elemento.precio <= selectores[indice].value);
           break;
-        case "sel_Dormitorios":
+        case "sel_Dormitorios": // Corregir
           datosFiltrados = datosFiltrados.filter(elemento => elemento.num_dormitorio >= selectores[indice].value);
           break;
         default:

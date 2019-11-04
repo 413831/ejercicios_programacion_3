@@ -102,13 +102,20 @@ function deshabilitarSelect(e)
   console.log(e.target);
   let atributo = e.target.value;
   let selector;
+  let checkbox = $('#chk_'+atributo);
 
   if(atributo == "num_dormitorio")
   {
     atributo = atributo.substring(4);
   }
-  console.log(atributo);
   selector = $('#sel_'+atributo);
-  selector.prop("disabled", "disabled");
+
+  if(!checkbox.prop('checked'))
+  {
+    selector.prop("disabled", true);
+  }
+  else {
+    selector.prop("disabled", false);
+  }
   console.log(selector);
 }
