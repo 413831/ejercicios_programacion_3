@@ -53,7 +53,8 @@ function crearBoxes(array, seccion) {
             checkbox.id = "chk_" + atributo;
             checkbox.value = atributo;
             checkbox.checked = true;
-            checkbox.onclick = traerAnuncios;
+            checkbox.addEventListener('click',traerAnuncios);
+            checkbox.addEventListener('click',deshabilitarSelect);
             div.appendChild(labelA);
             div.appendChild(checkbox);
             seccion.append(div);
@@ -94,4 +95,20 @@ function limpiarSelect(select) {
     while (select.hasChildNodes()) {
         select.removeChild(select.firstElementChild);
     }
+}
+
+function deshabilitarSelect(e)
+{
+  console.log(e.target);
+  let atributo = e.target.value;
+  let selector;
+
+  if(atributo == "num_dormitorio")
+  {
+    atributo = atributo.substring(4);
+  }
+  console.log(atributo);
+  selector = $('#sel_'+atributo);
+  selector.prop("disabled", "disabled");
+  console.log(selector);
 }
