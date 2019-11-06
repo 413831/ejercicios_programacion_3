@@ -8,6 +8,6 @@ var Greeter = /** @class */ (function () {
     };
     return Greeter;
 }());
-var greeter = new Greeter("world");
+var greeter = new Greeter("Pepito");
 console.log(greeter);
 console.log(greeter.greet());

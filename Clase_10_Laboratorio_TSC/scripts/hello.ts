@@ -1,3 +1,5 @@
+/// <reference path="Greeter.ts" />
+
 let ejemploUno:string = "Hola mundo";
 let ejemploDos = "Hola MUNDO";
 let mensaje:string;
