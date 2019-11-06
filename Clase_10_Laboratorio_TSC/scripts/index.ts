@@ -8,3 +8,5 @@ console.log(tupla);
 console.log(EHeroes);
 console.log(EHeroes.Avengers);
 console.log(EHeroes[EHeroes.Avengers]);
+console.log(funcionEnviarMision("Spiderman"));
+console.log(funcionEnviarMision());

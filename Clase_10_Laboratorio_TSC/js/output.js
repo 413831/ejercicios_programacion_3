@@ -16,6 +16,10 @@ var EHeroes;
     EHeroes[EHeroes["Xmen"] = 0] = "Xmen";
     EHeroes[EHeroes["Avengers"] = 1] = "Avengers";
 })(EHeroes || (EHeroes = {}));
+// Funciones => con el '?' se indica que es un parametro opcional
+var funcionEnviarMision = function (heroe) {
+    return heroe + " en camino!.";
+};
 /// <reference path="hello.ts" />
 var Greeter = /** @class */ (function () {
     function Greeter(message) {
@@ -35,4 +39,6 @@ console.log(tupla);
 console.log(EHeroes);
 console.log(EHeroes.Avengers);
 console.log(EHeroes[EHeroes.Avengers]);
+console.log(funcionEnviarMision("Spiderman"));
+console.log(funcionEnviarMision());
 //# sourceMappingURL=output.js.map

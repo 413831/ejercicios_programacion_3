@@ -19,3 +19,9 @@ enum EHeroes{
     Avengers
 }
 
+// Funciones => con el '?' se indica que es un parametro opcional
+let funcionEnviarMision = function(heroe?:string):string
+{
+    return heroe + " en camino!.";
+}
+
