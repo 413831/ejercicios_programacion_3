@@ -1,9 +1,11 @@
 <?php
 namespace App\Models\ORM;
-use App\Models\ORM\usuario;
+use App\Models\ORM\pedido;
+use App\Models\ORM\pedidoDB;
 use App\Models\IApiControler;
 
-include_once __DIR__ . '/usuario.php';
+include_once __DIR__ . '/pedido.php';
+include_once __DIR__ . '/pedidoDB.php';
 include_once __DIR__ . '../../modelAPI/IApiControler.php';
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -36,13 +38,25 @@ class pedidoController implements IApiControler
      	 //complete el codigo
        $parametros = $request->getParsedBody();
        $pedido = new Pedido;
-       $pedido->nombre = $parametros['nombre'];
-       $usuario->clave = $parametros['clave'];
-       $usuario->rol = $parametros['rol'];
-       $usuario->save();
-       // Implementar TOKEN
+       $pedido->tiempo = $parametros['tiempo'];
+       $pedido->mesa = $parametros['mesa'];
+       $pedido->cliente = $parametros['cliente'];
+       $pedido->encargado = $parametros['encargado'];
+       $pedido->estadoPedido = $parametros['estadoPedido'];
+       $pedido->save();
 
-     	 $newResponse = $response->withJson("sin completar", 200);
+       $productos = $parametros['pedido'];
+       $productos = explode(',',$productos);
+       $pedido->id;
+
+       for ($i=0; $i < count($productos); $i++) {
+         $pedidoDB = new pedidoDB;
+         $pedidoDB->pedido = $pedido->id;
+         $pedidoDB->producto = $productos[$i];
+         $pedidoDB->save();
+       }
+
+     	 $newResponse = $response->withJson("Pedido ".$pedido->id ." ingresado." , 200);
         return $response;
     }
       public function BorrarUno($request, $response, $args) {
@@ -54,7 +68,7 @@ class pedidoController implements IApiControler
      public function ModificarUno($request, $response, $args) {
      	//complete el codigo
      	$newResponse = $response->withJson("sin completar", 200);
-		return 	$newResponse;
+		    return 	$newResponse;
     }
 
 

@@ -1,9 +1,9 @@
 <?php
 namespace App\Models\ORM;
-use App\Models\ORM\usuario;
+use App\Models\ORM\producto;
 use App\Models\IApiControler;
 
-include_once __DIR__ . '/usuario.php';
+include_once __DIR__ . '/producto.php';
 include_once __DIR__ . '../../modelAPI/IApiControler.php';
 
 use Psr\Http\Message\ResponseInterface as Response;

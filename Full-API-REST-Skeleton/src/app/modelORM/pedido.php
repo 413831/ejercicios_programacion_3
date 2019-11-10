@@ -12,6 +12,4 @@ class pedido extends \Illuminate\Database\Eloquent\Model {
   protected $cliente;
   protected $encargado;
 
-
-
 }

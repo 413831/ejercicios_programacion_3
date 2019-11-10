@@ -73,12 +73,21 @@ return function (App $app) {
 
     $app->group('/productos', function () {
         //$this->get('/',cdControler::class . ':TraerTodos');
-       $this->get('/',usuarioController::class . ':TraerTodos');
-       $this->get('/{id}',usuarioController::class . ':TraerUno');
-       $this->post('/',usuarioController::class . ':CargarUno');
-       $this->post('/baja',usuarioController::class . ':BorrarUno');
-       $this->post('/{id}',usuarioController::class . ':ModificarUno');
+       $this->get('/',productoController::class . ':TraerTodos');
+       $this->get('/{id}',productoController::class . ':TraerUno');
+       $this->post('/',productoController::class . ':CargarUno');
+       $this->post('/baja',productoController::class . ':BorrarUno');
+       $this->post('/{id}',productoController::class . ':ModificarUno');
    });
+
+   $app->group('/pedidos', function () {
+       //$this->get('/',cdControler::class . ':TraerTodos');
+      $this->get('/',pedidoController::class . ':TraerTodos');
+      $this->get('/{id}',pedidoController::class . ':TraerUno');
+      $this->post('/',pedidoController::class . ':CargarUno');
+      $this->post('/baja',pedidoController::class . ':BorrarUno');
+      $this->post('/{id}',pedidoController::class . ':ModificarUno');
+  });
 
 
 };
