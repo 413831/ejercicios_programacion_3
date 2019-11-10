@@ -61,7 +61,12 @@ class pedidoController implements IApiControler
     }
       public function BorrarUno($request, $response, $args) {
   		//complete el codigo
-     	$newResponse = $response->withJson("sin completar", 200);
+      $parametros = $request->getParsedBody();
+      $id = $parametros['id'];
+      $pedido = Pedido::find($id);
+      $pedido->delete();
+      PedidoDB::where('pedido', '=', $id)->delete();
+     	$newResponse = $response->withJson("Pedido borrado", 200);
       	return $newResponse;
     }
 
