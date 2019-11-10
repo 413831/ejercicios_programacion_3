@@ -79,3 +79,17 @@
 [2019-11-10 17:50:46] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2F, autoridad=localhost [] {"uid":"6041273"}
 [2019-11-10 17:51:29] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2F, autoridad=localhost [] {"uid":"7bc98c9"}
 [2019-11-10 17:53:35] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2F, autoridad=localhost [] {"uid":"c1ced95"}
+[2019-11-10 18:21:33] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2F, autoridad=localhost [] {"uid":"f331219"}
+[2019-11-10 18:21:53] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2F, autoridad=localhost [] {"uid":"95a609b"}
+[2019-11-10 18:24:27] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2Fusuarios, autoridad=localhost [] {"uid":"61fbbda"}
+[2019-11-10 18:24:33] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2Fmesas, autoridad=localhost [] {"uid":"d471c98"}
+[2019-11-10 18:24:38] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2Fproductos, autoridad=localhost [] {"uid":"e272baa"}
+[2019-11-10 18:24:43] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2Fpedidos, autoridad=localhost [] {"uid":"c275c62"}
+[2019-11-10 18:25:03] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM%2Fusuarios, autoridad=localhost [] {"uid":"0a03644"}
+[2019-11-10 18:26:34] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2%2F, autoridad=localhost [] {"uid":"979255d"}
+[2019-11-10 18:26:39] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2, autoridad=localhost [] {"uid":"b5ba491"}
+[2019-11-10 18:26:39] UTN FRA LOGGER.INFO: Slim-Skeleton '/' route [] {"uid":"b5ba491"}
+[2019-11-10 18:26:52] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2%2F, autoridad=localhost [] {"uid":"e5b22e0"}
+[2019-11-10 18:27:11] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2%2F, autoridad=localhost [] {"uid":"26d873a"}
+[2019-11-10 18:27:32] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2%2F, autoridad=localhost [] {"uid":"d71c38a"}
+[2019-11-10 18:30:34] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2FFull-API-REST-Skeleton%2Fpublic, RUTA=cdORM2%2F, autoridad=localhost [] {"uid":"d8bca2a"}
