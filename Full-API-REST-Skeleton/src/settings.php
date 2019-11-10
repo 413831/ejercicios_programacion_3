@@ -30,7 +30,7 @@ return [
         'db' => [
            'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'cdcol',
+            'database' => 'bd_trabajo_practico',
             'username' => 'root',
             'password' => '',
             'charset'   => 'utf8',

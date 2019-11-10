@@ -1,3 +1,4 @@
+﻿
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
@@ -6,6 +7,8 @@
 -- Tiempo de generación: 05-11-2019 a las 01:53:03
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
+
+CREATE DATABASE `bd_prueba`;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,6 +30,8 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `alumnos`
 --
+
+
 
 CREATE TABLE `alumnos` (
   `id` int(11) NOT NULL,
