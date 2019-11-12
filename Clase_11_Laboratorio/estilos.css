@@ -1,0 +1,23 @@
+.borde1{
+    background-color: #aaa;
+    border: 1px solid black;
+    height: 50px;
+}
+
+.borde2{
+    background-color: #bbb;
+    border: 1px solid black;
+    height: 50px;
+}
+
+.borde3{
+    background-color: #ccc;
+    border: 1px solid black;
+    height: 50px;
+}
+
+.borde4{
+    background-color: #ddd;
+    border: 1px solid black;
+    height: 50px;
+}
