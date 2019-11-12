@@ -35,6 +35,20 @@ var funcionEnviarMision3 = function (heroe) {
     if (heroe === void 0) { heroe = "Superman"; }
     return heroe + " enviado a mision";
 };
+// Implementacion de interfaces
+var Avenger = /** @class */ (function () {
+    function Avenger() {
+        this.nombre = "Un avenger";
+    }
+    return Avenger;
+}());
+var Mutante = /** @class */ (function () {
+    function Mutante() {
+        this.nombre = "Un mutante";
+    }
+    return Mutante;
+}());
+var miFuncion;
 /// <reference path="hello.ts" />
 var Greeter = /** @class */ (function () {
     function Greeter(message) {
@@ -55,6 +69,10 @@ var ironman = {
 var wolverine = {
     nombre: "James"
 };
+var unAvenger = new Avenger();
+var unMutante = new Mutante();
+var miFuncion;
+miFuncion = function (num1, num2) { return num1 + num2; };
 console.log(greeter);
 console.log(greeter.greet());
 console.log(mensaje);
@@ -69,4 +87,6 @@ console.log(funcionEnviarMision2("Batman", "Ironman", "Hulk"));
 console.log(funcionEnviarMision3());
 console.log(ironman.getNombre());
 console.log(wolverine.nombre);
+console.log(unAvenger.nombre);
+console.log(miFuncion(1, 5));
 //# sourceMappingURL=output.js.map

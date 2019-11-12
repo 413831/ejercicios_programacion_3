@@ -9,6 +9,11 @@ let ironman:Heroe = {
 let wolverine:IHeroe = {
     nombre: "James"
 }
+let unAvenger = new Avenger();
+let unMutante = new Mutante();
+let miFuncion:IfuncDosNumeros;
+miFuncion = (num1,num2)=>num1 + num2;
+
 console.log(greeter);
 console.log(greeter.greet());
 console.log(mensaje);
@@ -23,3 +28,5 @@ console.log(funcionEnviarMision2("Batman","Ironman","Hulk"));
 console.log(funcionEnviarMision3());
 console.log(ironman.getNombre());
 console.log(wolverine.nombre);
+console.log(unAvenger.nombre);
+console.log(miFuncion(1,5));

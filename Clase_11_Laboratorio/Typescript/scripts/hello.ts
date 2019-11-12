@@ -49,13 +49,27 @@ type Heroe = {
 
 }
 
+// Interfaces
 interface IHeroe{
     nombre:string,
     poder?:string,
     mostrar?():string
 }
 
+// Implementacion de interfaces
+class Avenger implements IHeroe{
+    nombre:string = "Un avenger";
+} 
 
+class Mutante implements IHeroe{
+    nombre:string = "Un mutante";    
+} 
+
+// Interface en funcion
+interface IfuncDosNumeros{
+    (num1:number,num2:numer):number;
+}
+let miFuncion:IfuncDosNumeros;
 
 
 
