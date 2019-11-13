@@ -57,19 +57,42 @@ interface IHeroe{
 }
 
 // Implementacion de interfaces
-class Avenger implements IHeroe{
-    nombre:string = "Un avenger";
+// Clase con atributos privados
+// Clases con metodos estaticos
+class Avenger {
+    private _nombre:string = "Un avenger";
+    private _edad:number;
+    // Constructor publico
+    constructor(nombre:string, edad:number){
+        this._nombre = nombre;
+        this._edad = edad;
+    }
+    // Metodos
+    public mostrar = ()=>{return "Nombre: " + this.nombre + " Edad: " + this.edad;};
+    // Setters & Getters
+    get edad():number{return this._edad;};
+    set edad(e:number){this._edad = e};
+    
+    get nombre():string{return this._nombre;};
+    set nombre(e:string){this._nombre = e};
 } 
 
 class Mutante implements IHeroe{
     nombre:string = "Un mutante";    
+    static nombre_de_clase = "XMen";
+
 } 
 
 // Interface en funcion
 interface IfuncDosNumeros{
-    (num1:number,num2:numer):number;
+    (num1:number,num2:number):number;
 }
-let miFuncion:IfuncDosNumeros;
+
+// Herencia
+class GuardianDeLaGalaxia extends Avenger{
+    
+}
+
 
 
 
