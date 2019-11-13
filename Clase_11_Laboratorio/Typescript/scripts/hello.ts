@@ -116,6 +116,5 @@ namespace Funciones{
             console.log("Esto es un ejemplo de clase dentro de un Namespace");
         }
     }
-
 }
 
