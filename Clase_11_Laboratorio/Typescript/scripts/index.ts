@@ -12,7 +12,7 @@ let wolverine:IHeroe = {
 let unAvenger = new Avenger("Capitan America",30);
 let unMutante = new Mutante();
 let miFuncion:IfuncDosNumeros;
-let starLord = new GuardianDeLaGalaxia("Peter Quill",34);
+let starLord = new GuardianDeLaGalaxia("Peter Quill",34,"Tierra");
 miFuncion = (num1,num2)=>num1 + num2;
 
 console.log(greeter);
@@ -32,3 +32,4 @@ console.log(wolverine.nombre);
 console.log(unAvenger.mostrar());
 console.log(miFuncion(1,5));
 console.log(Mutante.nombre_de_clase);
+console.log(starLord.mostrar());

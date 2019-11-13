@@ -87,8 +87,10 @@ var Mutante = /** @class */ (function () {
 // Herencia
 var GuardianDeLaGalaxia = /** @class */ (function (_super) {
     __extends(GuardianDeLaGalaxia, _super);
-    function GuardianDeLaGalaxia() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function GuardianDeLaGalaxia(nombre, edad, planeta) {
+        var _this = _super.call(this, nombre, edad) || this;
+        _this.planeta = planeta;
+        return _this;
     }
     return GuardianDeLaGalaxia;
 }(Avenger));
@@ -115,7 +117,7 @@ var wolverine = {
 var unAvenger = new Avenger("Capitan America", 30);
 var unMutante = new Mutante();
 var miFuncion;
-var starLord = new GuardianDeLaGalaxia("Peter Quill", 34);
+var starLord = new GuardianDeLaGalaxia("Peter Quill", 34, "Tierra");
 miFuncion = function (num1, num2) { return num1 + num2; };
 console.log(greeter);
 console.log(greeter.greet());
@@ -134,4 +136,5 @@ console.log(wolverine.nombre);
 console.log(unAvenger.mostrar());
 console.log(miFuncion(1, 5));
 console.log(Mutante.nombre_de_clase);
+console.log(starLord.mostrar());
 //# sourceMappingURL=output.js.map

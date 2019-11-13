@@ -90,7 +90,12 @@ interface IfuncDosNumeros{
 
 // Herencia
 class GuardianDeLaGalaxia extends Avenger{
-    
+    planeta:string;
+
+    constructor(nombre:string,edad:number,planeta:string){
+        super(nombre,edad);
+        this.planeta = planeta;
+    }
 }
 
 
