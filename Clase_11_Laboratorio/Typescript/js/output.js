@@ -77,6 +77,7 @@ var Avenger = /** @class */ (function () {
     ;
     return Avenger;
 }());
+// Implementacion de una interfaz en una clase
 var Mutante = /** @class */ (function () {
     function Mutante() {
         this.nombre = "Un mutante";
@@ -94,6 +95,27 @@ var GuardianDeLaGalaxia = /** @class */ (function (_super) {
     }
     return GuardianDeLaGalaxia;
 }(Avenger));
+// Namespaces
+var Funciones;
+(function (Funciones) {
+    function f1() {
+        console.log("Yo soy la f1 la re frula de tu virola madre");
+    }
+    Funciones.f1 = f1;
+    function f2() {
+        console.log("la f2 sabe lo que hiciste eh...");
+    }
+    Funciones.f2 = f2;
+    var Generica = /** @class */ (function () {
+        function Generica() {
+        }
+        Generica.test = function () {
+            console.log("Esto es un ejemplo de clase dentro de un Namespace");
+        };
+        return Generica;
+    }());
+    Funciones.Generica = Generica;
+})(Funciones || (Funciones = {}));
 /// <reference path="hello.ts" />
 var Greeter = /** @class */ (function () {
     function Greeter(message) {
@@ -137,4 +159,5 @@ console.log(unAvenger.mostrar());
 console.log(miFuncion(1, 5));
 console.log(Mutante.nombre_de_clase);
 console.log(starLord.mostrar());
+Funciones.Generica.test;
 //# sourceMappingURL=output.js.map

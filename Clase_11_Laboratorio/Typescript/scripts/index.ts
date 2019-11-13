@@ -1,4 +1,5 @@
 
+
 let greeter = new Greeter("Pepito");
 let ironman:Heroe = {
     nombre: "Tony Stark",
@@ -33,3 +34,4 @@ console.log(unAvenger.mostrar());
 console.log(miFuncion(1,5));
 console.log(Mutante.nombre_de_clase);
 console.log(starLord.mostrar());
+Funciones.Generica.test;

@@ -59,7 +59,8 @@ interface IHeroe{
 // Implementacion de interfaces
 // Clase con atributos privados
 // Clases con metodos estaticos
-class Avenger {
+
+class Avenger implements IHeroe{
     private _nombre:string = "Un avenger";
     private _edad:number;
     // Constructor publico
@@ -77,6 +78,8 @@ class Avenger {
     set nombre(e:string){this._nombre = e};
 } 
 
+
+// Implementacion de una interfaz en una clase
 class Mutante implements IHeroe{
     nombre:string = "Un mutante";    
     static nombre_de_clase = "XMen";
@@ -98,6 +101,21 @@ class GuardianDeLaGalaxia extends Avenger{
     }
 }
 
+// Namespaces
+namespace Funciones{
+    export function f1(){
+        console.log("Yo soy la f1 la re frula de tu virola madre");
+    }
+    export function f2(){
+        console.log("la f2 sabe lo que hiciste eh...");
+    }
 
+    export class Generica{
 
+        public static test = ()=>{
+            console.log("Esto es un ejemplo de clase dentro de un Namespace");
+        }
+    }
+
+}
 
