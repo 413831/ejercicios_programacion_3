@@ -1,11 +1,15 @@
 form{
   margin: 20px auto;
   width: 700px;
+  border: solid grey;
+  border-radius: 15px;
 }
 
 .filtros{
   margin: 20px auto;
   width: 700px;
+  border: solid grey;
+  border-radius: 15px;
 }
 
 .filtros > *{
@@ -55,9 +59,7 @@ fieldset{
 
 .tabla{
   padding-top: 10px;
-  margin: auto;
   border-collapse: collapse;
-  width: 700px;
   background-color: whitesmoke;
 }
 

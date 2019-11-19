@@ -11,11 +11,11 @@
     <link rel="stylesheet"  href="./estilos.css">
   </head>
   <body>
-    <div class="container"> <!--Por defecto queda centrado, sino se puede usar container-fluid -->
+    <div class="container-fluid"> <!--Por defecto 'container' queda centrado, sino se puede usar 'container-fluid' -->
       <div class="row">
-        <div class="col-2 borde1">Caja 1</div>
-        <div class="col-7 borde2">Caja 2</div>
-        <div class="col-3 borde3">Caja 3</div>
+        <div class="col-lg-4 col-md-2 col-sm-4 borde1">Caja 1</div>
+        <div class="col-lg-4 col-md-4 col-sm-3 borde2">Caja 2</div>
+        <div class="col-lg-4 col-md-6 col-sm-5 borde3">Caja 3</div>
       </div>
       <div class="row">
         <div class="col-sm-4 borde1">Caja 1</div>
@@ -43,9 +43,9 @@
         <div class="col-md-4 col-lg-4 col-xl-2 offset-xl-1 borde2">Caja 3</div>
         <div class="col-md-4 col-lg-2 col-xl-1 borde1">Caja 4</div>
       </div>
-      
+
       <div class="row">
-        <div class="col-12">
+        <div class="col-12"> <!-- el numero maximo de columnas es 12 --> 
             <table class="table table-bordered table-striped table-hover">
               <tr class="thead-dark">
                 <th>Id</th>
@@ -64,7 +64,7 @@
                 <td>data</td>
                 <td>data</td>
                 <td>data</td>
-              </tr>   
+              </tr>
               <tr class="table-warning">
                 <td>data</td>
                 <td>data</td>

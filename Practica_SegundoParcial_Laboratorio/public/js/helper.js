@@ -1,44 +1,53 @@
 Array.prototype.unique = function() {return [...new Set(this)]};
 
 function crearTabla(array) {
-  var tabla = document.createElement('table');
-  var cabecera = document.createElement('tr');
-  tabla.className = "tabla";
+  let tbody = document.createElement("tbody");
+    let col = document.createElement("div");
+    col.className = "col-10";
+    let tabla = document.createElement("table");
+    tabla.className= "table table-responsive table-bordered table-striped table-hover";
 
-  for(atributo in array[0]) // Se crea cabecera de la tabla
-  {
-    let th = document.createElement('th');
-    if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
-    {
-      th.textContent = atributo.substring(4);
-    }
-    else {
-      th.textContent = atributo;
-    }
-    cabecera.appendChild(th);
-  }
-  tabla.appendChild(cabecera);
+    let cabecera = document.createElement("tr");
+    cabecera.className = "table-primary justify-content-md-center";
+    //Completando cabecera}
+    for (atributo in array[0]) {
+            let th = document.createElement("th");
+            if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
+            {
+              th.textContent = atributo.substring(4);
+            }
+            else {
+              th.textContent = atributo;
+            }
+            cabecera.appendChild(th);
 
-  for(i in array){
-    var fila = document.createElement('tr');
-    var objeto = array[i];
-    for(j in objeto){
-        var celda = document.createElement('td');
-        var dato = document.createTextNode(objeto[j]);
-        celda.appendChild(dato);
-        fila.appendChild(celda);
     }
-    tabla.appendChild(fila);
-  }
-  return tabla;
+    tbody.appendChild(cabecera)
+    tabla.appendChild(tbody);
+
+    for (i in array) {
+
+        let fila = document.createElement("tr");
+        fila.className = "table-stripped";
+        let objeto = array[i];
+        for (j in objeto) {
+            var celda = document.createElement("td");
+            var dato = document.createTextNode(objeto[j]);
+            celda.appendChild(dato);
+            fila.appendChild(celda);
+        }
+        tbody.appendChild(fila);
+        tabla.appendChild(tbody);
+    }
+    return tabla;
 }
 
 function crearBoxes(array, seccion) {
     for (atributo in array[0]) {
         if (atributo != "id") {
             let div = document.createElement("div");
-            div.classList.add("box");
             let labelA = document.createElement("label");
+            labelA.className = "form-check-label";
             labelA.htmlFor = "chk_" + atributo; // Enlace con entre el label y el checkbox
             if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
             {
