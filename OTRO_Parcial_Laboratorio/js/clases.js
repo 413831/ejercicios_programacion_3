@@ -59,6 +59,14 @@ var Persona = /** @class */ (function () {
     });
     ;
     ;
+    Object.defineProperty(Persona.prototype, "Id", {
+        get: function () { return this.id; },
+        set: function (e) { this.id = e; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    ;
     return Persona;
 }());
 var tipoLegislador;
@@ -90,10 +98,10 @@ var Parser = /** @class */ (function () {
         var _this = this;
         this.decode = function (params) {
             params.forEach(function (element) {
-                var legislador = new Legislador(element.value[0], element.value[1], element.value[2], element.value[3], element.value[4], element.value[5], element.value[6]);
+                var legislador = new Legislador(element.Id, element.Nombre, element.Apellido, element.Edad, element.Email, element.Sexo, element.TipoLegislador);
                 _this.datos.push(legislador);
             });
-            return params;
+            return _this.datos;
         };
         this.datos = Array();
     }

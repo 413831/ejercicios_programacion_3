@@ -31,6 +31,9 @@ class Persona
 
     get Sexo():string{return this.sexo;};
     set Sexo(e:string){this.sexo = e};
+
+    get Id():string{return this.id;};
+    set Id(e:string){this.id = e};
 }
 
 enum tipoLegislador{

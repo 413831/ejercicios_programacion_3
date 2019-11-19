@@ -2,19 +2,17 @@
 
 class Parser{
     public datos:Persona[];     
-    public decode = (params:Array<object>):object => {
+    public decode = (params:Array<Legislador>):Persona[] => {
         
         params.forEach(element => {
-            let legislador = new Legislador(element.value[0],element.value[1],element.value[2],
-                            element.value[3],element.value[4],element.value[5],element.value[6]);
-                            this.datos.push(legislador);
+            let legislador = new Legislador(element.Id,element.Nombre,element.Apellido,
+                                            element.Edad,element.Email,element.Sexo,element.TipoLegislador);
+            this.datos.push(legislador);
         });
-        return params;
+        return this.datos;
     }
     
     constructor() {
         this.datos = Array();
     }
-
-
 }
