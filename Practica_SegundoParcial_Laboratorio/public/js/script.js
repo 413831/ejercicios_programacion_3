@@ -5,10 +5,12 @@ $(function () {
 })
 
 function inicializarManejadores() {
-  $("#btnBorrar").click(bajaAnuncio);
-  $('#btnFiltrar').click(traerAnuncios);
-  $("#form").submit(manejadorAlta);
+  $("#btnBorrar").click(baja);
+  $('#btnFiltrar').click(mostrar);
+  $("#form").submit(alta);
   traerAnuncios();
+  console.log(localStorage);
+ // mostrar();
   crearBoxes(datos, $("#checkBoxes")); // Corregir
   crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
   crearSelectores(["100000","300000","500000"],$("#selectores"),"precio");
@@ -18,85 +20,50 @@ function inicializarManejadores() {
 function manejadorAlta(e) {
   e.preventDefault();
   let nuevoAnuncio = obtenerAnuncio(e.target, false);
-  altaAnuncio(nuevoAnuncio);
+  alta(nuevoAnuncio);
 }
 
 function manejadorModificar(e) {
   e.preventDefault();
   let anuncio = obtenerAnuncio(e.target, true);
-  modificarAnuncio(anuncio);
+  modificar(anuncio);
 }
 
-function altaAnuncio(anuncio) {
-  let xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      traerAnuncios();
-    } else {
-      // Hacer algo mientras llega la respuesta
-      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
-    }
-  }
-  xhr.open('POST', 'http://localhost:3000/altaAnuncio', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  console.log(anuncio);
-  xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
+function alta(anuncio) {
+  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
+  anuncios.push(anuncio);
+  localStorage.setItem("anuncios",JSON.stringify(anuncios));
+  console.log("Alta realizada");
+  mostrar();
 }
 
-function bajaAnuncio(anuncio) {
-  let xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      traerAnuncios();
-    } else {
-      // Hacer algo mientras llega la respuesta
-      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
-    }
-  }
-  xhr.open('POST', 'http://localhost:3000/bajaAnuncio', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  console.log(anuncio);
-  xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
+function baja(anuncio) {
+  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
+  anuncios.slice(anuncios.indexOf(anuncio),anuncio);
+  localStorage.setItem("anuncios",JSON.stringify(anuncios));
+  console.log("Baja realizada");
+  mostrar();
 }
 
-function modificarAnuncio(anuncio) {
-  let xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      traerAnuncios();
-    } else {
-      // Hacer algo mientras llega la respuesta
-      // document.getElementById('tablaDatos').innerHTML = '<img src="./Spinner-1s-200px.gif" alt="spinner">';
-      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
+function modificar(anuncio) {
+  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
+  anuncios.filter(elemento => {
+    if(elemento.id === anuncio.id)
+    {
+      elemento = anuncio;
+      console.log("Modificacion realizada");
     }
-  }
-  xhr.open('POST', 'http://localhost:3000/modificarAnuncio', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  if(anuncio != undefined)
-  {
-    anuncio.active = true;
-  }
-  console.log(anuncio);
-  xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
+  });
+  localStorage.setItem("anuncios",JSON.stringify(anuncios));
+  mostrar();
 }
 
-function traerAnuncios() {
-  let xhr = new XMLHttpRequest();
-  let anuncios;
-  let celdas;
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      anuncios = JSON.parse(xhr.responseText);
-      datosJSON = anuncios.data;
-      $("#tablaDatos").html("");
-      $("#tablaDatos").append(crearTabla(filtrarCheckbox(datosJSON)));
-      $("td").click(mostrarAnuncio);
-    } else {
-      $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
-    }
-  }
-  xhr.open('GET', 'http://localhost:3000/traerAnuncios', true);
-  xhr.send();
+function mostrar() {
+  let anuncios = localStorage.getItem("anuncios");
+  
+  $("#tablaDatos").html("");
+  $("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(anuncios))));
+  $("td").click(mostrarAnuncio);
 }
 
 function obtenerAnuncio(frm, tieneId) {
