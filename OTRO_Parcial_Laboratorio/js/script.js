@@ -8,11 +8,11 @@ function inicializarManejadores() {
   $("#btnBorrar").click(baja);
   $('#btnFiltrar').click(mostrar);
   $("#form").submit(alta);
-  // traerData();
+  traerData();
   console.log(localStorage);
  // mostrar();
-  crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
-  crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
+  //crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
+  //crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
 
 }
 
@@ -29,7 +29,8 @@ function manejadorModificar(e) {
 }
 
 function alta(persona) {
-  let personas = JSON.parse(localStorage.getItem("anuncios"));
+  console.log(persona);
+  let personas = JSON.parse(localStorage.getItem("legisladores"));
   personas.push(persona);
   localStorage.setItem("legisladores",JSON.stringify(personas));
   console.log("Alta realizada");
@@ -37,7 +38,7 @@ function alta(persona) {
 }
 
 function baja(persona) {
-  let personas = JSON.parse(localStorage.getItem("anuncios"));
+  let personas = JSON.parse(localStorage.getItem("legisladores"));
   personas.slice(personas.indexOf(persona),persona);
   localStorage.setItem("legisladores",JSON.stringify(personas));
   console.log("Baja realizada");
@@ -45,7 +46,7 @@ function baja(persona) {
 }
 
 function modificar(persona) {
-  let personas = JSON.parse(localStorage.getItem("anuncios"));
+  let personas = JSON.parse(localStorage.getItem("legisladores"));
   personas.filter(elemento => {
     if(elemento.id === anuncio.id)
     {
@@ -58,10 +59,10 @@ function modificar(persona) {
 }
 
 function mostrar() {
-  let personas = localStorage.getItem("anuncios");
-  
+  let personas = localStorage.getItem("legisladores");
   $("#tablaDatos").html("");
-  $("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
+  //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
+  $("#tablaDatos").append(crearTabla(JSON.parse(personas)));
   $("td").click(mostrarAnuncio);
 }
 

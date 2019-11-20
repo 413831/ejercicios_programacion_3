@@ -72,17 +72,17 @@ function altaAnuncio(anuncio) {
 
   function traerData() {
     let xhr = new XMLHttpRequest();
-    let anuncios;
+    let legisladores;
     let celdas;
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        anuncios = JSON.parse(xhr.responseText);
-        localStorage.setItem("legisladores",JSON.stringify(anuncios.data));
+        legisladores = JSON.parse(xhr.responseText);
+        localStorage.setItem("legisladores",JSON.stringify(legisladores));
         mostrar();
       } else {
         $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
       }
     }
-    xhr.open('GET', 'http://localhost:3000/traerAnuncios', true);
+    xhr.open('GET', './data/MOCK_DATA.json', true); // Archivo JSON 
     xhr.send();
   }

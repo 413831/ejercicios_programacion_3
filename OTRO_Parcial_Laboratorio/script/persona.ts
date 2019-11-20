@@ -1,11 +1,11 @@
 class Persona
 {
+    protected id:any;
     protected nombre:string;
     protected apellido:string;
     protected edad:number;
     protected email:string;
     protected sexo:string;
-    protected id:any;
 
     constructor(id:any,nombre: string, apellido: string, edad: number, email: string, sexo:string) {
         this.id = id;

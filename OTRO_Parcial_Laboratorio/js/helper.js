@@ -3,7 +3,7 @@ Array.prototype.unique = function() {return [...new Set(this)]};
 function crearTabla(array) {
   let tbody = document.createElement("tbody");
     let col = document.createElement("div");
-    col.className = "col-10";
+    col.className = "col-8";
     let tabla = document.createElement("table");
     tabla.className= "table table-responsive table-bordered table-striped table-hover";
 
