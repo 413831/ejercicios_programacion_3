@@ -17,6 +17,7 @@ function inicializarManejadores() {
 
 function manejadorAlta(e) {
   e.preventDefault();
+  console.log(e);
   let nuevaPersona = obtenerPersona(e.target, false);
   console.log(nuevaPersona);
   alta(nuevaPersona);
@@ -24,12 +25,19 @@ function manejadorAlta(e) {
 
 function manejadorModificar(e) {
   e.preventDefault();
+
+  let persona = obtenerPersona(e.target, true);
+  console.log(persona);
+  modificar(persona);
+}
+
+function manejadorBaja(e) {
+  e.preventDefault();
   let persona = obtenerPersona(e.target, true);
   modificar(persona);
 }
 
 function alta(persona) {
-  console.log(persona);
   let personas = JSON.parse(localStorage.getItem("legisladores"));
   personas.push(persona);
   localStorage.setItem("legisladores",JSON.stringify(personas));
@@ -37,9 +45,16 @@ function alta(persona) {
   mostrar();
 }
 
-function baja(persona) {
+function baja(e) {
   let personas = JSON.parse(localStorage.getItem("legisladores"));
-  personas.slice(personas.indexOf(persona),persona);
+  let id = $("#id").val();
+  let persona = GetById(id);
+
+  console.log(id);
+  console.log("BAJA" + persona);
+  personas.splice(persona.id,1);
+  console.log(personas);
+
   localStorage.setItem("legisladores",JSON.stringify(personas));
   console.log("Baja realizada");
   mostrar();
@@ -47,20 +62,15 @@ function baja(persona) {
 
 function modificar(persona) {
   let personas = JSON.parse(localStorage.getItem("legisladores"));
-  personas.filter(elemento => {
-    if(elemento.id === anuncio.id)
-    {
-      elemento = persona;
-      console.log("Modificacion realizada");
-    }
-  });
-  localStorage.setItem("anuncios",JSON.stringify(personas));
+  console.log(persona);
+  personas.splice(persona.id,1,persona);
+  console.log(personas);
+  localStorage.setItem("legisladores",JSON.stringify(personas));
   mostrar();
 }
 
 function mostrar() {
   let personas = localStorage.getItem("legisladores");
-  console.log("FUNCION MOSTRAR");
   console.log(JSON.parse(personas));
   $("#tablaDatos").html("");
   //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
@@ -106,12 +116,13 @@ function obtenerPersona(frm, tieneId) {
         if (tieneId == true) {
           id = element.value;
         }
+        else{
+          let id = GenerateId();
+        }
         break;
     }
   }
-  let idMasAlto = GenerateId();
-  console.log(idMasAlto);
-  legislador = new Legislador(idMasAlto,nombre, apellido, edad, email, sexo, funcion);
+  legislador = new Legislador(id,nombre, apellido, edad, email, sexo, funcion);
   console.log(legislador);
   return legislador;
 }
@@ -126,17 +137,30 @@ function GenerateId()
     var IDMasAlto = legisladores.reduce(function (IDMasAlto, legislador, i, array) {
                if (legislador.id > IDMasAlto) {
                    IDMasAlto = legislador.id;
-               }
+               };
                return IDMasAlto;
            }, 0);
-           return IDMasAlto+1;
   }
+}
+
+function GetById(id)
+{
+  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
+
+  if(legisladores)
+  {
+    var legislador = legisladores.filter(x =>{
+      if(x.id == id) return x;
+    });
+  }
+  return legislador;
 }
 
 function mostrarPersona(e) {
   let fila = e.target.parentElement;
   let nodos = fila.childNodes;
 
+  $("#id").val(nodos[0].innerText);
   $("#nombre").val(nodos[1].innerText);
   $("#apellido").val(nodos[2].innerText);
   $("#edad").val(nodos[3].innerText);

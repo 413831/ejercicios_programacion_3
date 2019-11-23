@@ -13,15 +13,9 @@ function crearTabla(array) {
     for (atributo in array[0]) {
             let thead = document.createElement("thead");
             let th = document.createElement("th");
-            if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
-            {
-              th.textContent = atributo.substring(4);
-            }
-            else {
-              th.textContent = atributo;
-            }
+            
+            th.textContent = atributo;
             cabecera.appendChild(th);
-
     }
     tbody.appendChild(cabecera)
     tabla.appendChild(tbody);
