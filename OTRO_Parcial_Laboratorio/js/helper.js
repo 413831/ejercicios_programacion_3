@@ -3,7 +3,7 @@ Array.prototype.unique = function() {return [...new Set(this)]};
 function crearTabla(array) {
   let tbody = document.createElement("tbody");
     let col = document.createElement("div");
-    col.className = "col-8";
+    col.className = "row col-md-12";
     let tabla = document.createElement("table");
     tabla.className= "table table-responsive table-bordered table-striped table-hover";
 
@@ -11,6 +11,7 @@ function crearTabla(array) {
     cabecera.className = "table-primary justify-content-md-center";
     //Completando cabecera}
     for (atributo in array[0]) {
+            let thead = document.createElement("thead");
             let th = document.createElement("th");
             if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
             {

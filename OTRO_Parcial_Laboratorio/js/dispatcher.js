@@ -13,7 +13,7 @@ function altaAnuncio(anuncio) {
     console.log(anuncio);
     xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
   }
-  
+
   function bajaAnuncio(anuncio) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
@@ -29,7 +29,7 @@ function altaAnuncio(anuncio) {
     console.log(anuncio);
     xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
   }
-  
+
   function modificarAnuncio(anuncio) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
@@ -50,7 +50,7 @@ function altaAnuncio(anuncio) {
     console.log(anuncio);
     xhr.send(JSON.stringify(anuncio)); // Se parsea a JSON
   }
-  
+
 //   function traerAnuncios() {
 //     let xhr = new XMLHttpRequest();
 //     let anuncios;
@@ -76,13 +76,13 @@ function altaAnuncio(anuncio) {
     let celdas;
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        legisladores = JSON.parse(xhr.responseText);
-        localStorage.setItem("legisladores",JSON.stringify(legisladores));
+        //legisladores = JSON.parse(xhr.responseText);
+        localStorage.setItem("legisladores",xhr.responseText);
         mostrar();
       } else {
         $("#tablaDatos").html('<img src="./Spinner-1s-200px.gif" alt="spinner">');
       }
     }
-    xhr.open('GET', './data/MOCK_DATA.json', true); // Archivo JSON 
+    xhr.open('GET', './data/MOCK_DATA.json', true); // Archivo JSON
     xhr.send();
   }

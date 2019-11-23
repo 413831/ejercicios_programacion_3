@@ -7,7 +7,7 @@ $(function () {
 function inicializarManejadores() {
   $("#btnBorrar").click(baja);
   $('#btnFiltrar').click(mostrar);
-  $("#form").submit(alta);
+  $("#form").submit(manejadorAlta);
   traerAnuncios();
   console.log(localStorage);
  // mostrar();
@@ -20,6 +20,7 @@ function inicializarManejadores() {
 function manejadorAlta(e) {
   e.preventDefault();
   let nuevoAnuncio = obtenerAnuncio(e.target, false);
+  console.log(nuevoAnuncio);
   alta(nuevoAnuncio);
 }
 
@@ -60,7 +61,7 @@ function modificar(anuncio) {
 
 function mostrar() {
   let anuncios = localStorage.getItem("anuncios");
-  
+  console.log("FUNCION MOSTRAR");
   $("#tablaDatos").html("");
   $("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(anuncios))));
   $("td").click(mostrarAnuncio);
@@ -121,10 +122,10 @@ function mostrarAnuncio(e) {
   $("#lblId").show();
   $("#titulo").val( nodos[1].innerText);
 
-  if (nodos[2].innerText == "Alquiler") {
+  if (nodos[2].innerText == "Alquiler" || nodos[2].innerText == "alquiler") {
     $("#rdoAlquiler").prop('checked',true);
     // document.getElementById("rdoAlquiler").checked = true;
-  } else if (nodos[0].innerText == "Venta") {
+  } else if (nodos[2].innerText == "Venta" || nodos[2].innerText == "venta") {
     $("#rdoVenta").prop('checked',true);
     // document.getElementById("rdoVenta").checked = true;
   }
@@ -139,16 +140,6 @@ function mostrarAnuncio(e) {
   $("#btnBorrar").show();
   $("#form").off("submit",manejadorAlta);
   $("#form").submit(manejadorModificar);
-
-  // document.getElementById('descripcion').value = nodos[3].innerText;
-  // document.getElementById('precio').value = nodos[4].innerText;
-  // document.getElementById('num_wc').value = nodos[5].innerText;
-  // document.getElementById('num_estacionamiento').value = nodos[6].innerText;
-  // document.getElementById('num_dormitorio').value = nodos[7].innerText;
-  // document.getElementById('btnCrearModificar').innerText = "Modificar";
-  // document.getElementById('btnBorrar').hidden = false
-  // frm.removeEventListener('submit', manejadorAlta);
-  // frm.addEventListener('submit', manejadorModificar);
 }
 
 function filtrarCheckbox(datosJSON) {
@@ -189,7 +180,7 @@ function filtrarPorSelector(array)
           datosFiltrados = datosFiltrados.filter(elemento => elemento.precio <= selectores[indice].value);
           break;
         case "sel_Dormitorios": // Corregir
-          datosFiltrados = datosFiltrados.filter(elemento => elemento.num_dormitorio >= selectores[indice].value);
+          datosFiltrados = datosFiltrados.filt  er(elemento => elemento.num_dormitorio >= selectores[indice].value);
           break;
         default:
           break;

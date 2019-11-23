@@ -5,12 +5,11 @@ $(function () {
 })
 
 function inicializarManejadores() {
-  $("#btnBorrar").click(baja);
-  $('#btnFiltrar').click(mostrar);
-  $("#form").submit(alta);
   traerData();
   console.log(localStorage);
- // mostrar();
+  $("#btnBorrar").click(baja);
+  $('#btnFiltrar').click(mostrar);
+  $("#form").submit(manejadorAlta);
   //crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
   //crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
 
@@ -19,6 +18,7 @@ function inicializarManejadores() {
 function manejadorAlta(e) {
   e.preventDefault();
   let nuevaPersona = obtenerPersona(e.target, false);
+  console.log(nuevaPersona);
   alta(nuevaPersona);
 }
 
@@ -60,10 +60,12 @@ function modificar(persona) {
 
 function mostrar() {
   let personas = localStorage.getItem("legisladores");
+  console.log("FUNCION MOSTRAR");
+  console.log(JSON.parse(personas));
   $("#tablaDatos").html("");
   //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
   $("#tablaDatos").append(crearTabla(JSON.parse(personas)));
-  $("td").click(mostrarAnuncio);
+  $("td").click(mostrarPersona);
 }
 
 function obtenerPersona(frm, tieneId) {
@@ -74,29 +76,30 @@ function obtenerPersona(frm, tieneId) {
   let email;
   let sexo;
   let funcion;
+  let legislador;
 
   for (element of frm.elements) {
     switch (element.name) {
       case "nombre":
-        titulo = element.value;
+        nombre = element.value;
         break;
       case "apellido":
-        descripcion = element.value;
+        apellido = element.value;
         break;
       case "edad":
-        precio = element.value;
+        edad = element.value;
         break;
       case "email":
-        num_wc = element.value;
+        email = element.value;
         break;
       case "sexo":
         if (element.checked === true) {
-          transaccion = element.value;
+          sexo = element.value;
         }
         break;
       case "funcion":
         if (element.checked === true) {
-          transaccion = element.value;
+          funcion = element.value;
         }
         break;
       case "id":
@@ -106,43 +109,55 @@ function obtenerPersona(frm, tieneId) {
         break;
     }
   }
-  return new Legislador(id,nombre, apellido, edad, email, sexo, funcion);
+  let idMasAlto = GenerateId();
+  console.log(idMasAlto);
+  legislador = new Legislador(idMasAlto,nombre, apellido, edad, email, sexo, funcion);
+  console.log(legislador);
+  return legislador;
+}
+
+
+function GenerateId()
+{
+  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
+
+  if(legisladores)
+  {
+    var IDMasAlto = legisladores.reduce(function (IDMasAlto, legislador, i, array) {
+               if (legislador.id > IDMasAlto) {
+                   IDMasAlto = legislador.id;
+               }
+               return IDMasAlto;
+           }, 0);
+           return IDMasAlto+1;
+  }
 }
 
 function mostrarPersona(e) {
   let fila = e.target.parentElement;
   let nodos = fila.childNodes;
 
-  $("#nombre").val(nodos[0].innerText);
+  $("#nombre").val(nodos[1].innerText);
+  $("#apellido").val(nodos[2].innerText);
+  $("#edad").val(nodos[3].innerText);
+  $("#email").val(nodos[4].innerText);
 
-  if (nodos[2].innerText == "Alquiler") {
-    $("#rdoAlquiler").prop('checked',true);
-    // document.getElementById("rdoAlquiler").checked = true;
-  } else if (nodos[0].innerText == "Venta") {
-    $("#rdoVenta").prop('checked',true);
-    // document.getElementById("rdoVenta").checked = true;
+  if (nodos[5].innerText == "Female") {
+    $("#rdoMujer").prop('checked',true);
+  } else if (nodos[5].innerText == "Male") {
+    $("#rdoHombre").prop('checked',true);
   }
 
-  $("#descripcion").val(nodos[3].innerText);
-  $("#precio").val(nodos[4].innerText);
-  $("#num_wc").val(nodos[5].innerText);
-  $("#num_estacionamiento").val(nodos[6].innerText);
-  $("#num_dormitorio").val(nodos[7].innerText);
-  $("#btnCrearModificar").text("Modificar");
+  if (nodos[6].innerText == "Senador") {
+    $("#rdoSenador").prop('checked',true);
+  } else if (nodos[6].innerText == "Diputado") {
+    $("#rdoDiputado").prop('checked',true);
+  }
 
+  $("#btnCrearModificar").text("Modificar");
   $("#btnBorrar").show();
   $("#form").off("submit",manejadorAlta);
   $("#form").submit(manejadorModificar);
-
-  // document.getElementById('descripcion').value = nodos[3].innerText;
-  // document.getElementById('precio').value = nodos[4].innerText;
-  // document.getElementById('num_wc').value = nodos[5].innerText;
-  // document.getElementById('num_estacionamiento').value = nodos[6].innerText;
-  // document.getElementById('num_dormitorio').value = nodos[7].innerText;
-  // document.getElementById('btnCrearModificar').innerText = "Modificar";
-  // document.getElementById('btnBorrar').hidden = false
-  // frm.removeEventListener('submit', manejadorAlta);
-  // frm.addEventListener('submit', manejadorModificar);
 }
 
 function filtrarCheckbox(datosJSON) {
