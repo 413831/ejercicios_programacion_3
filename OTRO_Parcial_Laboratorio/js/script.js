@@ -7,20 +7,24 @@ $(function () {
 function inicializarManejadores() {
   traerData();
   console.log(localStorage);
-  $("#btnBorrar").click(baja);
+  $("#btnBorrar").click(manejadorBaja);
   $('#btnFiltrar').click(mostrar);
   $("#form").submit(manejadorAlta);
   //crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
   //crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
-
 }
 
 function manejadorAlta(e) {
   e.preventDefault();
   console.log(e);
-  let nuevaPersona = obtenerPersona(e.target, false);
-  console.log(nuevaPersona);
-  alta(nuevaPersona);
+  let listadoJSON = JSON.parse(localStorage.getItem("legisladores"));
+  let legisladores = ToLegisladores(listadoJSON);
+  legisladores =   Controller.alta(legisladores);
+  console.log(legisladores);
+  localStorage.setItem("legisladores",JSON.stringify(legisladores));
+
+  console.log("Alta realizada");
+  mostrar();
 }
 
 function manejadorModificar(e) {
@@ -28,53 +32,51 @@ function manejadorModificar(e) {
 
   let persona = obtenerPersona(e.target, true);
   console.log(persona);
-  modificar(persona);
+  modificar(persona.id);
 }
 
 function manejadorBaja(e) {
   e.preventDefault();
-  let persona = obtenerPersona(e.target, true);
-  modificar(persona);
+  Controller.baja();
 }
 
-function alta(persona) {
-  let personas = JSON.parse(localStorage.getItem("legisladores"));
-  personas.push(persona);
-  localStorage.setItem("legisladores",JSON.stringify(personas));
-  console.log("Alta realizada");
-  mostrar();
-}
+// function alta(persona) {
+//   let personas = JSON.parse(localStorage.getItem("legisladores"));
+//
+//   personas.push(persona);
+//
+//   localStorage.setItem("legisladores",JSON.stringify(personas));
+//   console.log("Alta realizada");
+//   mostrar();
+// }
 
-function baja(e) {
+// function baja(e) {
+//   let personas = JSON.parse(localStorage.getItem("legisladores"));
+//   let id = $("#id").val();
+//   let index = GetIndex(id);
+//
+//   personas.splice(index,1);
+//
+//   localStorage.setItem("legisladores",JSON.stringify(personas));
+//   console.log("Baja realizada");
+//   mostrar();
+// }
+
+function modificar(id) {
   let personas = JSON.parse(localStorage.getItem("legisladores"));
-  let id = $("#id").val();
   let persona = GetById(id);
+  let index = GetIndex(id);
 
-  console.log(id);
-  console.log("BAJA" + persona);
-  personas.splice(persona.id,1);
-  console.log(personas);
-
-  localStorage.setItem("legisladores",JSON.stringify(personas));
-  console.log("Baja realizada");
-  mostrar();
-}
-
-function modificar(persona) {
-  let personas = JSON.parse(localStorage.getItem("legisladores"));
-  console.log(persona);
-  personas.splice(persona.id,1,persona);
-  console.log(personas);
+  personas.splice(index,1,persona[0]);
   localStorage.setItem("legisladores",JSON.stringify(personas));
   mostrar();
 }
 
 function mostrar() {
-  let personas = localStorage.getItem("legisladores");
-  console.log(JSON.parse(personas));
+  let personas = JSON.parse(localStorage.getItem("legisladores"));
   $("#tablaDatos").html("");
   //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
-  $("#tablaDatos").append(crearTabla(JSON.parse(personas)));
+  $("#tablaDatos").append(crearTabla(personas));
   $("td").click(mostrarPersona);
 }
 
@@ -117,7 +119,7 @@ function obtenerPersona(frm, tieneId) {
           id = element.value;
         }
         else{
-          let id = GenerateId();
+          id = GenerateId();
         }
         break;
     }
@@ -126,7 +128,6 @@ function obtenerPersona(frm, tieneId) {
   console.log(legislador);
   return legislador;
 }
-
 
 function GenerateId()
 {
@@ -140,6 +141,7 @@ function GenerateId()
                };
                return IDMasAlto;
            }, 0);
+    return IDMasAlto+1;
   }
 }
 
@@ -155,6 +157,46 @@ function GetById(id)
   }
   return legislador;
 }
+
+function GetIndex(id)
+{
+  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
+  let index = 0;
+
+  if(legisladores)
+  {
+    for(index = 0 ; index < legisladores.length;index++)
+    {
+      if(legisladores[index].id == id)
+      {
+        break;
+      }
+    }
+  }
+  return index;
+}
+
+function ToLegisladores(datosJSON) {
+    var listaLegisladores = [];
+
+    if(datosJSON != null && datosJSON != "")
+    {
+        for (var i = 0; i < datosJSON.length; i++) {
+            let id = datosJSON[i].id;
+            let nombre = datosJSON[i].nombre;
+            let apellido = datosJSON[i].apellido;
+            let edad = datosJSON[i].edad;
+            let email = datosJSON[i].email;
+            let sexo = datosJSON[i].sexo;
+            let tipo = datosJSON[i].tipo;
+
+            var legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
+            listaLegisladores.push(legislador);
+        }
+        return listaLegisladores;
+    }
+}
+
 
 function mostrarPersona(e) {
   let fila = e.target.parentElement;

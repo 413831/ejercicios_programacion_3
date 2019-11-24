@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -18,61 +21,85 @@ var Persona = /** @class */ (function () {
         this.email = email;
         this.sexo = sexo;
     }
-    Object.defineProperty(Persona.prototype, "Nombre", {
+    Object.defineProperty(Persona.prototype, "getNombre", {
         // Setters & Getters
         get: function () { return this.nombre; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setNombre", {
         set: function (e) { this.nombre = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
-    Object.defineProperty(Persona.prototype, "Apellido", {
+    Object.defineProperty(Persona.prototype, "getApellido", {
         get: function () { return this.apellido; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setApellido", {
         set: function (e) { this.apellido = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
-    Object.defineProperty(Persona.prototype, "Edad", {
+    Object.defineProperty(Persona.prototype, "getEdad", {
         get: function () { return this.edad; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setEdad", {
         set: function (e) { this.edad = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
-    Object.defineProperty(Persona.prototype, "Email", {
+    Object.defineProperty(Persona.prototype, "getEmail", {
         get: function () { return this.email; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setEmail", {
         set: function (e) { this.email = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
-    Object.defineProperty(Persona.prototype, "Sexo", {
+    Object.defineProperty(Persona.prototype, "getSexo", {
         get: function () { return this.sexo; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setSexo", {
         set: function (e) { this.sexo = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
-    Object.defineProperty(Persona.prototype, "Id", {
+    Object.defineProperty(Persona.prototype, "getId", {
         get: function () { return this.id; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Persona.prototype, "setId", {
         set: function (e) { this.id = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
     return Persona;
 }());
 var tipoLegislador;
 (function (tipoLegislador) {
-    tipoLegislador[tipoLegislador["Diputado"] = 0] = "Diputado";
-    tipoLegislador[tipoLegislador["Senador"] = 1] = "Senador";
+    tipoLegislador["Diputado"] = "Diputado";
+    tipoLegislador["Senador"] = "Senador";
 })(tipoLegislador || (tipoLegislador = {}));
 /// <reference path="persona.ts" />
 var Legislador = /** @class */ (function (_super) {
@@ -82,29 +109,86 @@ var Legislador = /** @class */ (function (_super) {
         _this.tipo = tipo;
         return _this;
     }
-    Object.defineProperty(Legislador.prototype, "TipoLegislador", {
+    Object.defineProperty(Legislador.prototype, "getTipoLegislador", {
         get: function () { return this.tipo; },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Legislador.prototype, "setTipoLegislador", {
         set: function (e) { this.tipo = e; },
         enumerable: true,
         configurable: true
     });
     ;
-    ;
     return Legislador;
 }(Persona));
 /// <reference path="legislador.ts" />
-var Parser = /** @class */ (function () {
-    function Parser() {
-        var _this = this;
-        this.decode = function (params) {
-            params.forEach(function (element) {
-                var legislador = new Legislador(element.Id, element.Nombre, element.Apellido, element.Edad, element.Email, element.Sexo, element.TipoLegislador);
-                _this.datos.push(legislador);
-            });
-            return _this.datos;
-        };
-        this.datos = Array();
+var Controller = /** @class */ (function () {
+    function Controller() {
     }
-    return Parser;
+    // Alta de un elemento en el listado del local storage
+    // Se toman los valores con JQuery de los elementos del DOM
+    Controller.alta = function (legisladores) {
+        var nombre = String($("#nombre").val());
+        var apellido = String($("#apellido").val());
+        var email = String($("#email").val());
+        var edad = Number($("#edad").val());
+        var sexo = String($("input[name='sexo']:checked").val());
+        var tipo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+        var id = this.GenerateId(legisladores);
+        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, tipo);
+        legisladores.push(legislador);
+        return legisladores;
+    };
+    // Baja fisica de un elemento del listado del local storage
+    Controller.baja = function (legisladores) {
+        var id = Number($("#id").val());
+        var index = this.GetIndex(id, legisladores);
+        if (index) {
+            // Borro el elemento del indice especificado
+            //listadoJSON.splice(index,1);
+            legisladores.splice(index, 1);
+        }
+        return legisladores;
+    };
+    // Obtengo el index de un elemento del listado JSON
+    Controller.GetIndex = function (id, listadoJSON) {
+        var index = 0;
+        if (listadoJSON && id) {
+            for (var i = 0; i < listadoJSON.length; i++) {
+                if (listadoJSON[i].getId == id) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    };
+    // Busca el último ID del listado y retorna el siguiente
+    Controller.GenerateId = function (listado) {
+        var IDMasAlto;
+        if (listado) {
+            IDMasAlto = listado.reduce(function (IDMasAlto, elemento, i, array) {
+                if (elemento.getId > IDMasAlto) {
+                    IDMasAlto = elemento.getId;
+                }
+                ;
+                return IDMasAlto;
+            }, 0);
+            return IDMasAlto + 1;
+        }
+        return 0;
+    };
+    Controller.TipoLegislador = function (value) {
+        if (value.toLowerCase() == "diputado") {
+            return tipoLegislador.Diputado;
+        }
+        else if (value.toLowerCase() == "senador") {
+            return tipoLegislador.Senador;
+        }
+        return 0;
+    };
+    return Controller;
 }());
 //# sourceMappingURL=clases.js.map

@@ -17,26 +17,26 @@ class Persona
     }
 
     // Setters & Getters
-    get Nombre():string{return this.nombre;};
-    set Nombre(e:string){this.nombre = e};
+    get getNombre():string{return this.nombre;};
+    set setNombre(e:string){this.nombre = e};
 
-    get Apellido():string{return this.apellido;};
-    set Apellido(e:string){this.apellido = e};
+    get getApellido():string{return this.apellido;};
+    set setApellido(e:string){this.apellido = e};
 
-    get Edad():number{return this.edad;};
-    set Edad(e:number){this.edad = e};
-    
-    get Email():string{return this.email;};
-    set Email(e:string){this.email = e};
+    get getEdad():number{return this.edad;};
+    set setEdad(e:number){this.edad = e};
 
-    get Sexo():string{return this.sexo;};
-    set Sexo(e:string){this.sexo = e};
+    get getEmail():string{return this.email;};
+    set setEmail(e:string){this.email = e};
 
-    get Id():string{return this.id;};
-    set Id(e:string){this.id = e};
+    get getSexo():string{return this.sexo;};
+    set setSexo(e:string){this.sexo = e};
+
+    get getId():number{return this.id;};
+    set setId(e:number){this.id = e};
 }
 
 enum tipoLegislador{
-    Diputado,
-    Senador
+    Diputado = "Diputado",
+    Senador = "Senador"
 }
