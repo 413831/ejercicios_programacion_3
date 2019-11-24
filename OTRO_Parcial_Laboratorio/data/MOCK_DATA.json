@@ -1,181 +1,20 @@
-[{
-    "id": 1,
-    "nombre": "Gena",
-    "apellido": "Biggin",
-    "edad": 39,
-    "email": "gbiggin0@ehow.com",
-    "sexo": "Female",
-    "tipo": "Senador"
-  },
-  {
-    "id": 2,
-    "nombre": "Beau",
-    "apellido": "Simeoli",
-    "edad": 60,
-    "email": "bsimeoli1@pinterest.com",
-    "sexo": "Male",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 3,
-    "nombre": "Dorie",
-    "apellido": "Davidesco",
-    "edad": 64,
-    "email": "ddavidesco2@jiathis.com",
-    "sexo": "Female",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 4,
-    "nombre": "Rodolfo",
-    "apellido": "Gilliver",
-    "edad": 6,
-    "email": "rgilliver3@wunderground.com",
-    "sexo": "Male",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 5,
-    "nombre": "Yevette",
-    "apellido": "Wicken",
-    "edad": 64,
-    "email": "ywicken4@so-net.ne.jp",
-    "sexo": "Female",
-    "tipo": "Senador"
-  },
-  {
-    "id": 6,
-    "nombre": "Milty",
-    "apellido": "Sword",
-    "edad": 68,
-    "email": "msword5@nsw.gov.au",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 7,
-    "nombre": "Dorris",
-    "apellido": "Olenikov",
-    "edad": 2,
-    "email": "dolenikov6@cisco.com",
-    "sexo": "Female",
-    "tipo": "Senador"
-  },
-  {
-    "id": 8,
-    "nombre": "Irma",
-    "apellido": "Copelli",
-    "edad": 31,
-    "email": "icopelli7@usnews.com",
-    "sexo": "Female",
-    "tipo": "Senador"
-  },
-  {
-    "id": 9,
-    "nombre": "Ignacio",
-    "apellido": "Needs",
-    "edad": 16,
-    "email": "ineeds8@domainmarket.com",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 10,
-    "nombre": "Errol",
-    "apellido": "Schirach",
-    "edad": 25,
-    "email": "eschirach9@hatena.ne.jp",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 11,
-    "nombre": "Hyacinthie",
-    "apellido": "Sauter",
-    "edad": 77,
-    "email": "hsautera@tmall.com",
-    "sexo": "Female",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 12,
-    "nombre": "Lydon",
-    "apellido": "Joules",
-    "edad": 38,
-    "email": "ljoulesb@123-reg.co.uk",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 13,
-    "nombre": "Josephine",
-    "apellido": "Dubock",
-    "edad": 45,
-    "email": "jdubockc@harvard.edu",
-    "sexo": "Female",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 14,
-    "nombre": "Mable",
-    "apellido": "Lannin",
-    "edad": 44,
-    "email": "mlannind@bandcamp.com",
-    "sexo": "Female",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 15,
-    "nombre": "Torin",
-    "apellido": "Sandison",
-    "edad": 30,
-    "email": "tsandisone@angelfire.com",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 16,
-    "nombre": "Ivan",
-    "apellido": "MacChaell",
-    "edad": 48,
-    "email": "imacchaellf@hc360.com",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 17,
-    "nombre": "Edmon",
-    "apellido": "Everest",
-    "edad": 8,
-    "email": "eeverestg@mayoclinic.com",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 18,
-    "nombre": "Tybalt",
-    "apellido": "Baiden",
-    "edad": 13,
-    "email": "tbaidenh@hibu.com",
-    "sexo": "Male",
-    "tipo": "Diputado"
-  },
-  {
-    "id": 19,
-    "nombre": "Terri",
-    "apellido": "Caneo",
-    "edad": 55,
-    "email": "tcaneoi@webmd.com",
-    "sexo": "Male",
-    "tipo": "Senador"
-  },
-  {
-    "id": 20,
-    "nombre": "Rolland",
-    "apellido": "Yeardsley",
-    "edad": 62,
-    "email": "ryeardsleyj@vkontakte.ru",
-    "sexo": "Male",
-    "tipo": "Senador"
-  }
-]
+[{"id":1,"nombre":"Sabina","apellido":"Windrass","edad":30,"email":"swindrass0@marketwatch.com","sexo":"Female","cargo":"Senador"},
+{"id":2,"nombre":"Ruthe","apellido":"Scadding","edad":39,"email":"rscadding1@dion.ne.jp","sexo":"Female","cargo":"Senador"},
+{"id":3,"nombre":"Engelbert","apellido":"Creeboe","edad":32,"email":"ecreeboe2@nationalgeographic.com","sexo":"Male","cargo":"Senador"},
+{"id":4,"nombre":"Jervis","apellido":"Noton","edad":95,"email":"jnoton3@vkontakte.ru","sexo":"Male","cargo":"Diputado"},
+{"id":5,"nombre":"Timmi","apellido":"Robertson","edad":51,"email":"trobertson4@utexas.edu","sexo":"Female","cargo":"Senador"},
+{"id":6,"nombre":"Nelly","apellido":"Kohring","edad":99,"email":"nkohring5@skype.com","sexo":"Female","cargo":"Senador"},
+{"id":7,"nombre":"Tan","apellido":"Joberne","edad":85,"email":"tjoberne6@wsj.com","sexo":"Male","cargo":"Senador"},
+{"id":8,"nombre":"Jessie","apellido":"Sodor","edad":65,"email":"jsodor7@flickr.com","sexo":"Female","cargo":"Senador"},
+{"id":9,"nombre":"Michaella","apellido":"Fasson","edad":51,"email":"mfasson8@usa.gov","sexo":"Female","cargo":"Senador"},
+{"id":10,"nombre":"Inness","apellido":"Paur","edad":19,"email":"ipaur9@google.co.jp","sexo":"Male","cargo":"Diputado"},
+{"id":11,"nombre":"Kaine","apellido":"Paschek","edad":55,"email":"kpascheka@networkadvertising.org","sexo":"Male","cargo":"Senador"},
+{"id":12,"nombre":"Blondell","apellido":"Moroney","edad":82,"email":"bmoroneyb@freewebs.com","sexo":"Female","cargo":"Senador"},
+{"id":13,"nombre":"Carce","apellido":"Kobsch","edad":29,"email":"ckobschc@telegraph.co.uk","sexo":"Male","cargo":"Diputado"},
+{"id":14,"nombre":"Corinna","apellido":"Eidelman","edad":23,"email":"ceidelmand@bravesites.com","sexo":"Female","cargo":"Diputado"},
+{"id":15,"nombre":"Amandy","apellido":"Quarles","edad":62,"email":"aquarlese@microsoft.com","sexo":"Female","cargo":"Senador"},
+{"id":16,"nombre":"Franz","apellido":"Jacqueminot","edad":45,"email":"fjacqueminotf@plala.or.jp","sexo":"Male","cargo":"Diputado"},
+{"id":17,"nombre":"Maria","apellido":"Bashford","edad":40,"email":"mbashfordg@auda.org.au","sexo":"Female","cargo":"Senador"},
+{"id":18,"nombre":"Karlotta","apellido":"Bourtoumieux","edad":52,"email":"kbourtoumieuxh@yolasite.com","sexo":"Female","cargo":"Senador"},
+{"id":19,"nombre":"Bethany","apellido":"McKeever","edad":81,"email":"bmckeeveri@hatena.ne.jp","sexo":"Female","cargo":"Senador"},
+{"id":20,"nombre":"Danny","apellido":"Gabbetis","edad":82,"email":"dgabbetisj@tamu.edu","sexo":"Male","cargo":"Senador"}]

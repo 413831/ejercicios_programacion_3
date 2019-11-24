@@ -10,10 +10,10 @@
       let email:string = String($("#email").val());
       let edad:number = Number($("#edad").val());
       let sexo:string = String($("input[name='sexo']:checked").val());
-      let tipo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+      let cargo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
       let id:number = this.GenerateId(legisladores);
 
-      let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
+      let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, cargo);
 
       legisladores.push(legislador);
       return legisladores;
@@ -42,13 +42,14 @@
       let email:string = String($("#email").val());
       let edad:number = Number($("#edad").val());
       let sexo:string = String($("input[name='sexo']:checked").val());
-      let tipo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+      let cargo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
       let id = Number($("#id").val());
       let index:number = this.GetIndex(id, legisladores);
 
-      let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
+      let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, cargo);
 
       legisladores.splice(index,1,legislador);
+
       return legisladores;
     }
 
@@ -116,4 +117,18 @@
       return tipoLegislador.Vacio;
     }
 
+    public static PromedioEdad(listado:Array<Legislador>, genero:String)
+    {
+      let promedio:Number = listado.map(elemento => parseInt(elemento.getEdad)).
+                                      reduce((prev,curr) => (prev + curr)) / listado.length;
+
+      $("#promedioEdad").val(promedio);
+    }
+
+    public static PorcentajeSexo(listado:Array<Legislador>, genero:String)
+    {
+      let porcentaje:Number = (listado.filter(elemento => String(elemento.getSexo).toLowerCase() === genero).length / listado.length) * 100;
+
+      $("#porcentajeSexo").val(porcentaje);
+    }
 }

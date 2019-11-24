@@ -12,7 +12,7 @@ function inicializarManejadores() {
   let datosJSON = JSON.parse(localStorage.getItem("legisladores"));
   // Creacion boxes y selectores para filtros
   crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
-  crearSelectores(datosJSON.map(objeto => objeto.tipo.toLowerCase()).unique().sort(),$("#selectores"),"Cargo");
+  crearSelectores(datosJSON.map(objeto => objeto.cargo.toLowerCase()).unique().sort(),$("#selectores"),"Cargo");
   crearSelectores(datosJSON.map(objeto => objeto.sexo.toLowerCase()).unique().sort(),$("#selectores"),"Sexo");
 }
 
@@ -54,9 +54,28 @@ function manejadorBaja(e) {
 
 function mostrar() {
   let datos = JSON.parse(localStorage.getItem("legisladores"));
-
+  datos = filtrarCheckbox(datos);
   $("#tablaDatos").html("");
-  $("#tablaDatos").append(crearTabla(filtrarCheckbox(datos)));
+  $("#tablaDatos").append(crearTabla(datos));
+
+  let uncheckedBox = $("input:checkbox:not(:checked)");
+  let selectores = $("#selectores .form-control");
+
+  selectores.map(x => {
+    if(selectores[x].disabled == true)
+    {
+      selectores[x].disabled = false;
+    }
+  });
+
+  selectores.map(x =>{
+    uncheckedBox.each( elemento => {
+      if(uncheckedBox[elemento].id.substring(4) == selectores[x].id.substring(4).toLowerCase())
+      {
+        selectores[x].disabled = true;
+      }
+    });
+  });
 }
 
 function ToLegisladores(datosJSON) {
@@ -64,20 +83,10 @@ function ToLegisladores(datosJSON) {
 
     if(datosJSON != null && datosJSON != "")
     {
-        for (var i = 0; i < datosJSON.length; i++) {
-            let id = datosJSON[i].id;
-            let nombre = datosJSON[i].nombre;
-            let apellido = datosJSON[i].apellido;
-            let edad = datosJSON[i].edad;
-            let email = datosJSON[i].email;
-            let sexo = datosJSON[i].sexo;
-            let tipo = datosJSON[i].tipo;
-
-            var legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
-            listaLegisladores.push(legislador);
-        }
-        return listaLegisladores;
+      datosJSON.forEach(elemento => listaLegisladores.push(new Legislador(elemento.id,elemento.nombre, elemento.apellido,
+                                                              elemento.edad,elemento.email,elemento.sexo,elemento.tipo)));
     }
+    return listaLegisladores;
 }
 
 function cargarFormulario(e) {
@@ -139,11 +148,13 @@ function filtrarPorSelector(array)
       switch (selector) {
         case "sel_Cargo":
           datosFiltrados = datosFiltrados.filter(elemento => {
-            if(elemento.transaccion != undefined) elemento.tipo.toLowerCase() === selectores[indice].value;
+            if(elemento.tipo != undefined) elemento.tipo.toLowerCase() === selectores[indice].value;
           });
           break;
         case "sel_Sexo": // Corregir
           datosFiltrados = datosFiltrados.filter(elemento => elemento.sexo.toLowerCase() === selectores[indice].value);
+          Controller.PromedioEdad(ToLegisladores(datosFiltrados),selectores[indice].value);
+          Controller.PorcentajeSexo(ToLegisladores(JSON.parse(localStorage.getItem("legisladores"))),selectores[indice].value);
           break;
         default:
           break;
@@ -153,6 +164,12 @@ function filtrarPorSelector(array)
   else if (datosFiltrados.length == 0){
     return array;
   }
-  console.log(datosFiltrados);
   return datosFiltrados;
+}
+
+function deshabilitarSelect(array)
+{
+  selectores = $("select");
+
+  selectores = selectores.each(selector => console.log(selectores[selector]));
 }

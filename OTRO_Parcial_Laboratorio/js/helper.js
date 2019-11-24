@@ -6,7 +6,7 @@ function crearTabla(array) {
     let cuerpo = document.createElement("tbody");
     let tr = document.createElement("tr");
     // Atributos para Bootstrap
-    tabla.className= "table table-dark table-responsive table-striped table-hover";
+    tabla.className= "table table-dark  table-striped table-hover";
     tr.className = "table-primary";
 
     //Completando cabecera
@@ -58,7 +58,7 @@ function crearBoxes(array, seccion) {
             checkbox.value = atributo;
             checkbox.checked = true;
             checkbox.addEventListener('click',traerData);
-            checkbox.addEventListener('click',deshabilitarSelect);
+            checkbox.addEventListener('click',deshabilitarOpcion);
             inputText.appendChild(checkbox);
             inputGroup.appendChild(inputText);
 
@@ -76,10 +76,11 @@ function crearSelectores(array, seccion, atributo)
   let option = document.createElement('option');
   let label = document.createElement('label');
 
-  select.className = "form-control";
+  select.className = "form-control col-5";
   select.id = "sel_" + atributo;
   label.className = "form-check-label";
   label.htmlFor = "sel_" + atributo;
+  label.id = "lbl_" + atributo;
   label.appendChild(document.createTextNode(atributo));
   option.value = "Todos"; // Por defecto se agrega opcion TODOS
   option.textContent = "Todos";
@@ -103,17 +104,13 @@ function limpiarSelect(select) {
     }
 }
 
-function deshabilitarSelect(e)
+function deshabilitarOpcion(e)
 {
   console.log(e.target);
   let atributo = e.target.value;
   let selector;
   let checkbox = $('#chk_'+atributo);
 
-  if(atributo == "num_dormitorio")
-  {
-    atributo = atributo.substring(4);
-  }
   selector = $('#sel_'+atributo);
 
   if(!checkbox.prop('checked'))

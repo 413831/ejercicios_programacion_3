@@ -54,10 +54,10 @@
             <h5>Seleccione su sexo: </h5>
           </label>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-info active">
+              <label class="btn btn-info">
               <input type="radio" name="sexo" id="rdoMujer" autocomplete="off" value="Female"> Mujer
             </label>
-            <label class="btn btn-info">
+              <label class="btn btn-info">
               <input type="radio" name="sexo" id="rdoHombre" autocomplete="off" value="Male"> Hombre
             </label>
           </div>
@@ -66,10 +66,10 @@
           <h5>Seleccione cargo: </h5>
         </label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-info active">
+            <label class="btn btn-info">
             <input type="radio" name="funcion" id="rdoDiputado" autocomplete="off" value="diputado"> Diputado
           </label>
-          <label class="btn btn-info">
+            <label class="btn btn-info">
             <input type="radio" name="funcion" id="rdoSenador" autocomplete="off" value="senador"> Senador
           </label>
         </div>
@@ -86,30 +86,24 @@
         <fieldset>
           <h5>Filtrar:</h5>
           <div id="selectores" class="input-group mb-3">
-
-
+          </div>
+          <div id="promedios" class="form-group col-md-4">
+            <label for="porcentajeSexo" id="lblPromedio">Promedio de Edad</label>
+            <input type="text" id="promedioEdad" class="form-control" name="promedioEdad" disabled>
+            <label for="porcentajeSexo" id="lblPorcentaje">Porcentaje de sexo</label>
+            <input type="text" id="porcentajeSexo" class="form-control" name="porcentajeSexo" disabled>
           </div>
           <div class="row">
             <div class="col text-center">
-              <button type="button" name="btnFiltrar" class="btn btn-outline-primary" id="btnFiltrar">Filtrar</button>
+              <button type="button" name="btnFiltrar" class="btn btn-outline-primary btn-lg" id="btnFiltrar">Filtrar</button>
             </div>
           </div>
             <hr>
-
-
           <div id="checkBoxes" class="input-group mb-3 box">
-
-
-
           </div>
           <hr>
         </fieldset>
-
-
-        <div id="tablaDatos" class="table-responsive-md">
-
-
-
+      <div id="tablaDatos" class="table-responsive">
         </div>
       </form>
     </div>

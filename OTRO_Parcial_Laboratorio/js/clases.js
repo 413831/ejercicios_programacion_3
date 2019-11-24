@@ -105,19 +105,19 @@ var tipoLegislador;
 /// <reference path="persona.ts" />
 var Legislador = /** @class */ (function (_super) {
     __extends(Legislador, _super);
-    function Legislador(id, nombre, apellido, edad, email, sexo, tipo) {
+    function Legislador(id, nombre, apellido, edad, email, sexo, cargo) {
         var _this = _super.call(this, id, nombre, apellido, edad, email, sexo) || this;
-        _this.tipo = tipo;
+        _this.cargo = cargo;
         return _this;
     }
     Object.defineProperty(Legislador.prototype, "getTipoLegislador", {
-        get: function () { return this.tipo; },
+        get: function () { return this.cargo; },
         enumerable: true,
         configurable: true
     });
     ;
     Object.defineProperty(Legislador.prototype, "setTipoLegislador", {
-        set: function (e) { this.tipo = e; },
+        set: function (e) { this.cargo = e; },
         enumerable: true,
         configurable: true
     });
@@ -136,9 +136,9 @@ var Controller = /** @class */ (function () {
         var email = String($("#email").val());
         var edad = Number($("#edad").val());
         var sexo = String($("input[name='sexo']:checked").val());
-        var tipo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+        var cargo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
         var id = this.GenerateId(legisladores);
-        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, tipo);
+        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, cargo);
         legisladores.push(legislador);
         return legisladores;
     };
@@ -162,10 +162,10 @@ var Controller = /** @class */ (function () {
         var email = String($("#email").val());
         var edad = Number($("#edad").val());
         var sexo = String($("input[name='sexo']:checked").val());
-        var tipo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+        var cargo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
         var id = Number($("#id").val());
         var index = this.GetIndex(id, legisladores);
-        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, tipo);
+        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, cargo);
         legisladores.splice(index, 1, legislador);
         return legisladores;
     };
@@ -217,6 +217,15 @@ var Controller = /** @class */ (function () {
             return tipoLegislador.Senador;
         }
         return tipoLegislador.Vacio;
+    };
+    Controller.PromedioEdad = function (listado, genero) {
+        var promedio = listado.map(function (elemento) { return parseInt(elemento.getEdad); }).
+            reduce(function (prev, curr) { return (prev + curr); }) / listado.length;
+        $("#promedioEdad").val(promedio);
+    };
+    Controller.PorcentajeSexo = function (listado, genero) {
+        var porcentaje = (listado.filter(function (elemento) { return String(elemento.getSexo).toLowerCase() === genero; }).length / listado.length) * 100;
+        $("#porcentajeSexo").val(porcentaje);
     };
     return Controller;
 }());
