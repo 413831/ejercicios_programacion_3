@@ -1,94 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/helper.js"></script>
-    <script src="./js/dispatcher.js"></script>
-    <script src="./js/script.js"></script>
-    <script src="./js/clases.js"></script>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <title>Formulario de Alta</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/helper.js"></script>
+  <script src="./js/dispatcher.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/clases.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <title>Formulario de Alta</title>
 </head>
+
 <body>
-    <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#form">Home</a></li>
-    <li class="breadcrumb-item"><a href="#tablaDatos">Tabla</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data</li>
-  </ol>
-</nav>
-    </form>
-    <div class="jumbotron vertical-center">
-        <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#form">Home</a></li>
+      <li class="breadcrumb-item"><a href="#tablaDatos">Tabla</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
+  </form>
+  <div class="jumbotron horizontal-center">
+    <div class="container">
+      <form id="form" action="#">
+        <div class="row justify-content-center">
+         <div class="form-group col-md-8 col-md-offset-4 align-center ">
+        <h1>Formulario de Alta</h1>
+        <div class="form-group row col-md-10">
+          <label for="id" id="lblId" hidden><h5>ID</h5></label>
+          <input type="text" id="id" class="form-control" name="id" hidden disabled>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="nombre" id="lblNombre"><h5>Nombre</h5></label>
+          <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese su Nombre" required>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="apellido" id="lblApellido"><h5>Apellido</h5></label>
+          <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Ingrese su Apellido" required>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="email" id="lblEmail"><h5>Email</h5></label>
+          <input type="text" id="email" class="form-control" name="email" placeholder="Ingrese su Email" required>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="edad" id="lblEdad"><h5>Edad</h5></label>
+          <input type="number" id="edad" class="form-control" name="edad" placeholder="Ingrese su Edad" required>
+        </div>
 
-        <form id="form" action="#">
-            <h1>Formulario de Alta</h1>
-        <div class="form-group row col-md-10">
-              <label for="id" id="lblId" hidden>Nombre</label>
-              <input type="text" id="id" class="form-control" name="id" hidden disabled>
-        </div>
-        <div class="form-group row col-md-10">
-            <label for="nombre" id="lblNombre">Nombre</label>
-            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese su Nombre" required>
-        </div>
-        <div class="form-group row col-md-10">
-            <label for="apellido" id="lblApellido">Apellido</label>
-            <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Ingrese su Apellido" required>
-        </div>
-        <div class="form-group row col-md-10">
-            <label for="email" id="lblEmail">Email</label>
-            <input type="text" id="email" class="form-control" name="email" placeholder="Ingrese su Email" required>
-        </div>
-        <div class="form-group row col-md-10">
-            <label for="edad" id="lblEdad">Edad</label>
-            <input type="number" id="edad" class="form-control" name="edad" placeholder="Ingrese su Edad" required>
-        </div>
-        <div class="form-check">Sexo:
-            <div>
-                <input type="radio" id="rdoMujer" class="form-check-inline" name="sexo" value="Female">
-                <label for="rdoMujer" id="lblRdoMujer" class="form-check-label">Mujer</label>
-            </div>
-            <div>
-                <input type="radio" id="rdoHombre" class="form-check-inline" name="sexo" value="Male">
-                <label for="rdoHombre" id="lblRdoHombre" class="form-check-label">Hombre</label>
-            </div>
-        </div>
-        <div class="form-check">Tipo:
-            <div>
-                <input type="radio" id="rdoDiputado" class="form-check-inline" name="funcion" value="diputado">
-                <label for="rdoDiputado" id="lblRdoDiputado" class="form-check-label">Diputado</label>
-            </div>
-            <div>
-                <input type="radio" id="rdoSenador" class="form-check-inline" name="funcion" value="senador">
-                <label for="rdoSenador" id="lblRdoSenador" class="form-check-label">Senador</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" name="btnCrearModificar" id="btnCrearModificar" class="btnCrearModificar btn btn-primary btn-lg">Dar de Alta</button>
-            <button type="button" name="btnBorrar" id="btnBorrar" class="btnBorrar btn btn-primary btn-lg">Borrar</button>
+          <label for="rdoMujer">
+            <h5>Seleccione su sexo: </h5>
+          </label>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-info active">
+              <input type="radio" name="sexo" id="rdoMujer" autocomplete="off" value="Female"> Mujer
+            </label>
+            <label class="btn btn-info">
+              <input type="radio" name="sexo" id="rdoHombre" autocomplete="off" value="Male"> Hombre
+            </label>
           </div>
+          <hr>
+        <label for="rdoDiputado">
+          <h5>Seleccione cargo: </h5>
+        </label>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-info active">
+            <input type="radio" name="funcion" id="rdoDiputado" autocomplete="off" value="diputado"> Diputado
+          </label>
+          <label class="btn btn-info">
+            <input type="radio" name="funcion" id="rdoSenador" autocomplete="off" value="senador"> Senador
+          </label>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col text-center">
+            <button type="submit" name="btnCrearModificar" id="btnCrearModificar" class="btnCrearModificar btn btn-primary btn-lg">Dar de Alta</button>
+            <button type="button" name="btnBorrar" id="btnBorrar" class="btnBorrar btn btn-outline-danger btn-lg">Borrar</button>
+          </div>
+        </div>
+        </div>
+        </div>
+        <hr>
+        <fieldset>
+          <h5>Filtrar:</h5>
+          <div id="selectores" class="input-group mb-3">
 
-          <fieldset>
-              <div id="selectores" class="input-group mb-3">
 
-
-              </div>
-              <div id="checkBoxes" class="input-group mb-3">
-
-
-
-              </div>
-          </fieldset>
-            <div id="tablaDatos" class="table-responsive-md">
-
-
-
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <button type="button" name="btnFiltrar" class="btn btn-outline-primary" id="btnFiltrar">Filtrar</button>
             </div>
-    </form>
+          </div>
+            <hr>
+
+
+          <div id="checkBoxes" class="input-group mb-3 box">
+
+
+
+          </div>
+          <hr>
+        </fieldset>
+
+
+        <div id="tablaDatos" class="table-responsive-md">
+
+
+
+        </div>
+      </form>
     </div>
-</div>
+  </div>
 </body>
+
 </html>

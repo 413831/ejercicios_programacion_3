@@ -12,8 +12,8 @@ function inicializarManejadores() {
   let datosJSON = JSON.parse(localStorage.getItem("legisladores"));
   // Creacion boxes y selectores para filtros
   crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
-  crearSelectores(datosJSON.map(objeto => objeto.tipo.toLowerCase()).unique().sort(),$("#selectores"),"Cargo: ");
-  crearSelectores(datosJSON.map(objeto => objeto.sexo.toLowerCase()).unique().sort(),$("#selectores"),"Sexo: ");
+  crearSelectores(datosJSON.map(objeto => objeto.tipo.toLowerCase()).unique().sort(),$("#selectores"),"Cargo");
+  crearSelectores(datosJSON.map(objeto => objeto.sexo.toLowerCase()).unique().sort(),$("#selectores"),"Sexo");
 }
 
 function manejadorAlta(e) {
@@ -56,8 +56,7 @@ function mostrar() {
   let datos = JSON.parse(localStorage.getItem("legisladores"));
 
   $("#tablaDatos").html("");
-  //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
-  $("#tablaDatos").append(crearTabla(datos));
+  $("#tablaDatos").append(crearTabla(filtrarCheckbox(datos)));
 }
 
 function ToLegisladores(datosJSON) {
@@ -138,16 +137,13 @@ function filtrarPorSelector(array)
     selectores.each( indice => {
       selector = selectores[indice].id;
       switch (selector) {
-        case "sel_Transaccion":
+        case "sel_Cargo":
           datosFiltrados = datosFiltrados.filter(elemento => {
-            if(elemento.transaccion != undefined) elemento.transaccion.toLowerCase() === selectores[indice].value;
+            if(elemento.transaccion != undefined) elemento.tipo.toLowerCase() === selectores[indice].value;
           });
           break;
-        case "sel_Precio": // Corregir
-          datosFiltrados = datosFiltrados.filter(elemento => elemento.precio <= selectores[indice].value);
-          break;
-        case "sel_Dormitorios": // Corregir
-          datosFiltrados = datosFiltrados.filter(elemento => elemento.num_dormitorio >= selectores[indice].value);
+        case "sel_Sexo": // Corregir
+          datosFiltrados = datosFiltrados.filter(elemento => elemento.sexo.toLowerCase() === selectores[indice].value);
           break;
         default:
           break;
