@@ -38,5 +38,6 @@ class Persona
 
 enum tipoLegislador{
     Diputado = "Diputado",
-    Senador = "Senador"
+    Senador = "Senador",
+    Vacio = ""
 }

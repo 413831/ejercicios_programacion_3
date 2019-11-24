@@ -5,13 +5,13 @@
     // Alta de un elemento en el listado del local storage
     // Se toman los valores con JQuery de los elementos del DOM
     public static alta(legisladores:Array<Legislador>):Array<Legislador> {
-      let nombre: string = String($("#nombre").val());
-      let apellido: string = String($("#apellido").val());
-      let email: string = String($("#email").val());
-      let edad: number = Number($("#edad").val());
+      let nombre:string = String($("#nombre").val());
+      let apellido:string = String($("#apellido").val());
+      let email:string = String($("#email").val());
+      let edad:number = Number($("#edad").val());
       let sexo:string = String($("input[name='sexo']:checked").val());
       let tipo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
-      let id = this.GenerateId(legisladores);
+      let id:number = this.GenerateId(legisladores);
 
       let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
 
@@ -23,6 +23,8 @@
     public static baja(legisladores:Array<Legislador>):Array<Legislador> {
       let id:number = Number($("#id").val());
       let index:number = this.GetIndex(id, legisladores);
+      let legislador:Legislador = this.GetById(id,legisladores);
+      console.log(legislador);
 
       if(index)
       {
@@ -33,16 +35,33 @@
       return legisladores;
     }
 
-    // Obtengo el index de un elemento del listado JSON
-    private static GetIndex(id:number, listadoJSON:Array<Legislador>):number
+    // Modificacion de un elemento del listado del local storage
+    public static modificar(legisladores:Array<Legislador>):Array<Legislador> {
+      let nombre:string = String($("#nombre").val());
+      let apellido:string = String($("#apellido").val());
+      let email:string = String($("#email").val());
+      let edad:number = Number($("#edad").val());
+      let sexo:string = String($("input[name='sexo']:checked").val());
+      let tipo:tipoLegislador = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+      let id = Number($("#id").val());
+      let index:number = this.GetIndex(id, legisladores);
+
+      let legislador = new Legislador(id,nombre, apellido, edad, email, sexo, tipo);
+
+      legisladores.splice(index,1,legislador);
+      return legisladores;
+    }
+
+    // Obtengo el index de un objeto del listado
+    private static GetIndex(id:number, listado:Array<Legislador>):number
     {
       let index:number = 0;
 
-      if(listadoJSON && id)
+      if(listado && id)
       {
-        for(var i = 0 ; i < listadoJSON.length;i++)
+        for(var i = 0 ; i < listado.length;i++)
         {
-          if(listadoJSON[i].getId == id)
+          if(listado[i].getId == id)
           {
             index = i;
             break;
@@ -52,8 +71,8 @@
       return index;
     }
 
-    // Busca el último ID del listado y retorna el siguiente
-    private static GenerateId(listado:Array<Legislador>): Number
+    // Busca el último ID de un objeto del listado y retorna el siguiente
+    private static GenerateId(listado:Array<Legislador>): number
     {
       var IDMasAlto:number;
 
@@ -70,6 +89,20 @@
       return 0;
     }
 
+    // Retorna un elemento de un listado de objetos por el Id
+    private static GetById(id:number, listado:Array<Legislador>): Legislador
+    {
+      let objeto:Legislador[] = listado;
+      if(listado)
+      {
+        objeto = listado.filter(elemento =>{
+          if(elemento.getId == id) return elemento;
+        });
+      }
+      return objeto[0];
+    }
+
+    // Funcion para castear el string en valor del ENUM tipoLegislador
     public static TipoLegislador(value:String):tipoLegislador
     {
       if(value.toLowerCase() == "diputado")
@@ -80,7 +113,7 @@
       {
         return tipoLegislador.Senador;
       }
-      return 0;
+      return tipoLegislador.Vacio;
     }
 
 }

@@ -13,10 +13,19 @@
     <title>Formulario de Alta</title>
 </head>
 <body>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#form">Home</a></li>
+    <li class="breadcrumb-item"><a href="#tablaDatos">Tabla</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
     </form>
-    <div class="container">
-        <h1>Formulario de Alta</h1>
+    <div class="jumbotron vertical-center">
+        <div class="container">
+
         <form id="form" action="#">
+            <h1>Formulario de Alta</h1>
         <div class="form-group row col-md-10">
               <label for="id" id="lblId" hidden>Nombre</label>
               <input type="text" id="id" class="form-control" name="id" hidden disabled>
@@ -58,26 +67,28 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" name="btnCrearModificar" id="btnCrearModificar" class="btnCrearModificar btn btn-primary">Dar de Alta</button>
-            <button type="button" name="btnBorrar" id="btnBorrar" class="btnBorrar btn btn-primary">Borrar</button>
+            <button type="submit" name="btnCrearModificar" id="btnCrearModificar" class="btnCrearModificar btn btn-primary btn-lg">Dar de Alta</button>
+            <button type="button" name="btnBorrar" id="btnBorrar" class="btnBorrar btn btn-primary btn-lg">Borrar</button>
           </div>
-          <div id="selectores">
+
+          <fieldset>
+              <div id="selectores" class="input-group mb-3">
 
 
-          </div>
-          <div class="filtros">
+              </div>
+              <div id="checkBoxes" class="input-group mb-3">
 
 
 
-          </div>
-          <div class="container">
-            <div id="tablaDatos">
+              </div>
+          </fieldset>
+            <div id="tablaDatos" class="table-responsive-md">
 
 
 
             </div>
-        </div>
     </form>
     </div>
+</div>
 </body>
 </html>

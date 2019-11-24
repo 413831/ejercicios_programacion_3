@@ -100,6 +100,7 @@ var tipoLegislador;
 (function (tipoLegislador) {
     tipoLegislador["Diputado"] = "Diputado";
     tipoLegislador["Senador"] = "Senador";
+    tipoLegislador["Vacio"] = "";
 })(tipoLegislador || (tipoLegislador = {}));
 /// <reference path="persona.ts" />
 var Legislador = /** @class */ (function (_super) {
@@ -145,6 +146,8 @@ var Controller = /** @class */ (function () {
     Controller.baja = function (legisladores) {
         var id = Number($("#id").val());
         var index = this.GetIndex(id, legisladores);
+        var legislador = this.GetById(id, legisladores);
+        console.log(legislador);
         if (index) {
             // Borro el elemento del indice especificado
             //listadoJSON.splice(index,1);
@@ -152,12 +155,26 @@ var Controller = /** @class */ (function () {
         }
         return legisladores;
     };
-    // Obtengo el index de un elemento del listado JSON
-    Controller.GetIndex = function (id, listadoJSON) {
+    // Modificacion de un elemento del listado del local storage
+    Controller.modificar = function (legisladores) {
+        var nombre = String($("#nombre").val());
+        var apellido = String($("#apellido").val());
+        var email = String($("#email").val());
+        var edad = Number($("#edad").val());
+        var sexo = String($("input[name='sexo']:checked").val());
+        var tipo = this.TipoLegislador(String($("input[name='funcion']:checked").val()));
+        var id = Number($("#id").val());
+        var index = this.GetIndex(id, legisladores);
+        var legislador = new Legislador(id, nombre, apellido, edad, email, sexo, tipo);
+        legisladores.splice(index, 1, legislador);
+        return legisladores;
+    };
+    // Obtengo el index de un objeto del listado
+    Controller.GetIndex = function (id, listado) {
         var index = 0;
-        if (listadoJSON && id) {
-            for (var i = 0; i < listadoJSON.length; i++) {
-                if (listadoJSON[i].getId == id) {
+        if (listado && id) {
+            for (var i = 0; i < listado.length; i++) {
+                if (listado[i].getId == id) {
                     index = i;
                     break;
                 }
@@ -165,7 +182,7 @@ var Controller = /** @class */ (function () {
         }
         return index;
     };
-    // Busca el último ID del listado y retorna el siguiente
+    // Busca el último ID de un objeto del listado y retorna el siguiente
     Controller.GenerateId = function (listado) {
         var IDMasAlto;
         if (listado) {
@@ -180,6 +197,18 @@ var Controller = /** @class */ (function () {
         }
         return 0;
     };
+    // Retorna un elemento de un listado de objetos por el Id
+    Controller.GetById = function (id, listado) {
+        var objeto = listado;
+        if (listado) {
+            objeto = listado.filter(function (elemento) {
+                if (elemento.getId == id)
+                    return elemento;
+            });
+        }
+        return objeto[0];
+    };
+    // Funcion para castear el string en valor del ENUM tipoLegislador
     Controller.TipoLegislador = function (value) {
         if (value.toLowerCase() == "diputado") {
             return tipoLegislador.Diputado;
@@ -187,7 +216,7 @@ var Controller = /** @class */ (function () {
         else if (value.toLowerCase() == "senador") {
             return tipoLegislador.Senador;
         }
-        return 0;
+        return tipoLegislador.Vacio;
     };
     return Controller;
 }());

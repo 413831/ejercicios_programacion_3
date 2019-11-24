@@ -1,5 +1,3 @@
-var datosJSON;
-
 $(function () {
     inicializarManejadores();
 })
@@ -10,170 +8,56 @@ function inicializarManejadores() {
   $("#btnBorrar").click(manejadorBaja);
   $('#btnFiltrar').click(mostrar);
   $("#form").submit(manejadorAlta);
-  //crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
-  //crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
+
+  let datosJSON = JSON.parse(localStorage.getItem("legisladores"));
+  // Creacion boxes y selectores para filtros
+  crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
+  crearSelectores(datosJSON.map(objeto => objeto.tipo.toLowerCase()).unique().sort(),$("#selectores"),"Cargo: ");
+  crearSelectores(datosJSON.map(objeto => objeto.sexo.toLowerCase()).unique().sort(),$("#selectores"),"Sexo: ");
 }
 
 function manejadorAlta(e) {
   e.preventDefault();
-  console.log(e);
   let listadoJSON = JSON.parse(localStorage.getItem("legisladores"));
   let legisladores = ToLegisladores(listadoJSON);
-  legisladores =   Controller.alta(legisladores);
-  console.log(legisladores);
-  localStorage.setItem("legisladores",JSON.stringify(legisladores));
 
+  legisladores = Controller.alta(legisladores);
+  localStorage.setItem("legisladores",JSON.stringify(legisladores));
   console.log("Alta realizada");
+
   mostrar();
 }
 
 function manejadorModificar(e) {
   e.preventDefault();
+  let listadoJSON = JSON.parse(localStorage.getItem("legisladores"));
+  let legisladores = ToLegisladores(listadoJSON);
 
-  let persona = obtenerPersona(e.target, true);
-  console.log(persona);
-  modificar(persona.id);
+  legisladores = Controller.modificar(legisladores);
+  localStorage.setItem("legisladores",JSON.stringify(legisladores));
+  console.log("Modificacion realizada");
+
+  mostrar();
 }
 
 function manejadorBaja(e) {
   e.preventDefault();
-  Controller.baja();
-}
+  let listadoJSON = JSON.parse(localStorage.getItem("legisladores"));
+  let legisladores = ToLegisladores(listadoJSON);
 
-// function alta(persona) {
-//   let personas = JSON.parse(localStorage.getItem("legisladores"));
-//
-//   personas.push(persona);
-//
-//   localStorage.setItem("legisladores",JSON.stringify(personas));
-//   console.log("Alta realizada");
-//   mostrar();
-// }
+  legisladores = Controller.baja(legisladores);
+  localStorage.setItem("legisladores",JSON.stringify(legisladores));
+  console.log("Baja realizada");
 
-// function baja(e) {
-//   let personas = JSON.parse(localStorage.getItem("legisladores"));
-//   let id = $("#id").val();
-//   let index = GetIndex(id);
-//
-//   personas.splice(index,1);
-//
-//   localStorage.setItem("legisladores",JSON.stringify(personas));
-//   console.log("Baja realizada");
-//   mostrar();
-// }
-
-function modificar(id) {
-  let personas = JSON.parse(localStorage.getItem("legisladores"));
-  let persona = GetById(id);
-  let index = GetIndex(id);
-
-  personas.splice(index,1,persona[0]);
-  localStorage.setItem("legisladores",JSON.stringify(personas));
   mostrar();
 }
 
 function mostrar() {
-  let personas = JSON.parse(localStorage.getItem("legisladores"));
+  let datos = JSON.parse(localStorage.getItem("legisladores"));
+
   $("#tablaDatos").html("");
   //$("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(personas))));
-  $("#tablaDatos").append(crearTabla(personas));
-  $("td").click(mostrarPersona);
-}
-
-function obtenerPersona(frm, tieneId) {
-  let id;
-  let nombre;
-  let apellido;
-  let edad;
-  let email;
-  let sexo;
-  let funcion;
-  let legislador;
-
-  for (element of frm.elements) {
-    switch (element.name) {
-      case "nombre":
-        nombre = element.value;
-        break;
-      case "apellido":
-        apellido = element.value;
-        break;
-      case "edad":
-        edad = element.value;
-        break;
-      case "email":
-        email = element.value;
-        break;
-      case "sexo":
-        if (element.checked === true) {
-          sexo = element.value;
-        }
-        break;
-      case "funcion":
-        if (element.checked === true) {
-          funcion = element.value;
-        }
-        break;
-      case "id":
-        if (tieneId == true) {
-          id = element.value;
-        }
-        else{
-          id = GenerateId();
-        }
-        break;
-    }
-  }
-  legislador = new Legislador(id,nombre, apellido, edad, email, sexo, funcion);
-  console.log(legislador);
-  return legislador;
-}
-
-function GenerateId()
-{
-  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
-
-  if(legisladores)
-  {
-    var IDMasAlto = legisladores.reduce(function (IDMasAlto, legislador, i, array) {
-               if (legislador.id > IDMasAlto) {
-                   IDMasAlto = legislador.id;
-               };
-               return IDMasAlto;
-           }, 0);
-    return IDMasAlto+1;
-  }
-}
-
-function GetById(id)
-{
-  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
-
-  if(legisladores)
-  {
-    var legislador = legisladores.filter(x =>{
-      if(x.id == id) return x;
-    });
-  }
-  return legislador;
-}
-
-function GetIndex(id)
-{
-  let legisladores = JSON.parse(localStorage.getItem("legisladores"));
-  let index = 0;
-
-  if(legisladores)
-  {
-    for(index = 0 ; index < legisladores.length;index++)
-    {
-      if(legisladores[index].id == id)
-      {
-        break;
-      }
-    }
-  }
-  return index;
+  $("#tablaDatos").append(crearTabla(datos));
 }
 
 function ToLegisladores(datosJSON) {
@@ -197,8 +81,7 @@ function ToLegisladores(datosJSON) {
     }
 }
 
-
-function mostrarPersona(e) {
+function cargarFormulario(e) {
   let fila = e.target.parentElement;
   let nodos = fila.childNodes;
 
