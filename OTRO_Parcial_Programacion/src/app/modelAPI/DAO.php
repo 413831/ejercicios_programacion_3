@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+
 class GenericDao
 {
     public $archivo;
