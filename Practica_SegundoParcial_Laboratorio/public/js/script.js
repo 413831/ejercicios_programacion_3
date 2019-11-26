@@ -1,17 +1,17 @@
-var datosJSON;
-
 $(function () {
     inicializarManejadores();
 })
 
 function inicializarManejadores() {
-  $("#btnBorrar").click(baja);
+  traerData();
+  console.log(localStorage);
+  $("#btnBorrar").click(manejadorBaja);
   $('#btnFiltrar').click(mostrar);
   $("#form").submit(manejadorAlta);
-  traerAnuncios();
-  console.log(localStorage);
- // mostrar();
-  crearBoxes(datos, $("#checkBoxes")); // Corregir
+
+  let datosJSON = JSON.parse(localStorage.getItem("anuncios"));
+  // Creacion boxes y selectores para filtros
+  crearBoxes(datosJSON, $("#checkBoxes")); // Corregir
   crearSelectores(datos.map(objeto => objeto.transaccion.toLowerCase()).unique().sort(),$("#selectores"),"transaccion");
   crearSelectores(["100000","300000","500000"],$("#selectores"),"precio");
   crearSelectores(["1","3","5"],$("#selectores"),"dormitorio");
@@ -19,100 +19,79 @@ function inicializarManejadores() {
 
 function manejadorAlta(e) {
   e.preventDefault();
-  let nuevoAnuncio = obtenerAnuncio(e.target, false);
-  console.log(nuevoAnuncio);
-  alta(nuevoAnuncio);
+  let listadoJSON = JSON.parse(localStorage.getItem("anuncios"));
+  let anuncios = CrearAnuncios(listadoJSON);
+
+  anuncios = Controller.alta(legisladores);
+  localStorage.setItem("anuncios",JSON.stringify(anuncios));
+  console.log("Alta realizada");
+
+  mostrar();
 }
 
 function manejadorModificar(e) {
   e.preventDefault();
-  let anuncio = obtenerAnuncio(e.target, true);
-  modificar(anuncio);
-}
+  let listadoJSON = JSON.parse(localStorage.getItem("anuncios"));
+  let anuncios = CrearAnuncios(listadoJSON);
 
-function alta(anuncio) {
-  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
-  anuncios.push(anuncio);
+  anuncios = Controller.modificar(anuncios);
   localStorage.setItem("anuncios",JSON.stringify(anuncios));
-  console.log("Alta realizada");
+  console.log("Modificacion realizada");
+
   mostrar();
 }
 
-function baja(anuncio) {
-  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
-  anuncios.slice(anuncios.indexOf(anuncio),anuncio);
+function manejadorBaja(e) {
+  e.preventDefault();
+  let listadoJSON = JSON.parse(localStorage.getItem("anuncios"));
+  let anuncios = CrearAnuncios(listadoJSON);
+
+  anuncios = Controller.baja(anuncios);
   localStorage.setItem("anuncios",JSON.stringify(anuncios));
   console.log("Baja realizada");
-  mostrar();
-}
 
-function modificar(anuncio) {
-  let anuncios = JSON.parse(localStorage.getItem("anuncios"));
-  anuncios.filter(elemento => {
-    if(elemento.id === anuncio.id)
-    {
-      elemento = anuncio;
-      console.log("Modificacion realizada");
-    }
-  });
-  localStorage.setItem("anuncios",JSON.stringify(anuncios));
   mostrar();
 }
 
 function mostrar() {
-  let anuncios = localStorage.getItem("anuncios");
-  console.log("FUNCION MOSTRAR");
+  let datos = JSON.parse(localStorage.getItem("anuncios"));
+  datos = filtrarCheckbox(datos);
   $("#tablaDatos").html("");
-  $("#tablaDatos").append(crearTabla(filtrarCheckbox(JSON.parse(anuncios))));
-  $("td").click(mostrarAnuncio);
-}
+  $("#tablaDatos").append(crearTabla(datos));
 
-function obtenerAnuncio(frm, tieneId) {
-  let id;
-  let titulo;
-  let descripcion;
-  let transaccion;
-  let precio;
-  let num_wc;
-  let num_estacionamiento;
-  let num_dormitorio;
+  let uncheckedBox = $("input:checkbox:not(:checked)");
+  let selectores = $("#selectores .form-control");
 
-  for (element of frm.elements) {
-    switch (element.name) {
-      case "titulo":
-        titulo = element.value;
-        break;
-      case "descripcion":
-        descripcion = element.value;
-        break;
-      case "transaccion":
-        if (element.checked === true) {
-          transaccion = element.value;
-        }
-        break;
-      case "precio":
-        precio = element.value;
-        break;
-      case "num_wc":
-        num_wc = element.value;
-        break;
-      case "num_estacionamiento":
-        num_estacionamiento = element.value;
-        break;
-      case "num_dormitorio":
-        num_dormitorio = element.value;
-        break;
-      case "id":
-        if (tieneId == true) {
-          id = element.value;
-        }
-        break;
+  selectores.map(x => {
+    if(selectores[x].disabled == true)
+    {
+      selectores[x].disabled = false;
     }
-  }
-  return new Anuncio(id, titulo, descripcion, transaccion, precio, num_wc, num_estacionamiento, num_dormitorio);
+  });
+
+  selectores.map(x =>{
+    uncheckedBox.each( elemento => {
+      if(uncheckedBox[elemento].id.substring(4) == selectores[x].id.substring(4).toLowerCase())
+      {
+        selectores[x].disabled = true;
+      }
+    });
+  });
 }
 
-function mostrarAnuncio(e) {
+function CrearAnuncios(datosJSON) {
+    var listaAnuncios = [];
+
+    if(datosJSON != null && datosJSON != "")
+    {
+      datosJSON.forEach(elemento => listaAnuncios.push(new Anuncio(elemento.id, elemento.titulo, elemento.descripcion,
+                                                      elemento.transaccion,elemento.precio,elemento.num_wc,
+                                                      elemento.num_estacionamiento, elemento.num_dormitorio)));
+    }
+    return listaAnuncios;
+}
+
+function cargarFormulario(e) {
   let fila = e.target.parentElement;
   let nodos = fila.childNodes;
 
@@ -190,6 +169,12 @@ function filtrarPorSelector(array)
   else if (datosFiltrados.length == 0){
     return array;
   }
-  console.log(datosFiltrados);
   return datosFiltrados;
+}
+
+function deshabilitarSelect(array)
+{
+  selectores = $("select");
+
+  selectores = selectores.each(selector => console.log(selectores[selector]));
 }

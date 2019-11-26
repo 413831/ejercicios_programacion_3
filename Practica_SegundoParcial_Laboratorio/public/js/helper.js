@@ -1,43 +1,38 @@
 Array.prototype.unique = function() {return [...new Set(this)]};
 
 function crearTabla(array) {
-  let tbody = document.createElement("tbody");
-    let col = document.createElement("div");
-    col.className = "col-10";
     let tabla = document.createElement("table");
-    tabla.className= "table table-responsive table-bordered table-striped table-hover";
+    let cabecera = document.createElement("thead");
+    let cuerpo = document.createElement("tbody");
+    let tr = document.createElement("tr");
+    // Atributos para Bootstrap
+    tabla.className= "table table-dark  table-striped table-hover";
+    tr.className = "table-primary";
 
-    let cabecera = document.createElement("tr");
-    cabecera.className = "table-primary justify-content-md-center";
-    //Completando cabecera}
+    //Completando cabecera
     for (atributo in array[0]) {
             let th = document.createElement("th");
-            if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
-            {
-              th.textContent = atributo.substring(4);
-            }
-            else {
-              th.textContent = atributo;
-            }
-            cabecera.appendChild(th);
 
+            th.textContent = atributo;
+            th.scope = "col";
+            tr.appendChild(th);
+            cabecera.appendChild(tr);
     }
-    tbody.appendChild(cabecera)
-    tabla.appendChild(tbody);
+
+    tabla.appendChild(cabecera);
 
     for (i in array) {
-
         let fila = document.createElement("tr");
-        fila.className = "table-stripped";
         let objeto = array[i];
         for (j in objeto) {
             var celda = document.createElement("td");
             var dato = document.createTextNode(objeto[j]);
+            celda.addEventListener('click',cargarFormulario);
             celda.appendChild(dato);
             fila.appendChild(celda);
         }
-        tbody.appendChild(fila);
-        tabla.appendChild(tbody);
+        cuerpo.appendChild(fila);
+        tabla.appendChild(cuerpo);
     }
     return tabla;
 }
@@ -45,31 +40,30 @@ function crearTabla(array) {
 function crearBoxes(array, seccion) {
     for (atributo in array[0]) {
         if (atributo != "id") {
-            let div = document.createElement("div");
-            let labelA = document.createElement("label");
-            labelA.className = "form-check-label";
-            labelA.htmlFor = "chk_" + atributo; // Enlace con entre el label y el checkbox
-            if(atributo == "num_wc" || atributo == "num_dormitorio" || atributo == "num_estacionamiento")
-            {
-              labelA.appendChild(document.createTextNode(atributo.substring(4)));
-            }
-            else {
-              labelA.appendChild(document.createTextNode(atributo));
-            }
+            let label = document.createElement("label");
             let checkbox = document.createElement("input");
+            let inputGroup = document.createElement("div");
+            let inputText = document.createElement("div");
+            // Atributos para Bootstrap
+            label.className = "form-control";
+            inputGroup.className = "input-group-prepend";
+            inputText.className = "input-group-text";
+
+            label.htmlFor = "chk_" + atributo; // Enlace con entre el label y el checkbox
+            label.appendChild(document.createTextNode(atributo));
+
             checkbox.type = "checkbox";
             checkbox.name = "chk_" + atributo;
             checkbox.id = "chk_" + atributo;
             checkbox.value = atributo;
             checkbox.checked = true;
-            checkbox.addEventListener('click',traerAnuncios);
-            checkbox.addEventListener('click',deshabilitarSelect);
-            div.appendChild(labelA);
-            div.appendChild(checkbox);
-            seccion.append(div);
-        } else {
-            let div = document.createElement("div");
-            seccion.append(div);
+            checkbox.addEventListener('click',traerData);
+            checkbox.addEventListener('click',deshabilitarOpcion);
+            inputText.appendChild(checkbox);
+            inputGroup.appendChild(inputText);
+
+            seccion.append(inputGroup);
+            seccion.append(label);
         }
     }
     return seccion;
@@ -81,8 +75,12 @@ function crearSelectores(array, seccion, atributo)
   let select = document.createElement("select");
   let option = document.createElement('option');
   let label = document.createElement('label');
+
+  select.className = "form-control col-5";
   select.id = "sel_" + atributo;
+  label.className = "form-check-label";
   label.htmlFor = "sel_" + atributo;
+  label.id = "lbl_" + atributo;
   label.appendChild(document.createTextNode(atributo));
   option.value = "Todos"; // Por defecto se agrega opcion TODOS
   option.textContent = "Todos";
@@ -106,17 +104,13 @@ function limpiarSelect(select) {
     }
 }
 
-function deshabilitarSelect(e)
+function deshabilitarOpcion(e)
 {
   console.log(e.target);
   let atributo = e.target.value;
   let selector;
   let checkbox = $('#chk_'+atributo);
 
-  if(atributo == "num_dormitorio")
-  {
-    atributo = atributo.substring(4);
-  }
   selector = $('#sel_'+atributo);
 
   if(!checkbox.prop('checked'))
