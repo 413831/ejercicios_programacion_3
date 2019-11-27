@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ew">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script type="text/javascript" src="./node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="./js/clases.js"></script>
+  <script type="text/javascript" src="./js/data.js"></script>
+  <script type="text/javascript" src="./js/helper.js"></script>
+  <script type="text/javascript" src="./js/dispatcher.js"></script>
+  <script type="text/javascript" src="./js/script.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+ 
+  <title>Menu</title>
+</head>
+<boddiv>
+  <div class="jumbotron">
+  <div class="container-fluid">
+
+  <form action="#" class="formulario form-group" id="form">
+    <fieldset >
+      <legend class="titulo"><h1>Bienes Raices La Raiz</h1></legend>
+      <div class="form-group row col-md-10 ">
+        <label for="id" id="lblId" hidden><h5>Id</h5></label>
+        <input type="number" id="id" class="form-control col-md-6" name="id" hidden disabled>
+      </div>
+      <div class="form-group row col-md-10">
+        <label for="titulo"><h5>Título</h5></label>
+        <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Ingrese titulo" required>
+      </div>
+        <div class="form-group row col-md-10">
+          <label for="descripcion"><h5>Descripción</h5></label>
+          <input type="text" name="descripcion" class="form-control" id="descripcion" placeholder="Ingrese descripcion" required>
+       </div>
+        
+
+       <fieldset class="form-group">
+          <div class="row">
+              <label for="transaccion"><h5>Transacción: </h5></label>
+            <div class="col-sm-10">
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="transaccion" id="rdoAlquiler" value="alquiler">
+                  <label class="form-check-label" for="transaccion"><h6>Alquiler</h6></label>
+                </label>
+              </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="transaccion" id="rdoVenta" value="venta">
+                  <label class="form-check-label" for="transaccion"><h6>Venta</h6></label>
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+       <div class="form-group row col-md-10">    
+        <label for="precio"><h5>Precio</h5></label>
+        <input type="number" name="precio" class="form-control" id="precio" placeholder="Ingrese precio" required>
+       </div>
+        <div class="form-group row col-md-10">
+         <label for="num_wc"><h5>Baños</h5></label>
+         <input type="number" name="num_wc" class="form-control" id="num_wc" placeholder="Ingrese cantidad de baños" required>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="num_estacionamiento"><h5>Estacionamientos</h5></label>
+          <input type="number" name="num_estacionamiento" class="form-control" id="num_estacionamiento" placeholder="Ingrese cantidad de estacionamientos" required>
+        </div>
+        <div class="form-group row col-md-10">
+          <label for="num_dormitorio"><h5>Dormitorios</h5></label>
+          <input type="number" name="num_dormitorio" class="form-control" id="num_dormitorio" placeholder="Ingrese cantidad de dormitorios" required>
+        </div>
+        <hr>
+        <div class="form-group row col-md-10">
+            <div class="btn-group">
+              <button type="submit" name="btnCrearModificar" id="btnCrearModificar" class="btnCrearModificar btn btn-primary btn-lg">Crear</button>
+              <button type="button" name="btnBorrar" id="btnBorrar" class="btnBorrar btn btn-outline-danger btn-lg">Borrar</button>
+            </div>
+          </div>
+    </fieldset>
+  </form>
+    </div>
+    <fieldset class="filtros">
+       <div id="checkBoxes" class="input-group mb-3 box"></div>
+
+      <div id="selectores" class="input-group mb-3"></div>
+
+      <div class="row">        
+          <div id="promedios" class="form-group col-md-4">
+          <label for="promedioPrecio" id="lblPromedio">Promedio de Precio</label>
+          <input type="text" id="promedioPrecio" class="form-control" name="promedioPrecio" disabled>
+        </div>        
+      </div>
+          
+
+      <div class="row">
+          <div class="col text-center">
+            <button type="button" name="btnFiltrar" class="btn btn-outline-primary btn-lg" id="btnFiltrar">Filtrar</button>
+          </div>
+        </div>
+        <hr>
+    </fieldset>
+    <div class="container">
+      <div id="tablaDatos" class="table-responsive">
+
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

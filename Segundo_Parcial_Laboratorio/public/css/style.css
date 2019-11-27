@@ -1,0 +1,85 @@
+form{
+  margin: 20px auto;
+  width: 700px;
+  border: solid grey;
+  border-radius: 15px;
+}
+
+.filtros{
+  margin: 20px auto;
+  width: 700px;
+  border: solid grey;
+  border-radius: 15px;
+}
+
+.filtros > *{
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  justify-content: space-evenly;
+  margin:  auto;
+  padding: 15px 15px 15px 15px;
+}
+
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 15px 15px;
+}
+
+.setTransaccion{
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo{
+  font-size: 30px;
+}
+
+.formulario > *{
+  margin: 1.5px 1.5px 1.5px 1.5px;
+}
+
+.tablaDatos{
+  display: flex;
+  place-content: center;
+}
+
+body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: ghostwhite;
+}
+
+fieldset{
+  background-color: whitesmoke;
+  border-radius: 20px;
+  margin: 1.5px 1.5px 1.5px 1.5px;
+}
+
+.tabla{
+  padding-top: 10px;
+  border-collapse: collapse;
+  background-color: whitesmoke;
+}
+
+.tabla td{
+  text-align: center;
+}
+
+.tabla, .tabla th, .tabla td{
+  border: 1px solid grey;
+  max-width: 700px;
+
+  padding: 5px 5px 5px 5px;
+}
+
+.radiosTransaccion{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.radiosTransaccion div{
+  padding: 10px 0 10px;
+}
